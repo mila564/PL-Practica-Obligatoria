@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="mili">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../mili.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
