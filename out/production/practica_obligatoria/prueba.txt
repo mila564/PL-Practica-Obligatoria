@@ -1,18 +1,5 @@
-$A7164
-_total_2
-contador1
-+123.0
-$-E.A6F9
-$0.FFFF
-989hola
-
-%- Queremos sacar un 10 :p -%
-
-.23131
-
-
-
-
-
-
-
+procedimiento main ()
+inicio
+%- Queremos sacar un 10 :p 
+entero i;
+fin
