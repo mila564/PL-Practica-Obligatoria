@@ -2,13 +2,18 @@ grammar Gramatica;
 
 r: program+;
 
-program : part programPrima;
+program : (part | fpart) programPrima;
 
 programPrima : program | ;
 
 part :  'funcion' type restpart | 'procedimiento' restpart;
 
+fpart: 'funcion' 'funcion' type restpart | 'procedimiento' 'procedimiento' restpart{
+    notifyErrorListeners("You repeated funcion keyword.");
+};
+
 restpart : IDENTIFICADOR '(' restpartPrima;
+
 restpartPrima :	listparam ')' blq 	| ')' blq;
 
 listparam : type IDENTIFICADOR listparamPrima;
@@ -42,8 +47,6 @@ expPrima : op exp | ;
 expPrimaPrima :	'(' lid ')'	| ;
 
 op : '+' | '-' | '*' | '/';
-
-error_cierre_fin : ;
 
 IDENTIFICADOR : ([a-zA-Z]|'_')([a-zA-Z]|'_'|[0-9])*;
 

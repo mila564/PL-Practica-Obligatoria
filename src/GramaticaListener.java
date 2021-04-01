@@ -47,6 +47,16 @@ public interface GramaticaListener extends ParseTreeListener {
 	 */
 	void exitPart(GramaticaParser.PartContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link GramaticaParser#fpart}.
+	 * @param ctx the parse tree
+	 */
+	void enterFpart(GramaticaParser.FpartContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GramaticaParser#fpart}.
+	 * @param ctx the parse tree
+	 */
+	void exitFpart(GramaticaParser.FpartContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link GramaticaParser#restpart}.
 	 * @param ctx the parse tree
 	 */
