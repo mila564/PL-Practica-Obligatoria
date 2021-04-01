@@ -2,19 +2,21 @@ grammar Gramatica;
 
 r: program+;
 
-program : (part | fpart) programPrima;
+program : part programPrima;
 
 programPrima : program | ;
 
 part :  'funcion' type restpart | 'procedimiento' restpart;
 
-fpart: 'funcion' 'funcion' type restpart | 'procedimiento' 'procedimiento' restpart{
-    notifyErrorListeners("You repeated funcion keyword.");
+restpart : IDENTIFICADOR '(' restpartPrimaIntermedia;
+
+restpartPrimaIntermedia : (listparam | ) ')' (restpartPrima | frestpartPrima);
+
+restpartPrima :  blq | fblqFaltaInicio | fblqFaltaFin;
+
+frestpartPrima : ')'+ restpartPrima{
+    notifyErrorListeners("Demasiados paréntesis");
 };
-
-restpart : IDENTIFICADOR '(' restpartPrima;
-
-restpartPrima :	listparam ')' blq 	| ')' blq;
 
 listparam : type IDENTIFICADOR listparamPrima;
 
@@ -24,11 +26,33 @@ type : 'entero' | 'real' | 'caracter';
 
 blq : 'inicio' sentlist 'fin';
 
+fblqFaltaInicio : sentlist 'fin'{
+    notifyErrorListeners("Falta palabra reservada inicio");
+};
+
+fblqFaltaFin : 'inicio' sentlist{
+    notifyErrorListeners("Falta palabra reservada fin");
+};
+
 sentlist : sent sentlistPrima;
 
 sentlistPrima : sent sentlistPrima | ;
 
-sent : type lid ';'	| IDENTIFICADOR sentPrima | 'return' exp ';';
+sent
+    : type lid fsent
+    | IDENTIFICADOR sentPrima
+    | 'return' exp fsent
+    |'bifurcacion' '(' lcond ')' 'entonces' blq 'sino' blq
+    |'buclepara' '(' IDENTIFICADOR asig exp ';' lcond ';' IDENTIFICADOR asig exp ')'blq
+    |'buclemientras' '(' lcond ')' blq
+    | 'bucle' blq 'hasta' '(' lcond ')'
+    | blq
+    ;
+
+fsent
+    : ';'
+    | {notifyErrorListeners("Falta punto y coma");}
+    ;
 
 sentPrima : asig exp ';' | '(' sentPrimaPrima;
 
@@ -47,6 +71,16 @@ expPrima : op exp | ;
 expPrimaPrima :	'(' lid ')'	| ;
 
 op : '+' | '-' | '*' | '/';
+
+lcond : (cond | 'no' cond) lcondPrima;
+
+lcondPrima : opl lcond lcondPrima | ;
+
+cond : exp opr exp | 'cierto' | 'falso';
+
+opl : 'y' | 'o';
+
+opr : '==' | '<>' | '<' | '>' | '>=' | '<=';
 
 IDENTIFICADOR : ([a-zA-Z]|'_')([a-zA-Z]|'_'|[0-9])*;
 
