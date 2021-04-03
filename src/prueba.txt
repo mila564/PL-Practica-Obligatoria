@@ -1,5 +1,0 @@
-procedimiento main (entero j)
-inicio
-    caracter c;
-    %- Queremos sacar un 10 :p -%
-fin

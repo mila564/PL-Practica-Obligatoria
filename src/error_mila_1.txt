@@ -1,0 +1,11 @@
+funcion entero sumaDeLosPrimerosDiezNumeros ()
+inicio
+    entero suma;
+    entero i;
+    suma = .0;
+    %- Error lexico: Formato del numero incorrecto -%
+    buclepara (i = 1; i <= 10; i = i + 1)
+    inicio
+        suma = suma + i;
+    fin
+fin
