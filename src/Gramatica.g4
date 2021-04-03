@@ -12,7 +12,7 @@ restpart : IDENTIFICADOR '(' restpartPrimaIntermedia;
 
 restpartPrimaIntermedia : (listparam | ) ')' (restpartPrima | frestpartPrima);
 
-restpartPrima :  blq | fblqFaltaInicio | fblqFaltaFin;
+restpartPrima :  blq | fblqFaltaInicio;
 
 frestpartPrima : ')'+ restpartPrima{
     notifyErrorListeners("Demasiados paréntesis");
@@ -28,10 +28,6 @@ blq : 'inicio' sentlist 'fin';
 
 fblqFaltaInicio : sentlist 'fin'{
     notifyErrorListeners("Falta palabra reservada inicio");
-};
-
-fblqFaltaFin : 'inicio' sentlist{
-    notifyErrorListeners("Falta palabra reservada fin");
 };
 
 sentlist : sent sentlistPrima;
