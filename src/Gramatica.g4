@@ -39,7 +39,7 @@ sent
     | IDENTIFICADOR sentPrima
     | 'return' exp fsent
     |'bifurcacion' '(' lcond ')' 'entonces' blq 'sino' blq
-    |'buclepara' '(' IDENTIFICADOR asig exp ';' lcond ';' IDENTIFICADOR asig exp ')'blq
+    |'buclepara' '(' IDENTIFICADOR asig exp fsent lcond fsent IDENTIFICADOR asig exp ')' blq
     |'buclemientras' '(' lcond ')' blq
     | 'bucle' blq 'hasta' '(' lcond ')'
     | blq
@@ -50,9 +50,9 @@ fsent
     | {notifyErrorListeners("Falta punto y coma");}
     ;
 
-sentPrima : asig exp ';' | '(' sentPrimaPrima;
+sentPrima : asig exp fsent | '(' sentPrimaPrima;
 
-sentPrimaPrima : lid ')' ';'| ')' ';';
+sentPrimaPrima : lid ')' fsent | ')' fsent;
 
 lid : IDENTIFICADOR lidPrima;
 
