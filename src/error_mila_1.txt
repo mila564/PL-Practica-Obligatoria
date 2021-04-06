@@ -1,11 +1,12 @@
-funcion entero sumaDeLosPrimerosDiezNumeros ()
+funcion entero potencia (entero a, entero b)
 inicio
-    entero suma;
     entero i;
-    suma = .0;
-    %- Error lexico: Formato del numero incorrecto -%
-    buclepara (i = 1; i <= 10; i = i + 1)
+    entero temporal;
+    %- Error léxico: Formato del número incorrecto en la variable temporal -%
+    temporal = .1;
+    buclepara (i = 0; i < b; i = i + 1)
     inicio
-        suma = suma + i;
+        temporal = temporal * a;
     fin
+    return temporal;
 fin

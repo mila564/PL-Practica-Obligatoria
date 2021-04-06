@@ -97,5 +97,5 @@ ERRORLIT: (('"' ('""'|~'"')*)| (['](~[']|[']['])*) EOF){
 };
 
 ERRORNUM: ('.' ([+-]?[0-9]+) | ('$'[+-]?[0-9A-F]+)){
-    System.err.println("No es un número");
+    System.err.println(getText() + " no es un número");
 };

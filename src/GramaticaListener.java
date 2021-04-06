@@ -137,16 +137,6 @@ public interface GramaticaListener extends ParseTreeListener {
 	 */
 	void exitFblqFaltaInicio(GramaticaParser.FblqFaltaInicioContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link GramaticaParser#fblqFaltaFin}.
-	 * @param ctx the parse tree
-	 */
-	void enterFblqFaltaFin(GramaticaParser.FblqFaltaFinContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link GramaticaParser#fblqFaltaFin}.
-	 * @param ctx the parse tree
-	 */
-	void exitFblqFaltaFin(GramaticaParser.FblqFaltaFinContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link GramaticaParser#sentlist}.
 	 * @param ctx the parse tree
 	 */

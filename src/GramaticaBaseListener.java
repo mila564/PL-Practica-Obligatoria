@@ -171,18 +171,6 @@ public class GramaticaBaseListener implements GramaticaListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFblqFaltaFin(GramaticaParser.FblqFaltaFinContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitFblqFaltaFin(GramaticaParser.FblqFaltaFinContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterSentlist(GramaticaParser.SentlistContext ctx) { }
 	/**
 	 * {@inheritDoc}

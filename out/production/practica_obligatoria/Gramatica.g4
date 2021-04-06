@@ -12,7 +12,7 @@ restpart : IDENTIFICADOR '(' restpartPrimaIntermedia;
 
 restpartPrimaIntermedia : (listparam | ) ')' (restpartPrima | frestpartPrima);
 
-restpartPrima :  blq | fblqFaltaInicio | fblqFaltaFin;
+restpartPrima :  blq | fblqFaltaInicio;
 
 frestpartPrima : ')'+ restpartPrima{
     notifyErrorListeners("Demasiados paréntesis");
@@ -30,10 +30,6 @@ fblqFaltaInicio : sentlist 'fin'{
     notifyErrorListeners("Falta palabra reservada inicio");
 };
 
-fblqFaltaFin : 'inicio' sentlist{
-    notifyErrorListeners("Falta palabra reservada fin");
-};
-
 sentlist : sent sentlistPrima;
 
 sentlistPrima : sent sentlistPrima | ;
@@ -43,7 +39,7 @@ sent
     | IDENTIFICADOR sentPrima
     | 'return' exp fsent
     |'bifurcacion' '(' lcond ')' 'entonces' blq 'sino' blq
-    |'buclepara' '(' IDENTIFICADOR asig exp ';' lcond ';' IDENTIFICADOR asig exp ')'blq
+    |'buclepara' '(' IDENTIFICADOR asig exp fsent lcond fsent IDENTIFICADOR asig exp ')' blq
     |'buclemientras' '(' lcond ')' blq
     | 'bucle' blq 'hasta' '(' lcond ')'
     | blq
@@ -54,9 +50,9 @@ fsent
     | {notifyErrorListeners("Falta punto y coma");}
     ;
 
-sentPrima : asig exp ';' | '(' sentPrimaPrima;
+sentPrima : asig exp fsent | '(' sentPrimaPrima;
 
-sentPrimaPrima : lid ')' ';'| ')' ';';
+sentPrimaPrima : lid ')' fsent | ')' fsent;
 
 lid : IDENTIFICADOR lidPrima;
 
@@ -101,5 +97,5 @@ ERRORLIT: (('"' ('""'|~'"')*)| (['](~[']|[']['])*) EOF){
 };
 
 ERRORNUM: ('.' ([+-]?[0-9]+) | ('$'[+-]?[0-9A-F]+)){
-    System.err.println("No es un número");
+    System.err.println(getText() + " no es un número");
 };
