@@ -60,10 +60,10 @@ ERRORNUM=47
 'entonces'=13
 'sino'=14
 'buclepara'=15
-';'=16
-'buclemientras'=17
-'bucle'=18
-'hasta'=19
+'buclemientras'=16
+'bucle'=17
+'hasta'=18
+';'=19
 '='=20
 '+='=21
 '-='=22
