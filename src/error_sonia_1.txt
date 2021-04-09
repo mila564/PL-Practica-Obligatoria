@@ -1,4 +1,9 @@
-procedimiento sumarCadenas()
+funcion entero divisionEntera (entero dividendo, entero divisor)
 inicio
-    cadena = "Esta es la primera cadena" + "Esta es la segunda cadena"
-fin
+    buclemientras (dividendo > 0)
+    inicio
+        dividendo = dividendo - divisor
+    fin
+    cociente = dividendo + divisor;
+    return cociente;
+fin;
