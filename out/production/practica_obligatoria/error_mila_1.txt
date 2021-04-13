@@ -1,0 +1,12 @@
+funcion entero potencia (entero a, entero b)
+inicio
+    entero i;
+    entero temporal;
+    %- Error léxico: Formato del número incorrecto en la variable temporal -%
+    temporal = .1;
+    buclepara (i = 0; i < b; i = i + 1)
+    inicio
+        temporal = temporal * a;
+    fin
+    return temporal;
+fin

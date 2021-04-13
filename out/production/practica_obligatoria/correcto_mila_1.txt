@@ -1,0 +1,10 @@
+funcion entero sumaDiezPrimerosDigitos ()
+inicio
+    entero suma;
+    entero i;
+    suma = 0;
+    buclepara (i = 0; i < 10; i = i + 1)
+    inicio
+        suma = suma + i;
+    fin
+fin

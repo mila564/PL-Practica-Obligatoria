@@ -1,0 +1,12 @@
+procedimiento suma1odivide5 (entero numero)
+inicio
+	bifurcacion (numero > 9)
+	entonces
+	inicio
+    	return numero + 1;
+    fin
+    sino
+    inicio
+    	return numero / 10;
+    fin
+fin

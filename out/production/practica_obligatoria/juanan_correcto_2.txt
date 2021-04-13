@@ -1,0 +1,22 @@
+funcion caracter nombre (caracter inicial)
+inicio
+	caracter nombre;
+	bifurcacion (inicial == 'M')
+	entonces
+	inicio
+		nombre = "Milagros";
+	fin
+	sino 
+	inicio
+		bifurcacion (inicial == 'S')
+		entonces
+		inicio
+			nombre = "Sonia";
+		fin
+		sino
+		inicio
+			nombre = "Juan Antonio";
+		fin
+	fin
+	return "Mi nombre es " + nombre;
+fin
