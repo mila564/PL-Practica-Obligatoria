@@ -62,7 +62,7 @@ asig : '=' | '+=' | '-=' | '*=' | '/=';
 
 exp : CONSTENTERO expPrima | CONSTREAL expPrima | CONSTLIT expPrima | '(' exp ')' expPrima | IDENTIFICADOR expPrimaPrima expPrima;
 
-expPrima : op exp | ;
+expPrima : op exp expPrima | ;
 
 expPrimaPrima :	'(' lid ')'	| ;
 

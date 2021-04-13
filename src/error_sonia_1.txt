@@ -1,4 +1,0 @@
-procedimiento sumarCadenas()
-inicio
-    cadena = "Esta es la primera cadena" + "Esta es la segunda cadena"
-fin
