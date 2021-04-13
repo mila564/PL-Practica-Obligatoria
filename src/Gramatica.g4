@@ -60,11 +60,11 @@ lidPrima : | ',' lid;
 
 asig : '=' | '+=' | '-=' | '*=' | '/=';
 
-exp : CONSTENTERO expPrima | CONSTREAL expPrima | CONSTLIT expPrima | '(' exp ')' expPrima | IDENTIFICADOR expPrimaPrima expPrima;
+exp : CONSTENTERO expPrimaPrima | CONSTREAL expPrimaPrima | CONSTLIT expPrimaPrima | '(' exp ')' expPrimaPrima | IDENTIFICADOR expPrima expPrimaPrima;
 
-expPrima : op exp expPrima | ;
+expPrima : | '(' lid ')';
 
-expPrimaPrima :	'(' lid ')'	| ;
+expPrimaPrima : op exp expPrima | ;
 
 op : '+' | '-' | '*' | '/';
 
