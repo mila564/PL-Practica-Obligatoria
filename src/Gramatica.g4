@@ -42,7 +42,7 @@ sent
     : type lid fsent
     | IDENTIFICADOR sentPrima
     | 'return' exp fsent
-    |'bifurcacion' '(' lcond ')' 'entonces' blq 'sino' blq
+    |'bifurcacion' '(' lcond ')' restBifurcacion
     | fbifurcacion
     |'buclepara' '(' IDENTIFICADOR asig exp fsent lcond fsent IDENTIFICADOR asig exp ')' blq
     |'buclemientras' '(' lcond ')' blq
@@ -50,7 +50,9 @@ sent
     | blq
     ;
 
-fbifurcacion : 'bifurcacio' '(' lcond ')' 'entonces' blq 'sino' blq;
+restBifurcacion:  'entonces' blq 'sino' blq |  blq 'sino' blq {notifyErrorListeners("Falta la palabra reservada 'entonces'");};
+
+fbifurcacion : 'bifurcacio' '(' lcond ')' 'entonces' blq 'sino' blq {notifyErrorListeners("Palabra reservada 'bifurcacion' mal escrita");};
 
 fsent
     : ';'
@@ -81,11 +83,22 @@ lcondPrima : cond | 'no' cond;
 
 lcondPrimaPrima : opl lcond lcondPrima | ;
 
-cond : exp opr exp | 'cierto' | 'falso';
+cond : exp oprIntermedia exp | 'cierto' | 'falso';
+
+oprIntermedia: '=' oprIntermedia2 | opr;
+
+oprIntermedia2: fopr | asignacion;
+
+asignacion: '=';
+
+opr :'<>' | '<' | '>' | '>=' | '<=';
+
+fopr: '<' foprNotificacion|'>' foprNotificacion| foprNotificacion;
+
+foprNotificacion: {notifyErrorListeners("La expresión introducida dentro del bucle no es una condición");};
 
 opl : 'y' | 'o';
 
-opr : '==' | '<>' | '<' | '>' | '>=' | '<=';
 
 IDENTIFICADOR : ([a-zA-Z]|'_')([a-zA-Z]|'_'|[0-9])*;
 
