@@ -43,11 +43,14 @@ sent
     | IDENTIFICADOR sentPrima
     | 'return' exp fsent
     |'bifurcacion' '(' lcond ')' 'entonces' blq 'sino' blq
+    | fbifurcacion
     |'buclepara' '(' IDENTIFICADOR asig exp fsent lcond fsent IDENTIFICADOR asig exp ')' blq
     |'buclemientras' '(' lcond ')' blq
     | 'bucle' blq 'hasta' '(' lcond ')'
     | blq
     ;
+
+fbifurcacion : 'bifurcacio' '(' lcond ')' 'entonces' blq 'sino' blq;
 
 fsent
     : ';'
