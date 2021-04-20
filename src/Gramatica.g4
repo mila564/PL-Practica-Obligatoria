@@ -68,9 +68,11 @@ expPrimaPrima : op exp expPrima | ;
 
 op : '+' | '-' | '*' | '/';
 
-lcond : (cond | 'no' cond) lcondPrima;
+lcond :  lcondPrima lcondPrimaPrima;
 
-lcondPrima : opl lcond lcondPrima | ;
+lcondPrima : cond | 'no' cond;
+
+lcondPrimaPrima : opl lcond lcondPrima | ;
 
 cond : exp opr exp | 'cierto' | 'falso';
 
