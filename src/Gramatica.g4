@@ -10,13 +10,17 @@ part :  'funcion' type restpart | 'procedimiento' restpart;
 
 restpart : IDENTIFICADOR '(' restpartPrimaIntermedia;
 
-restpartPrimaIntermedia : (listparam | ) ')' (restpartPrima | frestpartPrima);
+restpartPrimaIntermedia: restpartPrimaIntermediaListparam | restpartPrimaIntermediaParentesis;
+restpartPrimaIntermediaListparam: listparam restpartPrimaIntermediaParentesis;
+restpartPrimaIntermediaParentesis: ')' restPartPrimaIntermedia2;
+restPartPrimaIntermedia2: restpartPrima| frestpartPrima;
 
 restpartPrima :  blq | fblqFaltaInicio;
 
-frestpartPrima : ')'+ restpartPrima{
+frestpartPrima : unCierreParentOVarios restpartPrima {
     notifyErrorListeners("Demasiados paréntesis");
 };
+unCierreParentOVarios : ')' | ')' unCierreParentOVarios;
 
 listparam : type IDENTIFICADOR listparamPrima;
 
