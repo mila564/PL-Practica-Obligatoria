@@ -1,4 +1,4 @@
-// Generated from src/Gramatica.g4 by ANTLR 4.9.2
+// Generated from Gramatica.g4 by ANTLR 4.9.1
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**
@@ -207,15 +207,15 @@ public interface GramaticaListener extends ParseTreeListener {
 	 */
 	void exitSent(GramaticaParser.SentContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link GramaticaParser#restBifurcacion}.
+	 * Enter a parse tree produced by {@link GramaticaParser#frestBifurcacion}.
 	 * @param ctx the parse tree
 	 */
-	void enterRestBifurcacion(GramaticaParser.RestBifurcacionContext ctx);
+	void enterFrestBifurcacion(GramaticaParser.FrestBifurcacionContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link GramaticaParser#restBifurcacion}.
+	 * Exit a parse tree produced by {@link GramaticaParser#frestBifurcacion}.
 	 * @param ctx the parse tree
 	 */
-	void exitRestBifurcacion(GramaticaParser.RestBifurcacionContext ctx);
+	void exitFrestBifurcacion(GramaticaParser.FrestBifurcacionContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link GramaticaParser#fbifurcacion}.
 	 * @param ctx the parse tree

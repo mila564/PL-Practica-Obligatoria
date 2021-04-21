@@ -1,4 +1,4 @@
-// Generated from src/Gramatica.g4 by ANTLR 4.9.2
+// Generated from Gramatica.g4 by ANTLR 4.9.1
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
 public class GramaticaParser extends Parser {
-	static { RuntimeMetaData.checkVersion("4.9.2", RuntimeMetaData.VERSION); }
+	static { RuntimeMetaData.checkVersion("4.9.1", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
 	protected static final PredictionContextCache _sharedContextCache =
@@ -30,7 +30,7 @@ public class GramaticaParser extends Parser {
 		RULE_restpartPrima = 9, RULE_frestpartPrima = 10, RULE_unCierreParentOVarios = 11, 
 		RULE_listparam = 12, RULE_listparamPrima = 13, RULE_type = 14, RULE_blq = 15, 
 		RULE_fblqFaltaInicio = 16, RULE_sentlist = 17, RULE_sentlistPrima = 18, 
-		RULE_sent = 19, RULE_restBifurcacion = 20, RULE_fbifurcacion = 21, RULE_fsent = 22, 
+		RULE_sent = 19, RULE_frestBifurcacion = 20, RULE_fbifurcacion = 21, RULE_fsent = 22, 
 		RULE_sentPrima = 23, RULE_sentPrimaPrima = 24, RULE_lid = 25, RULE_lidPrima = 26, 
 		RULE_asig = 27, RULE_exp = 28, RULE_expPrima = 29, RULE_expPrimaPrima = 30, 
 		RULE_op = 31, RULE_lcond = 32, RULE_lcondPrima = 33, RULE_lcondPrimaPrima = 34, 
@@ -42,7 +42,7 @@ public class GramaticaParser extends Parser {
 			"restpartPrimaIntermediaListparam", "restpartPrimaIntermediaParentesis", 
 			"restPartPrimaIntermedia2", "restpartPrima", "frestpartPrima", "unCierreParentOVarios", 
 			"listparam", "listparamPrima", "type", "blq", "fblqFaltaInicio", "sentlist", 
-			"sentlistPrima", "sent", "restBifurcacion", "fbifurcacion", "fsent", 
+			"sentlistPrima", "sent", "frestBifurcacion", "fbifurcacion", "fsent", 
 			"sentPrima", "sentPrimaPrima", "lid", "lidPrima", "asig", "exp", "expPrima", 
 			"expPrimaPrima", "op", "lcond", "lcondPrima", "lcondPrimaPrima", "cond", 
 			"oprIntermedia", "oprIntermedia2", "asignacion", "opr", "fopr", "opl"
@@ -1125,8 +1125,8 @@ public class GramaticaParser extends Parser {
 		public LcondContext lcond() {
 			return getRuleContext(LcondContext.class,0);
 		}
-		public RestBifurcacionContext restBifurcacion() {
-			return getRuleContext(RestBifurcacionContext.class,0);
+		public FrestBifurcacionContext frestBifurcacion() {
+			return getRuleContext(FrestBifurcacionContext.class,0);
 		}
 		public FbifurcacionContext fbifurcacion() {
 			return getRuleContext(FbifurcacionContext.class,0);
@@ -1206,7 +1206,7 @@ public class GramaticaParser extends Parser {
 				setState(179);
 				match(T__3);
 				setState(180);
-				restBifurcacion();
+				frestBifurcacion();
 				}
 				break;
 			case T__18:
@@ -1301,30 +1301,30 @@ public class GramaticaParser extends Parser {
 		return _localctx;
 	}
 
-	public static class RestBifurcacionContext extends ParserRuleContext {
+	public static class FrestBifurcacionContext extends ParserRuleContext {
 		public List<BlqContext> blq() {
 			return getRuleContexts(BlqContext.class);
 		}
 		public BlqContext blq(int i) {
 			return getRuleContext(BlqContext.class,i);
 		}
-		public RestBifurcacionContext(ParserRuleContext parent, int invokingState) {
+		public FrestBifurcacionContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_restBifurcacion; }
+		@Override public int getRuleIndex() { return RULE_frestBifurcacion; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof GramaticaListener ) ((GramaticaListener)listener).enterRestBifurcacion(this);
+			if ( listener instanceof GramaticaListener ) ((GramaticaListener)listener).enterFrestBifurcacion(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof GramaticaListener ) ((GramaticaListener)listener).exitRestBifurcacion(this);
+			if ( listener instanceof GramaticaListener ) ((GramaticaListener)listener).exitFrestBifurcacion(this);
 		}
 	}
 
-	public final RestBifurcacionContext restBifurcacion() throws RecognitionException {
-		RestBifurcacionContext _localctx = new RestBifurcacionContext(_ctx, getState());
-		enterRule(_localctx, 40, RULE_restBifurcacion);
+	public final FrestBifurcacionContext frestBifurcacion() throws RecognitionException {
+		FrestBifurcacionContext _localctx = new FrestBifurcacionContext(_ctx, getState());
+		enterRule(_localctx, 40, RULE_frestBifurcacion);
 		try {
 			setState(223);
 			_errHandler.sync(this);

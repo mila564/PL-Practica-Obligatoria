@@ -1,0 +1,13 @@
+funcion entero comprobarSiUnNumeroEsMayorQueOtroYOperar(entero numero1 , entero numero2)
+inicio
+    bifurcacion(numero1 >= numero2)entonces
+        inicio
+            numero1 = numero1 - numero2;
+            return numero1;
+        fin
+    sino
+        inicio
+            numero2 = numero2 - numero1;
+            return numero2;
+        fin
+fin

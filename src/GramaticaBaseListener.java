@@ -1,4 +1,4 @@
-// Generated from src/Gramatica.g4 by ANTLR 4.9.2
+// Generated from Gramatica.g4 by ANTLR 4.9.1
 
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
@@ -255,13 +255,13 @@ public class GramaticaBaseListener implements GramaticaListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterRestBifurcacion(GramaticaParser.RestBifurcacionContext ctx) { }
+	@Override public void enterFrestBifurcacion(GramaticaParser.FrestBifurcacionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitRestBifurcacion(GramaticaParser.RestBifurcacionContext ctx) { }
+	@Override public void exitFrestBifurcacion(GramaticaParser.FrestBifurcacionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

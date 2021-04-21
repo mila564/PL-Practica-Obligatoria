@@ -1,7 +1,7 @@
 <component name="libraryTable">
   <library name="mili">
     <CLASSES>
-      <root url="jar:///opt/homebrew/Cellar/antlr/4.9.2/antlr-4.9.2-complete.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../mili.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
