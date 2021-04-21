@@ -93,9 +93,7 @@ asignacion: '=';
 
 opr :'<>' | '<' | '>' | '>=' | '<=';
 
-fopr: '<' foprNotificacion|'>' foprNotificacion| foprNotificacion;
-
-foprNotificacion: {notifyErrorListeners("La expresión introducida dentro del bucle no es una condición");};
+fopr: ('<'|'>'| ) {notifyErrorListeners("La expresión introducida dentro del bucle no es una condición");};
 
 opl : 'y' | 'o';
 
@@ -111,13 +109,13 @@ CONSTLIT: (('"' ('""'|~'"')* '"' )| (['](~[']|[']['])*[']));
 WS: (' ' | '\n' | '\r' | '\t' | ('%%' ~('\n')* '\n') | ('%-' ((~('-')) | '-'~('%'))* '-%')) -> skip;
 
 ERRORCOMENT: ('%-' ((~('-')) | '-'~('%'))*) EOF{
-    System.err.println("Comentario multilinea sin cierre");
+    System.err.println("Error léxico: Comentario multilinea sin cierre");
 };
 
 ERRORLIT: (('"' ('""'|~'"')*)| (['](~[']|[']['])*) EOF){
-    System.err.println("Cadena sin cerrar");
+    System.err.println("Error léxico: Cadena sin cerrar");
 };
 
 ERRORNUM: ('.' ([+-]?[0-9]+) | ('$'[+-]?[0-9A-F]+)){
-    System.err.println(getText() + " no es un número");
+    System.err.println("Error léxico: " + getText() + " no es un número");
 };

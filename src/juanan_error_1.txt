@@ -1,7 +1,7 @@
 funcion entero main (real longitud))
 inicio
     real aux;
-    buclepara (contador = 0; contador < 10; contador += 1)
+    buclepara (contador = 0; contador < .10; contador += 1)
     %- No voy a cerrar este comentario bien
     inicio
     	aux = longitud + contador;

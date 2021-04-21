@@ -1,4 +1,4 @@
-// Generated from Gramatica.g4 by ANTLR 4.9.1
+// Generated from src/Gramatica.g4 by ANTLR 4.9.2
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**
@@ -67,6 +67,36 @@ public interface GramaticaListener extends ParseTreeListener {
 	 */
 	void exitRestpartPrimaIntermedia(GramaticaParser.RestpartPrimaIntermediaContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link GramaticaParser#restpartPrimaIntermediaListparam}.
+	 * @param ctx the parse tree
+	 */
+	void enterRestpartPrimaIntermediaListparam(GramaticaParser.RestpartPrimaIntermediaListparamContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GramaticaParser#restpartPrimaIntermediaListparam}.
+	 * @param ctx the parse tree
+	 */
+	void exitRestpartPrimaIntermediaListparam(GramaticaParser.RestpartPrimaIntermediaListparamContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GramaticaParser#restpartPrimaIntermediaParentesis}.
+	 * @param ctx the parse tree
+	 */
+	void enterRestpartPrimaIntermediaParentesis(GramaticaParser.RestpartPrimaIntermediaParentesisContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GramaticaParser#restpartPrimaIntermediaParentesis}.
+	 * @param ctx the parse tree
+	 */
+	void exitRestpartPrimaIntermediaParentesis(GramaticaParser.RestpartPrimaIntermediaParentesisContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GramaticaParser#restPartPrimaIntermedia2}.
+	 * @param ctx the parse tree
+	 */
+	void enterRestPartPrimaIntermedia2(GramaticaParser.RestPartPrimaIntermedia2Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link GramaticaParser#restPartPrimaIntermedia2}.
+	 * @param ctx the parse tree
+	 */
+	void exitRestPartPrimaIntermedia2(GramaticaParser.RestPartPrimaIntermedia2Context ctx);
+	/**
 	 * Enter a parse tree produced by {@link GramaticaParser#restpartPrima}.
 	 * @param ctx the parse tree
 	 */
@@ -86,6 +116,16 @@ public interface GramaticaListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitFrestpartPrima(GramaticaParser.FrestpartPrimaContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GramaticaParser#unCierreParentOVarios}.
+	 * @param ctx the parse tree
+	 */
+	void enterUnCierreParentOVarios(GramaticaParser.UnCierreParentOVariosContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GramaticaParser#unCierreParentOVarios}.
+	 * @param ctx the parse tree
+	 */
+	void exitUnCierreParentOVarios(GramaticaParser.UnCierreParentOVariosContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link GramaticaParser#listparam}.
 	 * @param ctx the parse tree
@@ -166,6 +206,26 @@ public interface GramaticaListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitSent(GramaticaParser.SentContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GramaticaParser#restBifurcacion}.
+	 * @param ctx the parse tree
+	 */
+	void enterRestBifurcacion(GramaticaParser.RestBifurcacionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GramaticaParser#restBifurcacion}.
+	 * @param ctx the parse tree
+	 */
+	void exitRestBifurcacion(GramaticaParser.RestBifurcacionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GramaticaParser#fbifurcacion}.
+	 * @param ctx the parse tree
+	 */
+	void enterFbifurcacion(GramaticaParser.FbifurcacionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GramaticaParser#fbifurcacion}.
+	 * @param ctx the parse tree
+	 */
+	void exitFbifurcacion(GramaticaParser.FbifurcacionContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link GramaticaParser#fsent}.
 	 * @param ctx the parse tree
@@ -287,6 +347,16 @@ public interface GramaticaListener extends ParseTreeListener {
 	 */
 	void exitLcondPrima(GramaticaParser.LcondPrimaContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link GramaticaParser#lcondPrimaPrima}.
+	 * @param ctx the parse tree
+	 */
+	void enterLcondPrimaPrima(GramaticaParser.LcondPrimaPrimaContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GramaticaParser#lcondPrimaPrima}.
+	 * @param ctx the parse tree
+	 */
+	void exitLcondPrimaPrima(GramaticaParser.LcondPrimaPrimaContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link GramaticaParser#cond}.
 	 * @param ctx the parse tree
 	 */
@@ -297,15 +367,35 @@ public interface GramaticaListener extends ParseTreeListener {
 	 */
 	void exitCond(GramaticaParser.CondContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link GramaticaParser#opl}.
+	 * Enter a parse tree produced by {@link GramaticaParser#oprIntermedia}.
 	 * @param ctx the parse tree
 	 */
-	void enterOpl(GramaticaParser.OplContext ctx);
+	void enterOprIntermedia(GramaticaParser.OprIntermediaContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link GramaticaParser#opl}.
+	 * Exit a parse tree produced by {@link GramaticaParser#oprIntermedia}.
 	 * @param ctx the parse tree
 	 */
-	void exitOpl(GramaticaParser.OplContext ctx);
+	void exitOprIntermedia(GramaticaParser.OprIntermediaContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GramaticaParser#oprIntermedia2}.
+	 * @param ctx the parse tree
+	 */
+	void enterOprIntermedia2(GramaticaParser.OprIntermedia2Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link GramaticaParser#oprIntermedia2}.
+	 * @param ctx the parse tree
+	 */
+	void exitOprIntermedia2(GramaticaParser.OprIntermedia2Context ctx);
+	/**
+	 * Enter a parse tree produced by {@link GramaticaParser#asignacion}.
+	 * @param ctx the parse tree
+	 */
+	void enterAsignacion(GramaticaParser.AsignacionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GramaticaParser#asignacion}.
+	 * @param ctx the parse tree
+	 */
+	void exitAsignacion(GramaticaParser.AsignacionContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link GramaticaParser#opr}.
 	 * @param ctx the parse tree
@@ -316,4 +406,24 @@ public interface GramaticaListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitOpr(GramaticaParser.OprContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GramaticaParser#fopr}.
+	 * @param ctx the parse tree
+	 */
+	void enterFopr(GramaticaParser.FoprContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GramaticaParser#fopr}.
+	 * @param ctx the parse tree
+	 */
+	void exitFopr(GramaticaParser.FoprContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GramaticaParser#opl}.
+	 * @param ctx the parse tree
+	 */
+	void enterOpl(GramaticaParser.OplContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GramaticaParser#opl}.
+	 * @param ctx the parse tree
+	 */
+	void exitOpl(GramaticaParser.OplContext ctx);
 }
