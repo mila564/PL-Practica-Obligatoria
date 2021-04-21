@@ -10,13 +10,17 @@ part :  'funcion' type restpart | 'procedimiento' restpart;
 
 restpart : IDENTIFICADOR '(' restpartPrimaIntermedia;
 
-restpartPrimaIntermedia : (listparam | ) ')' (restpartPrima | frestpartPrima);
+restpartPrimaIntermedia: restpartPrimaIntermediaListparam | restpartPrimaIntermediaParentesis;
+restpartPrimaIntermediaListparam: listparam restpartPrimaIntermediaParentesis;
+restpartPrimaIntermediaParentesis: ')' restPartPrimaIntermedia2;
+restPartPrimaIntermedia2: restpartPrima| frestpartPrima;
 
 restpartPrima :  blq | fblqFaltaInicio;
 
-frestpartPrima : ')'+ restpartPrima{
+frestpartPrima : unCierreParentOVarios restpartPrima {
     notifyErrorListeners("Demasiados paréntesis");
 };
+unCierreParentOVarios : ')' | ')' unCierreParentOVarios;
 
 listparam : type IDENTIFICADOR listparamPrima;
 
@@ -38,12 +42,17 @@ sent
     : type lid fsent
     | IDENTIFICADOR sentPrima
     | 'return' exp fsent
-    |'bifurcacion' '(' lcond ')' 'entonces' blq 'sino' blq
+    |'bifurcacion' '(' lcond ')' restBifurcacion
+    | fbifurcacion
     |'buclepara' '(' IDENTIFICADOR asig exp fsent lcond fsent IDENTIFICADOR asig exp ')' blq
     |'buclemientras' '(' lcond ')' blq
     | 'bucle' blq 'hasta' '(' lcond ')'
     | blq
     ;
+
+restBifurcacion:  'entonces' blq 'sino' blq |  blq 'sino' blq {notifyErrorListeners("Falta la palabra reservada 'entonces'");};
+
+fbifurcacion : 'bifurcacio' '(' lcond ')' 'entonces' blq 'sino' blq {notifyErrorListeners("Palabra reservada 'bifurcacion' mal escrita");};
 
 fsent
     : ';'
@@ -60,23 +69,36 @@ lidPrima : | ',' lid;
 
 asig : '=' | '+=' | '-=' | '*=' | '/=';
 
-exp : CONSTENTERO expPrima | CONSTREAL expPrima | CONSTLIT expPrima | '(' exp ')' expPrima | IDENTIFICADOR expPrimaPrima expPrima;
+exp : CONSTENTERO expPrimaPrima | CONSTREAL expPrimaPrima | CONSTLIT expPrimaPrima | '(' exp ')' expPrimaPrima | IDENTIFICADOR expPrima expPrimaPrima;
 
-expPrima : op exp | ;
+expPrima : | '(' lid ')';
 
-expPrimaPrima :	'(' lid ')'	| ;
+expPrimaPrima : op exp expPrima | ;
 
 op : '+' | '-' | '*' | '/';
 
-lcond : (cond | 'no' cond) lcondPrima;
+lcond :  lcondPrima lcondPrimaPrima;
 
-lcondPrima : opl lcond lcondPrima | ;
+lcondPrima : cond | 'no' cond;
 
-cond : exp opr exp | 'cierto' | 'falso';
+lcondPrimaPrima : opl lcond lcondPrima | ;
+
+cond : exp oprIntermedia exp | 'cierto' | 'falso';
+
+oprIntermedia: '=' oprIntermedia2 | opr;
+
+oprIntermedia2: fopr | asignacion;
+
+asignacion: '=';
+
+opr :'<>' | '<' | '>' | '>=' | '<=';
+
+fopr: '<' foprNotificacion|'>' foprNotificacion| foprNotificacion;
+
+foprNotificacion: {notifyErrorListeners("La expresión introducida dentro del bucle no es una condición");};
 
 opl : 'y' | 'o';
 
-opr : '==' | '<>' | '<' | '>' | '>=' | '<=';
 
 IDENTIFICADOR : ([a-zA-Z]|'_')([a-zA-Z]|'_'|[0-9])*;
 

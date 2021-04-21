@@ -6,4 +6,4 @@ inicio
     fin
     cociente = dividendo + divisor;
     return cociente;
-fin;
+fin

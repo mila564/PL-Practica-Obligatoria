@@ -6,7 +6,7 @@ inicio
             auxiliar = auxiliar + 1;
         fin
         resultado = auxiliar - numero;
-        bifurcacion (resultado >= 5)entonces
+        bifurcacio (resultado >= 5)entonces
                 inicio
                     return ""El resultado es un numero mayor o igual que 5";
                 fin
@@ -14,4 +14,4 @@ inicio
                 inicio
                     return "El resultado es un numero menor que 5";
                 fin
-fin;
+fin

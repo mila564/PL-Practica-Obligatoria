@@ -28,6 +28,8 @@ public class ClasePrincipal {
             Atención, sustituye "AxiomaDeLaGramatica" por el nombre del axioma de tu
             gramática
             */
+            anasint.removeErrorListeners(); // remove ConsoleErrorListener
+            anasint.addErrorListener(new CustomizedErrorListener()); // add ours
             anasint.r();
         } catch (org.antlr.v4.runtime.RecognitionException e) {
             //Fallo al reconocer la entrada
