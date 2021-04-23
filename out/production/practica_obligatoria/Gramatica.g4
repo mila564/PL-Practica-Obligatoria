@@ -13,7 +13,7 @@ restpart : IDENTIFICADOR '(' restpartPrimaIntermedia;
 restpartPrimaIntermedia: restpartPrimaIntermediaListparam | restpartPrimaIntermediaParentesis;
 restpartPrimaIntermediaListparam: listparam restpartPrimaIntermediaParentesis;
 restpartPrimaIntermediaParentesis: ')' restPartPrimaIntermedia2;
-restPartPrimaIntermedia2: restpartPrima| frestpartPrima;
+restPartPrimaIntermedia2: restpartPrima | frestpartPrima;
 
 restpartPrima :  blq | fblqFaltaInicio;
 
@@ -42,7 +42,7 @@ sent
     : type lid fsent
     | IDENTIFICADOR sentPrima
     | 'return' exp fsent
-    |'bifurcacion' '(' lcond ')' restBifurcacion
+    |'bifurcacion' '(' lcond ')' frestBifurcacion
     | fbifurcacion
     |'buclepara' '(' IDENTIFICADOR asig exp fsent lcond fsent IDENTIFICADOR asig exp ')' blq
     |'buclemientras' '(' lcond ')' blq
@@ -50,9 +50,9 @@ sent
     | blq
     ;
 
-restBifurcacion:  'entonces' blq 'sino' blq |  blq 'sino' blq {notifyErrorListeners("Falta la palabra reservada 'entonces'");};
+frestBifurcacion:  'entonces' blq 'sino' blq |  blq 'sino' blq {notifyErrorListeners("Falta la palabra reservada 'entonces'");};
 
-fbifurcacion : 'bifurcacio' '(' lcond ')' 'entonces' blq 'sino' blq {notifyErrorListeners("Palabra reservada 'bifurcacion' mal escrita");};
+fbifurcacion : 'bifurcacio' '(' lcond ')' frestBifurcacion {notifyErrorListeners("Palabra reservada 'bifurcacion' mal escrita");};
 
 fsent
     : ';'
@@ -96,7 +96,6 @@ opr :'<>' | '<' | '>' | '>=' | '<=';
 fopr: ('<'|'>'| ) {notifyErrorListeners("La expresión introducida dentro del bucle no es una condición");};
 
 opl : 'y' | 'o';
-
 
 IDENTIFICADOR : ([a-zA-Z]|'_')([a-zA-Z]|'_'|[0-9])*;
 

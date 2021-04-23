@@ -1,15 +1,6 @@
 funcion entero max (entero a, entero b)
 inicio
     bifurcacio (a > b)
-    entonces
-        inicio
-             b = b + 2;
-        fin
-    sino
-        inicio
-            a = 3 * a;
-        fin
-    bifurcacion (a > b)
         inicio
             return a;
         fin

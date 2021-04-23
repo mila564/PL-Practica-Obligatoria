@@ -13,7 +13,7 @@ restpart : IDENTIFICADOR '(' restpartPrimaIntermedia;
 restpartPrimaIntermedia: restpartPrimaIntermediaListparam | restpartPrimaIntermediaParentesis;
 restpartPrimaIntermediaListparam: listparam restpartPrimaIntermediaParentesis;
 restpartPrimaIntermediaParentesis: ')' restPartPrimaIntermedia2;
-restPartPrimaIntermedia2: restpartPrima| frestpartPrima;
+restPartPrimaIntermedia2: restpartPrima | frestpartPrima;
 
 restpartPrima :  blq | fblqFaltaInicio;
 
@@ -52,7 +52,7 @@ sent
 
 frestBifurcacion:  'entonces' blq 'sino' blq |  blq 'sino' blq {notifyErrorListeners("Falta la palabra reservada 'entonces'");};
 
-fbifurcacion : 'bifurcacio' '(' lcond ')' 'entonces' blq 'sino' blq {notifyErrorListeners("Palabra reservada 'bifurcacion' mal escrita");};
+fbifurcacion : 'bifurcacio' '(' lcond ')' frestBifurcacion {notifyErrorListeners("Palabra reservada 'bifurcacion' mal escrita");};
 
 fsent
     : ';'
