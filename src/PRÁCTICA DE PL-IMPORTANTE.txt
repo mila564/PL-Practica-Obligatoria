@@ -1,0 +1,106 @@
+1) Programa:
+
+Atributos: - lista de subprogramas (List<Subprograma>)
+
+- toString:
+
+	<TITLE> nombre del programa </TITLE>  
+	(ver cómo conseguirlo - argv[0]?? getName??)
+
+	'\n'
+
+	<H1> nombre del programa </H1>
+
+	<H2> Funciones y procedimientos </H2>
+
+	<UL>
+
+ 	bucle que itera sobre las cabeceras de las funciones
+	y procedimientos del programa
+
+	for (Subprograma s : p){
+		pw.println('<li>' + ' <A HREF="#s.getNombre()">s.getCabecera()</A>'+ '<li'> +'\n');
+	}
+	
+	</UL>
+
+	
+
+2) Subprograma (Superclase abstracta)
+
+Atributos: 
+	   - tipo (función/proc)
+           - nombre (String)
+	   - listParam (List<Param>)
+	   - lista de sentencias (List<Sent>)
+
+Procedimiento / Función
+
+toString redefinido para función:
+	
+	Función:
+	    - valor de retorno
+
+	<HR/>
+	<A NAME="#getNombre()">
+	<DIV> getTipo() + getValorRetorno() + getNombre()+
+	  for (Param p : l){
+	 	pw.print(p + ', ');
+	  }
+	</DIV>
+	<DIV> inicio </DIV>
+		for (Sent s: l){
+			pw.println(s);
+		}
+	<DIV> fin </DIV>
+
+3)  Param:
+		- tipo : String
+		- id : String
+
+	toString:
+		<SPAN CLASS="palres">getTipo()</SPAN><SPAN CLASS="ident">getId()</SPAN>
+
+4) Sent: clase abstracta
+
+-> SentSimple clase abstracta
+
+	-> DeclaraciónVariable
+
+		- tipo : String
+		- id : String
+
+		toString:
+
+		<SPAN CLASS="palres">getTipo()</SPAN>	
+		<SPAN CLASS="ident">getId()</SPAN>
+		;
+
+        -> Asignación
+
+		- id: String
+		- asig: String
+		- const: String
+		
+		toString:
+		
+		<SPAN CLASS="ident">getId()</SPAN>
+		getAsig()	
+		<SPAN CLASS="ident">getConst()</SPAN>
+		
+	-> Return
+		
+		-id : String
+		 
+		 <SPAN CLASS="palres">return</SPAN>
+		 <SPAN CLASS="ident">getId()</SPAN>
+
+-> Bifurcación
+
+	Condicion: 
+
+
+-> Buclemientras (while)
+-> Bucle (do while) 
+-> Buclepara (for)
+

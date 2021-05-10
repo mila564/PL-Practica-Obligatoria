@@ -25,6 +25,6 @@ public class Bucle {
 
     @Override
     public String toString() {
-        return "bucle "+blq.toString()+" hasta ("+ lcond.toString() + ")";
+        return "<DIV style=\"text-indent: 5cm\"> bucle "+ blq.toString() +" hasta ("+ lcond.toString() + ")</DIV>";
     }
 }
