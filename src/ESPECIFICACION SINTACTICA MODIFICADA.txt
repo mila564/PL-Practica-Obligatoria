@@ -1,0 +1,75 @@
+program : part programPrima;
+
+programPrima : program | ;
+
+part : 'funcion' type restpart | 'procedimiento' restpart;
+
+restpart: IDENTIFICADOR '(' respartPrima;
+
+restpartPrima: listparam ')' blq | ')' blq;
+
+listparam : type IDENTIFICADOR listparamPrima;
+
+listparamPrima : ',' type IDENTIFICADOR listparamPrima	| ;
+
+type : 'entero' | 'real' | 'caracter';
+
+blq : 'inicio' sentlist 'fin';
+
+sentlist : sent sentlistPrima;
+
+sentlistPrima : sent sentlistPrima | ;
+
+sent: type lid ';'  
+|
+IDENTIFICADOR sentPrima 
+|
+'return' exp ';'
+|
+'bifurcacion' '(' lcond ')' 'entonces' blq 'sino' blq
+| 
+'buclepara' '(' IDENTIFICADOR asig exp ';' lcond ';' 
+IDENTIFICADOR asig exp ')' blq
+| 
+'buclemientras' '(' lcond ')' blq
+| 
+'bucle' blq 'hasta' '(' lcond ')'
+| 
+blq
+
+sentPrima: asig exp ';' | '(' sentPrimaPrima 
+
+sentPrimaPrima : lid ')' ';' | ')' ';'
+
+lid : IDENTIFICADOR lidPrima;
+
+lidPrima : | ',' lid;
+
+asig : '=' | '+=' | '-=' | '*=' | '/=';
+
+exp : 
+IDENTIFICADOR expPrima expPrimaPrima
+| 
+'(' exp ')' expPrimaPrima
+| 
+CONSTENTERO expPrimaPrima
+| 
+CONSTREAL expPrimaPrima
+| 
+CONSTLIT expPrimaPrima
+
+expPrima: '(' lid ')' | ;
+
+expPrimaPrima: op exp expPrimaPrima | ;
+
+op : '+' | '-' | '*' | '/';
+
+lcond : cond lcondPrima | 'no' cond lcondPrima;
+
+lcondPrima: opl lcond lcondPrima | ;
+
+cond : exp opr exp | 'cierto' | 'falso';
+
+opl : 'y' | 'o'; 
+
+opr: '==' | '<>' | '<' | '>' | '>=' | '<=';
