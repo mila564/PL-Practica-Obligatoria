@@ -75,54 +75,6 @@ public class GramaticaBaseListener implements GramaticaListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterRestpartPrimaIntermedia(GramaticaParser.RestpartPrimaIntermediaContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitRestpartPrimaIntermedia(GramaticaParser.RestpartPrimaIntermediaContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterRestpartPrimaIntermediaListparam(GramaticaParser.RestpartPrimaIntermediaListparamContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitRestpartPrimaIntermediaListparam(GramaticaParser.RestpartPrimaIntermediaListparamContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterRestpartPrimaIntermediaParentesis(GramaticaParser.RestpartPrimaIntermediaParentesisContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitRestpartPrimaIntermediaParentesis(GramaticaParser.RestpartPrimaIntermediaParentesisContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterRestPartPrimaIntermedia2(GramaticaParser.RestPartPrimaIntermedia2Context ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitRestPartPrimaIntermedia2(GramaticaParser.RestPartPrimaIntermedia2Context ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterRestpartPrima(GramaticaParser.RestpartPrimaContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -135,25 +87,13 @@ public class GramaticaBaseListener implements GramaticaListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFrestpartPrima(GramaticaParser.FrestpartPrimaContext ctx) { }
+	@Override public void enterMasDeUnParentesis(GramaticaParser.MasDeUnParentesisContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitFrestpartPrima(GramaticaParser.FrestpartPrimaContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterUnCierreParentOVarios(GramaticaParser.UnCierreParentOVariosContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitUnCierreParentOVarios(GramaticaParser.UnCierreParentOVariosContext ctx) { }
+	@Override public void exitMasDeUnParentesis(GramaticaParser.MasDeUnParentesisContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -207,18 +147,6 @@ public class GramaticaBaseListener implements GramaticaListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFblqFaltaInicio(GramaticaParser.FblqFaltaInicioContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitFblqFaltaInicio(GramaticaParser.FblqFaltaInicioContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterSentlist(GramaticaParser.SentlistContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -243,6 +171,18 @@ public class GramaticaBaseListener implements GramaticaListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterFaltaPuntoYComa(GramaticaParser.FaltaPuntoYComaContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFaltaPuntoYComa(GramaticaParser.FaltaPuntoYComaContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterSent(GramaticaParser.SentContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -255,37 +195,13 @@ public class GramaticaBaseListener implements GramaticaListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFrestBifurcacion(GramaticaParser.FrestBifurcacionContext ctx) { }
+	@Override public void enterFaltaPalabraReservadaEntonces(GramaticaParser.FaltaPalabraReservadaEntoncesContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitFrestBifurcacion(GramaticaParser.FrestBifurcacionContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterFbifurcacion(GramaticaParser.FbifurcacionContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitFbifurcacion(GramaticaParser.FbifurcacionContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterFsent(GramaticaParser.FsentContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitFsent(GramaticaParser.FsentContext ctx) { }
+	@Override public void exitFaltaPalabraReservadaEntonces(GramaticaParser.FaltaPalabraReservadaEntoncesContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -423,18 +339,6 @@ public class GramaticaBaseListener implements GramaticaListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterLcondPrimaPrima(GramaticaParser.LcondPrimaPrimaContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitLcondPrimaPrima(GramaticaParser.LcondPrimaPrimaContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterCond(GramaticaParser.CondContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -447,37 +351,13 @@ public class GramaticaBaseListener implements GramaticaListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterOprIntermedia(GramaticaParser.OprIntermediaContext ctx) { }
+	@Override public void enterOpl(GramaticaParser.OplContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitOprIntermedia(GramaticaParser.OprIntermediaContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterOprIntermedia2(GramaticaParser.OprIntermedia2Context ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitOprIntermedia2(GramaticaParser.OprIntermedia2Context ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterAsignacion(GramaticaParser.AsignacionContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitAsignacion(GramaticaParser.AsignacionContext ctx) { }
+	@Override public void exitOpl(GramaticaParser.OplContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -495,25 +375,13 @@ public class GramaticaBaseListener implements GramaticaListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFopr(GramaticaParser.FoprContext ctx) { }
+	@Override public void enterOperadorIgualdadErroneo(GramaticaParser.OperadorIgualdadErroneoContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitFopr(GramaticaParser.FoprContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterOpl(GramaticaParser.OplContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitOpl(GramaticaParser.OplContext ctx) { }
+	@Override public void exitOperadorIgualdadErroneo(GramaticaParser.OperadorIgualdadErroneoContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

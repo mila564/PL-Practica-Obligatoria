@@ -6,13 +6,13 @@ inicio
             auxiliar = auxiliar + 1;
         fin
         resultado = auxiliar - numero;
-        bifurcacion (resultado >= 5)
+        bifurcacion(resultado <= 5)
             entonces
                 inicio
-                    return "El resultado es un numero mayor o igual que 5";
+                    return ""El resultado es igual o menor que 5";
                 fin
             sino
                 inicio
-                    return ""El resultado es un numero menor que 5";
+                    return "El resultado es mayor que 5";
                 fin
 fin
