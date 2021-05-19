@@ -62,11 +62,12 @@ faltaPuntoYComa : ';' | {notifyErrorListeners("Falta punto y coma.");};
 
 //----------------------------------------------------------------------------------------------------
 
-sent: type lid faltaPuntoYComa
+sent: type lid faltaPuntoYComa //  1_ Declaraciones de variables
 |
-IDENTIFICADOR sentPrima
+IDENTIFICADOR sentPrima // 2_ Sentencias de asignación y 3_ Llamadas a procedimientos
 |
-'return' exp faltaPuntoYComa // Falta explicar en la memoria que en error3.txt da error porque interpreta hasta el ; sin cerrar 
+'return' exp faltaPuntoYComa  // 4_ Return
+// Falta explicar en la memoria que en error3.txt da error porque interpreta hasta el ; sin cerrar
 |
 'bifurcacion' '(' lcond ')' faltaPalabraReservadaEntonces blq 'sino' blq
 |
@@ -119,15 +120,15 @@ lidPrima : | ',' lid;
 asig : '=' | '+=' | '-=' | '*=' | '/=';
 
 exp :
-IDENTIFICADOR expPrima expPrimaPrima
+IDENTIFICADOR expPrima expPrimaPrima // Identificador (una variable)
 |
-'(' exp ')' expPrimaPrima
+'(' exp ')' expPrimaPrima // Expresión entre paréntesis
 |
-CONSTENTERO expPrimaPrima
+CONSTENTERO expPrimaPrima // Constante entera. P.Ej: 5
 |
-CONSTREAL expPrimaPrima
+CONSTREAL expPrimaPrima // Constante real
 |
-CONSTLIT expPrimaPrima;
+CONSTLIT expPrimaPrima; // Constante literal (cadena)
 
 expPrima: '(' lid ')' | ;
 

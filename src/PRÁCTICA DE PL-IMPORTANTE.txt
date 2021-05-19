@@ -104,3 +104,24 @@ toString redefinido para función:
 -> Bucle (do while) 
 -> Buclepara (for)
 
+
+
+-> ExpBasico clase abstracta
+
+3 clases hijas
+
+	LlamadaProcedimiento (por crear)
+	ExpRecursivo
+	Constante
+
+-> ExpRecursivo: 2 atributos Op y Exp
+
+exp + op + exp + op + exp + op + exp
+
+-> Exp:
+Atributos:
+ - ExpBasico
+ - List<ExpRecursivo>
+
+
+
