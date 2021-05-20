@@ -100,7 +100,7 @@ toString redefinido para función:
 	Condicion: 
 
 
--> Buclemientras (while)
+-> especificacion.Buclemientras (while)
 -> Bucle (do while) 
 -> Buclepara (for)
 
@@ -117,7 +117,7 @@ toString redefinido para función:
 -> 2) ExpRecursivo - 2 atributos : Op y Exp
 
 class ExpRecursivo{
-	private Op operador;
+	private String operador;
 	private Exp expresion;
 }
 
@@ -138,6 +138,25 @@ EXP
 	-> clase hija 1
 	-> clase hija 2
 	-> clase hija 3
+
+-------------------------------
+
+Lcond
+
+	- booleano : Boolean
+	- condición : Cond
+	- condicionRecursivo : LcondRecursivo
+
+	Cond - Clase abstracta
+
+		- CondBooleanaSimple
+		- CondBooleanaCompleja
+		
+	 
+lcondRecursivo
+	- opl : String
+	- condición : lcond
+
 
 
 
