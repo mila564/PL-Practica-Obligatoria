@@ -13,7 +13,7 @@ grammar Gramatica;
     }
 }
 
-r: program+;
+r: program;
 
 program : part programPrima;
 
@@ -126,36 +126,66 @@ sentPrima: asig exp faltaPuntoYComa | '(' sentPrimaPrima;
 
 sentPrimaPrima : lid ')' faltaPuntoYComa | ')' faltaPuntoYComa;
 
-lid : IDENTIFICADOR lidPrima;
+lid returns [List<Identificador> s]:
+    IDENTIFICADOR lidPrima {$s = $lidPrima.s.addFirst(new Identificador($IDENTIFICADOR.text));}
+    ;
 
-lidPrima : | ',' lid;
+lidPrima returns [List<Identificador> s]:
+    ',' lid {$s = $lid.s;}
+    |
+    {$s = new ArrayList<Identificador>();}
+    ;
 
 asig : '=' | '+=' | '-=' | '*=' | '/=';
 
-exp :
-IDENTIFICADOR expPrima expPrimaPrima // especificacion.Identificador (una variable)
-|
-'(' exp ')' expPrimaPrima // Expresión entre paréntesis
-|
-CONSTENTERO expPrimaPrima // especificacion.Constante entera. P.Ej: 5
-|
-CONSTREAL expPrimaPrima // especificacion.Constante real
-|
-CONSTLIT expPrimaPrima; // especificacion.Constante literal (cadena)
+exp returns [Exp s]:
+    IDENTIFICADOR expPrima expPrimaPrima {$s = new Exp(new LlamadaProcedimientoExp($expPrima.s.addFirst(new Identificador($IDENTIFICADOR.text)), $expPrimaPrima.s));}
+    |
+    '(' exp ')' expPrimaPrima {$s = new Exp(new ExpConParentesis($exp.s), $expPrimaPrima.s);}
+    |
+    CONSTENTERO expPrimaPrima {$s = new Exp(new Constante($CONSTENTERO.text), $expPrimaPrima.s);}
+    |
+    CONSTREAL expPrimaPrima {$s = new Exp(new Constante($CONSTREAL.text), $expPrimaPrima.s);}
+    |
+    CONSTLIT expPrimaPrima {$s = new Exp(new Constante($CONSTLIT.text), $expPrimaPrima.s);}
+    ;
 
-expPrima: '(' lid ')' | ;
+expPrima returns [List<Identificador> s]:
+    '(' lid ')' {$s = $lid.s;}
+     |
+     {$s = new ArrayList<Identificador>();}
+     ;
 
-expPrimaPrima: op exp expPrimaPrima | ;
+expPrimaPrima returns [List<ExpRecursivo> s]:
+    op exp expPrimaPrima {$s = $expPrimaPrima.s.addFirst(new ExpRecursivo($op.s, $exp.s));}
+    |
+    {$s = new ArrayList<ExpRecursivo>();}
+    ;
 
 op : '+' | '-' | '*' | '/';
 
-lcond : cond lcondPrima | 'no' cond lcondPrima;
+lcond returns [LCond s]:
+    cond lcondPrima {$s = new Lcond(false, $cond.s, $lcondPrima.s);}
+    |
+    'no' cond lcondPrima {$s = new Lcond(true, $cond.s, $lcondPrima.s);}
+    ;
 
-lcondPrima: opl lcond lcondPrima | ;
+lcondPrima returns [LcondRecursivo s]:
+    opl lcond lcondPrima {$s = new LcondRecursivo ($opl.s, $lcond.s, $lcondPrima.s);}
+    |
+    {$s = null;};
 
-cond : exp opr exp | 'cierto' | 'falso';
+cond returns [Cond s]:
+    e1=exp opr e2=exp{$s = new CondBooleanaCompleja($e1.s, $opr.s, $e2.s);}
+    |
+    c='cierto'{$s = new CondBooleanaSimple($c.text);}
+    |
+    f='falso'{$s = new CondBooleanaSimple($f.text);};
 
-opl : 'y' | 'o';
+opl returns [String s]:
+    y='y'{$s = $y.text;}
+    |
+    o='o'{$s = $o.text;};
 
 //----------------------------------------------------------------------------------------------------
 
@@ -165,7 +195,19 @@ opl : 'y' | 'o';
 
 // opr: '==' | '<>' | '<' | '>' | '>=' | '<=';
 
-opr: '=' operadorIgualdadErroneo | '<>' | '<' | '>' | '>=' | '<=';
+opr returns [String s]:
+    '=' operadorIgualdadErroneo {$s = "==";}
+    |
+    '<>' {$s = "<>";}
+    |
+    '<' {$s = "<";}
+    |
+    '>' {$s = ">";}
+    |
+    '>='{$s = ">=";}
+    |
+    '<='{$s = "<=";}
+    ;
 
 operadorIgualdadErroneo : '=' | {notifyErrorListeners("No es un operador relacional");};
 

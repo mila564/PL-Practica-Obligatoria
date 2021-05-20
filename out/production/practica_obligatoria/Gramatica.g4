@@ -1,5 +1,18 @@
 grammar Gramatica;
 
+@header{
+    package especificacion;
+}
+
+@parser::members{
+    private Program programa;
+
+    public GramaticaParser (TokenStream input, Program prog){
+        this(input);
+        programa = prog;
+    }
+}
+
 r: program+;
 
 program : part programPrima;
@@ -62,11 +75,12 @@ faltaPuntoYComa : ';' | {notifyErrorListeners("Falta punto y coma.");};
 
 //----------------------------------------------------------------------------------------------------
 
-sent: type lid faltaPuntoYComa
+sent: type lid faltaPuntoYComa //  1_ Declaraciones de variables
 |
-IDENTIFICADOR sentPrima
+IDENTIFICADOR sentPrima // 2_ Sentencias de asignación y 3_ Llamadas a procedimientos
 |
-'return' exp ';'
+'return' exp faltaPuntoYComa  // 4_ especificacion.Return
+// Falta explicar en la memoria que en error3.txt da error porque interpreta hasta el ; sin cerrar
 |
 'bifurcacion' '(' lcond ')' faltaPalabraReservadaEntonces blq 'sino' blq
 |
@@ -119,15 +133,15 @@ lidPrima : | ',' lid;
 asig : '=' | '+=' | '-=' | '*=' | '/=';
 
 exp :
-IDENTIFICADOR expPrima expPrimaPrima
+IDENTIFICADOR expPrima expPrimaPrima // especificacion.Identificador (una variable)
 |
-'(' exp ')' expPrimaPrima
+'(' exp ')' expPrimaPrima // Expresión entre paréntesis
 |
-CONSTENTERO expPrimaPrima
+CONSTENTERO expPrimaPrima // especificacion.Constante entera. P.Ej: 5
 |
-CONSTREAL expPrimaPrima
+CONSTREAL expPrimaPrima // especificacion.Constante real
 |
-CONSTLIT expPrimaPrima;
+CONSTLIT expPrimaPrima; // especificacion.Constante literal (cadena)
 
 expPrima: '(' lid ')' | ;
 

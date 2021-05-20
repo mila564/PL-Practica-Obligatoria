@@ -3,26 +3,37 @@
 Atributos: - lista de subprogramas (List<Subprograma>)
 
 - toString:
+	<HEAD>
+		<TITLE> nombre del programa </TITLE>  
+		(ver cómo conseguirlo - argv[0]?? getName??)
 
-	<TITLE> nombre del programa </TITLE>  
-	(ver cómo conseguirlo - argv[0]?? getName??)
+		<STYLE>
+			.cte ... (el CSS)
+		</STYLE>
+	</HEAD>
+	<BODY>
+		<A NAME = "inicio"> // Ancla inicial
+		<H1> Programa: nombre del programa </H1>
+		<H2> Funciones y procedimientos </H2>
+		</A>
 
-	'\n'
+		<UL>
 
-	<H1> nombre del programa </H1>
+ 		bucle que itera sobre las cabeceras de las funciones
+		y procedimientos del programa
 
-	<H2> Funciones y procedimientos </H2>
-
-	<UL>
-
- 	bucle que itera sobre las cabeceras de las funciones
-	y procedimientos del programa
-
-	for (Subprograma s : p){
-		pw.println('<li>' + ' <A HREF="#s.getNombre()">s.getCabecera()</A>'+ '<li'> +'\n');
-	}
+		for (Subprograma s : p){
+			'<li>' + ' <A HREF="#s.getNombre()">s.getCabecera()</A>'+ '<li'> +'\n');
+		}
 	
-	</UL>
+		</UL>
+	</BODY>
+
+	
+
+	
+
+
 
 	
 
@@ -32,7 +43,7 @@ Atributos:
 	   - tipo (función/proc)
            - nombre (String)
 	   - listParam (List<Param>)
-	   - lista de sentencias (List<Sent>)
+	   - lista de sentencias (List<especificacion.Sent>)
 
 Procedimiento / Función
 
@@ -49,7 +60,7 @@ toString redefinido para función:
 	  }
 	</DIV>
 	<DIV> inicio </DIV>
-		for (Sent s: l){
+		for (especificacion.Sent s: l){
 			pw.println(s);
 		}
 	<DIV> fin </DIV>
@@ -61,7 +72,7 @@ toString redefinido para función:
 	toString:
 		<SPAN CLASS="palres">getTipo()</SPAN><SPAN CLASS="ident">getId()</SPAN>
 
-4) Sent: clase abstracta
+4) especificacion.Sent: clase abstracta
 
 -> SentSimple clase abstracta
 
@@ -88,7 +99,7 @@ toString redefinido para función:
 		getAsig()	
 		<SPAN CLASS="ident">getConst()</SPAN>
 		
-	-> Return
+	-> especificacion.Return
 		
 		-id : String
 		 
@@ -103,4 +114,60 @@ toString redefinido para función:
 -> Buclemientras (while)
 -> Bucle (do while) 
 -> Buclepara (for)
+
+
+
+-> 1) ExpBasico clase abstracta
+
+3 clases hijas
+
+	especificacion.LlamadaProcedimiento (por crear)
+	especificacion.ExpConParentesis
+	especificacion.Constante
+
+-> 2) ExpRecursivo - 2 atributos : Op y Exp
+
+class ExpRecursivo{
+	private String operador;
+	private Exp expresion;
+}
+
+-> 3) especificacion.Exp:
+
+Atributos:
+ - especificacion.ExpBasico
+ - List<especificacion.ExpRecursivo>
+
+class Exp{
+	private Exp expresion;
+	List<ExpRecursivo> lista;
+}
+
+-------------------------
+
+EXP
+	-> clase hija 1
+	-> clase hija 2
+	-> clase hija 3
+
+-------------------------------
+
+Lcond
+
+	- booleano : Boolean
+	- condición : Cond
+	- condicionRecursivo : LcondRecursivo
+
+	Cond - Clase abstracta
+
+		- CondBooleanaSimple
+		- CondBooleanaCompleja
+		
+	 
+lcondRecursivo
+	- opl : String
+	- condición : lcond
+
+
+
 

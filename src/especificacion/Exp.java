@@ -4,9 +4,9 @@ import java.util.List;
 
 public class Exp {
     private ExpBasico expresionSimple;
-    private ExpRecursivo expresionCompleja;
+    private List<ExpRecursivo> expresionCompleja;
 
-    public Exp(ExpBasico expresionSimple, ExpRecursivo expresionCompleja) {
+    public Exp(ExpBasico expresionSimple, List<ExpRecursivo> expresionCompleja) {
         this.expresionSimple = expresionSimple;
         this.expresionCompleja = expresionCompleja;
     }
@@ -19,16 +19,21 @@ public class Exp {
         this.expresionSimple = expresionSimple;
     }
 
-    public ExpRecursivo getExpresionCompleja() {
+    public List<ExpRecursivo> getExpresionCompleja() {
         return expresionCompleja;
     }
 
-    public void setExpresionCompleja(ExpRecursivo expresionCompleja) {
+    public void setExpresionCompleja(List<ExpRecursivo> expresionCompleja) {
         this.expresionCompleja = expresionCompleja;
     }
 
     @Override
     public String toString() {
-        return this.getExpresionSimple().toString() + this.getExpresionCompleja().toString();
+        String lista = "";
+        lista +=  this.getExpresionSimple().toString();
+        for (ExpRecursivo e : this.getExpresionCompleja()){
+            lista += e.toString();
+        }
+        return lista;
     }
 }

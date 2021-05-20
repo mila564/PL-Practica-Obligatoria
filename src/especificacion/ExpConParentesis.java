@@ -1,29 +1,22 @@
 package especificacion;
 
-import java.util.List;
-
 public class ExpConParentesis extends ExpBasico{
-    private List<Exp> listaExp;
+    private Exp expParentesis;
 
-    public ExpConParentesis(List<Exp> listaExp) {
-        this.listaExp = listaExp;
+    public ExpConParentesis(Exp listaExp) {
+        this.expParentesis = listaExp;
     }
 
-    public List<Exp> getListaExp() {
-        return listaExp;
+    public Exp getExpParentesis() {
+        return expParentesis;
     }
 
-    public void setListaExp(List<Exp> listaExp) {
-        this.listaExp = listaExp;
+    public void setExpParentesis(Exp expParentesis) {
+        this.expParentesis = expParentesis;
     }
 
     @Override
     public String toString() {
-        String lista = "(";
-        for (Exp e: this.getListaExp()){
-            lista += e.toString();
-        }
-        lista += ")";
-        return lista;
+        return "(" + this.getExpParentesis() + ")";
     }
 }
