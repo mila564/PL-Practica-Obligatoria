@@ -1,4 +1,4 @@
 package especificacion;
 
-public class ExpBasico {
+public abstract class ExpBasico {
 }

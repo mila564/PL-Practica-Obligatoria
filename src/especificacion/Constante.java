@@ -1,6 +1,6 @@
 package especificacion;
 
-public class Constante {
+public class Constante extends ExpBasico{
     private String texto;
 
     public Constante(String texto) {
@@ -17,6 +17,6 @@ public class Constante {
 
     @Override
     public String toString() {
-        return "<SPAN CLASS=\"cte\">"+ this.getTexto() +"</SPAN>";
+        return "<SPAN CLASS=\"cte\">"+ this.getTexto().toString() +"</SPAN>";
     }
 }

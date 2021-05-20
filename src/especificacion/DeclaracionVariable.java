@@ -33,6 +33,6 @@ public class DeclaracionVariable {
         for (Identificador id: lid){
             lista = id.toString() + ",";
         }
-        return "<div style=\"text-indent: 0.5cm>" + type.toString() + lista + ";</div>";
+        return "<DIV STYLE=\"text-indent: 0.5cm>" + type.toString() + lista + ";</DIV>";
     }
 }

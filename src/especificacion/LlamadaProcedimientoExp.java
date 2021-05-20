@@ -2,10 +2,10 @@ package especificacion;
 
 import java.util.List;
 
-public class LlamadaProcedimiento {
+public class LlamadaProcedimientoExp extends ExpBasico{
     private List<Identificador> identificadores;
 
-    public LlamadaProcedimiento(List<Identificador> identificadores) {
+    public LlamadaProcedimientoExp(List<Identificador> identificadores) {
         this.identificadores = identificadores;
     }
 
@@ -27,6 +27,6 @@ public class LlamadaProcedimiento {
             lista = id.toString() + ",";
         }
         lista += ')';
-        return "<div style=\"text-indent: 0.5cm>" + lista + ";</div>";
+        return lista;
     }
 }

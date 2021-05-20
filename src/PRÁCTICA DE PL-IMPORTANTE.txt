@@ -106,22 +106,38 @@ toString redefinido para función:
 
 
 
--> especificacion.ExpBasico clase abstracta
+-> 1) ExpBasico clase abstracta
 
 3 clases hijas
 
 	especificacion.LlamadaProcedimiento (por crear)
-	especificacion.ExpRecursivo
+	especificacion.ExpConParentesis
 	especificacion.Constante
 
--> especificacion.ExpRecursivo: 2 atributos Op y especificacion.Exp
+-> 2) ExpRecursivo - 2 atributos : Op y Exp
 
-exp + op + exp + op + exp + op + exp
+class ExpRecursivo{
+	private Op operador;
+	private Exp expresion;
+}
 
--> especificacion.Exp:
+-> 3) especificacion.Exp:
+
 Atributos:
  - especificacion.ExpBasico
  - List<especificacion.ExpRecursivo>
+
+class Exp{
+	private Exp expresion;
+	List<ExpRecursivo> lista;
+}
+
+-------------------------
+
+EXP
+	-> clase hija 1
+	-> clase hija 2
+	-> clase hija 3
 
 
 

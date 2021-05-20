@@ -1,6 +1,6 @@
 package especificacion;
 
-public class PalabraReservada {
+public class PalabraReservada{
     private String texto;
 
     public PalabraReservada(String texto) {
