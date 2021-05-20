@@ -1,5 +1,18 @@
 grammar Gramatica;
 
+@header{
+    package especificacion;
+}
+
+@parser::members{
+    private Program programa;
+
+    public GramaticaParser (TokenStream input, Program prog){
+        this(input);
+        programa = prog;
+    }
+}
+
 r: program+;
 
 program : part programPrima;

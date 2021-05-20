@@ -1,3 +1,6 @@
+import especificacion.*;
+import especificacion.GramaticaLexer;
+import especificacion.GramaticaParser;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
@@ -5,6 +8,7 @@ import org.antlr.v4.runtime.CommonTokenStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 public class ClasePrincipal {
     public static void main(String[] args) {
@@ -16,7 +20,11 @@ public class ClasePrincipal {
             // Identificar al analizador léxico como fuente de tokens para el sintáctico
             CommonTokenStream tokens = new CommonTokenStream(analex);
             // Crear el objeto correspondiente al analizador sintáctico
-            GramaticaParser anasint = new GramaticaParser(tokens);
+            // GramaticaParser anasint = new GramaticaParser(tokens);
+            String[] directorioSplit = args[0].split("\\\\");
+            String nombrePrograma = directorioSplit[directorioSplit.length-1];
+            Program programa = new Program(new ArrayList<Part>(), nombrePrograma);
+            GramaticaParser anasint = new GramaticaParser(tokens, programa);
             /*
             Si se quiere pasar al analizador algún objeto externo con el que trabajar,
             éste deberá ser de una clase del mismo paquete

@@ -1,4 +1,7 @@
 // Generated from Gramatica.g4 by ANTLR 4.9.1
+
+    package especificacion;
+
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
@@ -108,6 +111,14 @@ public class GramaticaParser extends Parser {
 
 	@Override
 	public ATN getATN() { return _ATN; }
+
+
+	    private Program programa;
+
+	    public GramaticaParser (TokenStream input, Program prog){
+	        this(input);
+	        programa = prog;
+	    }
 
 	public GramaticaParser(TokenStream input) {
 		super(input);

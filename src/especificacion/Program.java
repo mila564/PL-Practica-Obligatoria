@@ -6,8 +6,9 @@ public class Program {
     private List<Part> subprogramas;
     private String nombrePrograma;
 
-    public Program(List<Part> subprogramas) {
+    public Program(List<Part> subprogramas, String nombrePrograma) {
         this.subprogramas = subprogramas;
+        this.nombrePrograma = nombrePrograma;
     }
 
     public List<Part> getSubprogramas() {
@@ -32,7 +33,7 @@ public class Program {
         lista += "<!DOCTYPE html>";
         lista += "<html>";
         lista += "<head>";
-        lista += "<title>" + this.getNombrePrograma() + ".pl</title>";
+        lista += "<title>" + this.getNombrePrograma() + "</title>";
         lista += "<style>";
         lista += ".cte {color:rgb(19,189,72);}";
         lista += ".ident {color:rgb(55, 40, 244);}";
@@ -41,7 +42,7 @@ public class Program {
         lista += "</head>";
         lista += "<body>";
         lista += "<a name= \"inicio\">";
-        lista += "<h1>Programa:" + this.getNombrePrograma() + ".pl</h1>";
+        lista += "<h1>Programa:" + this.getNombrePrograma() + "</h1>";
         lista += "<h2>Funciones y procedimientos</h2>";
         lista += "</a>";
         lista += "<ul>";

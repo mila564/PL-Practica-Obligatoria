@@ -22,7 +22,7 @@ Atributos: - lista de subprogramas (List<Subprograma>)
  		bucle que itera sobre las cabeceras de las funciones
 		y procedimientos del programa
 
-		for (Subprograma s : p){
+		for (Part p : lista){
 			'<li>' + ' <A HREF="#s.getNombre()">s.getCabecera()</A>'+ '<li'> +'\n');
 		}
 	
@@ -37,20 +37,19 @@ Atributos: - lista de subprogramas (List<Subprograma>)
 
 	
 
-2) Subprograma (Superclase abstracta)
+2) Part (Superclase abstracta)
 
 Atributos: 
-	   - tipo (función/proc)
-           - nombre (String)
-	   - listParam (List<Param>)
-	   - lista de sentencias (List<especificacion.Sent>)
+           - nombre: PalabraReservada
+	   - List<Param> 
+	   - Blq
 
 Procedimiento / Función
 
 toString redefinido para función:
 	
 	Función:
-	    - valor de retorno
+	    - type
 
 	<HR/>
 	<A NAME="#getNombre()">
