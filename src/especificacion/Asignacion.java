@@ -1,7 +1,9 @@
+package especificacion;
+
 public class Asignacion {
 
     private Identificador id;
     private String asig;
-    //private Exp expresion;
+    //private especificacion.Exp expresion;
 
 }

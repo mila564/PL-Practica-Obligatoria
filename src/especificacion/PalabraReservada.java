@@ -1,7 +1,9 @@
-public class Constante {
+package especificacion;
+
+public class PalabraReservada {
     private String texto;
 
-    public Constante(String texto) {
+    public PalabraReservada(String texto) {
         this.texto = texto;
     }
 
@@ -15,6 +17,6 @@ public class Constante {
 
     @Override
     public String toString() {
-        return "<SPAN CLASS=\"cte\">"+ this.getTexto() +"</SPAN>";
+        return "<SPAN CLASS=\"palres\">"+ this.getTexto() +"</SPAN>";
     }
 }

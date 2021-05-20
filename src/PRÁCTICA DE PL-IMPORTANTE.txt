@@ -32,7 +32,7 @@ Atributos:
 	   - tipo (función/proc)
            - nombre (String)
 	   - listParam (List<Param>)
-	   - lista de sentencias (List<Sent>)
+	   - lista de sentencias (List<especificacion.Sent>)
 
 Procedimiento / Función
 
@@ -49,7 +49,7 @@ toString redefinido para función:
 	  }
 	</DIV>
 	<DIV> inicio </DIV>
-		for (Sent s: l){
+		for (especificacion.Sent s: l){
 			pw.println(s);
 		}
 	<DIV> fin </DIV>
@@ -61,7 +61,7 @@ toString redefinido para función:
 	toString:
 		<SPAN CLASS="palres">getTipo()</SPAN><SPAN CLASS="ident">getId()</SPAN>
 
-4) Sent: clase abstracta
+4) especificacion.Sent: clase abstracta
 
 -> SentSimple clase abstracta
 
@@ -88,7 +88,7 @@ toString redefinido para función:
 		getAsig()	
 		<SPAN CLASS="ident">getConst()</SPAN>
 		
-	-> Return
+	-> especificacion.Return
 		
 		-id : String
 		 
@@ -106,22 +106,22 @@ toString redefinido para función:
 
 
 
--> ExpBasico clase abstracta
+-> especificacion.ExpBasico clase abstracta
 
 3 clases hijas
 
-	LlamadaProcedimiento (por crear)
-	ExpRecursivo
-	Constante
+	especificacion.LlamadaProcedimiento (por crear)
+	especificacion.ExpRecursivo
+	especificacion.Constante
 
--> ExpRecursivo: 2 atributos Op y Exp
+-> especificacion.ExpRecursivo: 2 atributos Op y especificacion.Exp
 
 exp + op + exp + op + exp + op + exp
 
--> Exp:
+-> especificacion.Exp:
 Atributos:
- - ExpBasico
- - List<ExpRecursivo>
+ - especificacion.ExpBasico
+ - List<especificacion.ExpRecursivo>
 
 
 

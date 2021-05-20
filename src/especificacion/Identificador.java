@@ -1,7 +1,9 @@
-public class PalabraReservada {
+package especificacion;
+
+public class Identificador {
     private String texto;
 
-    public PalabraReservada(String texto) {
+    public Identificador(String texto) {
         this.texto = texto;
     }
 
@@ -15,6 +17,6 @@ public class PalabraReservada {
 
     @Override
     public String toString() {
-        return "<SPAN CLASS=\"palres\">"+ this.getTexto() +"</SPAN>";
+        return "<SPAN CLASS=\"ident\">"+ this.getTexto() +"</SPAN>";
     }
 }

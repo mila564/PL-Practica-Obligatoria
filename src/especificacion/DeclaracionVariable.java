@@ -1,3 +1,5 @@
+package especificacion;
+
 import java.util.List;
 
 public class DeclaracionVariable {

@@ -1,7 +1,9 @@
-public class Identificador {
+package especificacion;
+
+public class Constante {
     private String texto;
 
-    public Identificador(String texto) {
+    public Constante(String texto) {
         this.texto = texto;
     }
 
@@ -15,6 +17,6 @@ public class Identificador {
 
     @Override
     public String toString() {
-        return "<SPAN CLASS=\"ident\">"+ this.getTexto() +"</SPAN>";
+        return "<SPAN CLASS=\"cte\">"+ this.getTexto() +"</SPAN>";
     }
 }

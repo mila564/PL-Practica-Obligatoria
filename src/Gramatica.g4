@@ -66,7 +66,7 @@ sent: type lid faltaPuntoYComa //  1_ Declaraciones de variables
 |
 IDENTIFICADOR sentPrima // 2_ Sentencias de asignación y 3_ Llamadas a procedimientos
 |
-'return' exp faltaPuntoYComa  // 4_ Return
+'return' exp faltaPuntoYComa  // 4_ especificacion.Return
 // Falta explicar en la memoria que en error3.txt da error porque interpreta hasta el ; sin cerrar
 |
 'bifurcacion' '(' lcond ')' faltaPalabraReservadaEntonces blq 'sino' blq
@@ -120,15 +120,15 @@ lidPrima : | ',' lid;
 asig : '=' | '+=' | '-=' | '*=' | '/=';
 
 exp :
-IDENTIFICADOR expPrima expPrimaPrima // Identificador (una variable)
+IDENTIFICADOR expPrima expPrimaPrima // especificacion.Identificador (una variable)
 |
 '(' exp ')' expPrimaPrima // Expresión entre paréntesis
 |
-CONSTENTERO expPrimaPrima // Constante entera. P.Ej: 5
+CONSTENTERO expPrimaPrima // especificacion.Constante entera. P.Ej: 5
 |
-CONSTREAL expPrimaPrima // Constante real
+CONSTREAL expPrimaPrima // especificacion.Constante real
 |
-CONSTLIT expPrimaPrima; // Constante literal (cadena)
+CONSTLIT expPrimaPrima; // especificacion.Constante literal (cadena)
 
 expPrima: '(' lid ')' | ;
 
