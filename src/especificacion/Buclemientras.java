@@ -1,6 +1,6 @@
 package especificacion;
 
-public class Buclemientras {
+public class Buclemientras extends Sent{
     private Lcond condicion;
     private Blq cuerpo;
 

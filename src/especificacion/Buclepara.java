@@ -1,6 +1,6 @@
 package especificacion;
 
-public class Buclepara {
+public class Buclepara extends Sent{
     private Identificador idInicializacion;
     private String asigInicializacion;
     private Exp expInicializacion;

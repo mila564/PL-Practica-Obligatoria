@@ -2,7 +2,7 @@ package especificacion;
 
 import java.util.List;
 
-public class DeclaracionVariable {
+public class DeclaracionVariable extends Sent{
     private PalabraReservada type;
     private List<Identificador> lid;
 

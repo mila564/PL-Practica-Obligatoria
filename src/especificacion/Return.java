@@ -1,6 +1,6 @@
 package especificacion;
 
-public class Return {
+public class Return extends Sent{
     private Exp expresion;
 
     public Return(Exp expresion) {

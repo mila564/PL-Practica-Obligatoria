@@ -1,6 +1,6 @@
 package especificacion;
 
-public class Bifurcacion {
+public class Bifurcacion extends Sent{
     private Lcond condicion;
     private Blq bloqueEntonces;
     private Blq bloqueSino;

@@ -39,4 +39,5 @@ public abstract class Part {
 
     @Override
     public abstract String toString();
+    public abstract String getCabecera();
 }

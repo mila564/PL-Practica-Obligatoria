@@ -1,6 +1,6 @@
 package especificacion;
 
-public class Bucle {
+public class Bucle extends Sent{
     private Blq cuerpo;
     private Lcond condicion;
 
@@ -30,7 +30,9 @@ public class Bucle {
         String lista = "";
         lista += "<DIV STYLE=\"text-indent: 0.5cm>";
         lista += "<SPAN CLASS=\"palres\">bucle</SPAN>";
+        lista += "</DIV>";
         lista += this.getCuerpo().toString();
+        lista += "<DIV STYLE=\"text-indent: 0.5cm>";
         lista += "<SPAN CLASS=\"palres\">hasta</SPAN>";
         lista += "(";
         lista += this.getCondicion().toString();

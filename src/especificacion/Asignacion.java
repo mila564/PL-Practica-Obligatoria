@@ -1,6 +1,6 @@
 package especificacion;
 
-public class Asignacion {
+public class Asignacion extends Sent{
 
     private Identificador id;
     private String asig;

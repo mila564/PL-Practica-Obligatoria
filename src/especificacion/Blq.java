@@ -2,7 +2,7 @@ package especificacion;
 
 import java.util.List;
 
-public class Blq {
+public class Blq extends Sent{
     private List<Sent> sentencias;
 
     public Blq(List<Sent> sentencias) {
@@ -23,12 +23,10 @@ public class Blq {
         for (Sent s : this.getSentencias()){
             lista += s.toString();
         }
-        return "<DIV STYLE=\"text-indent: 0.5cm>"
-                + "<SPAN CLASS=\"palres\">inicio</SPAN>" + "/<DIV>"
-                + "<DIV STYLE=\"text-indent: 1cm>"
+        return "<DIV STYLE=\"text-indent: 0.5cm>" +
+                "<SPAN CLASS=\"palres\">inicio</SPAN>" + "<BR>"
                 + lista +
-                "/<DIV>" + "<DIV STYLE=\"text-indent: 0.5cm>"
-                + "<SPAN CLASS=\"palres\">fin</SPAN>" +
-                "/<DIV>";
+                "<SPAN CLASS=\"palres\">fin</SPAN>" +
+                "<BR>" + "</DIV>";
     }
 }
