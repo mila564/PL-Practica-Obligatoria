@@ -3,9 +3,9 @@ package especificacion;
 public class Lcond {
     private boolean negacion;
     private Cond condicion;
-    private LcondRecursivo condicionRecursiva;
+    private LcondPrima condicionRecursiva;
 
-    public Lcond(boolean negacion, Cond condicion, LcondRecursivo condicionRecursiva) {
+    public Lcond(boolean negacion, Cond condicion, LcondPrima condicionRecursiva) {
         this.negacion = negacion;
         this.condicion = condicion;
         this.condicionRecursiva = condicionRecursiva;
@@ -27,11 +27,11 @@ public class Lcond {
         this.condicion = condicion;
     }
 
-    public LcondRecursivo getCondicionRecursiva() {
+    public LcondPrima getCondicionRecursiva() {
         return condicionRecursiva;
     }
 
-    public void setCondicionRecursiva(LcondRecursivo condicionRecursiva) {
+    public void setCondicionRecursiva(LcondPrima condicionRecursiva) {
         this.condicionRecursiva = condicionRecursiva;
     }
 

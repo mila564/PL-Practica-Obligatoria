@@ -1,6 +1,4 @@
 import especificacion.*;
-import especificacion.GramaticaLexer;
-import especificacion.GramaticaParser;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
@@ -21,9 +19,11 @@ public class ClasePrincipal {
             CommonTokenStream tokens = new CommonTokenStream(analex);
             // Crear el objeto correspondiente al analizador sintáctico
             // GramaticaParser anasint = new GramaticaParser(tokens);
+
             String[] directorioSplit = args[0].split("\\\\");
             String nombrePrograma = directorioSplit[directorioSplit.length-1];
             Program programa = new Program(new ArrayList<Part>(), nombrePrograma);
+
             GramaticaParser anasint = new GramaticaParser(tokens, programa);
             /*
             Si se quiere pasar al analizador algún objeto externo con el que trabajar,

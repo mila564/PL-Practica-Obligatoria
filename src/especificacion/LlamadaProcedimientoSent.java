@@ -1,19 +1,20 @@
 package especificacion;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class LlamadaProcedimientoSent extends Sent{
-    private List<Identificador> identificadores;
+    private LinkedList<Identificador> identificadores;
 
-    public LlamadaProcedimientoSent(List<Identificador> identificadores) {
+    public LlamadaProcedimientoSent(LinkedList<Identificador> identificadores) {
         this.identificadores = identificadores;
     }
 
-    public List<Identificador> getIdentificadores() {
+    public LinkedList<Identificador> getIdentificadores() {
         return identificadores;
     }
 
-    public void setIdentificadores(List<Identificador> identificadores) {
+    public void setIdentificadores(LinkedList<Identificador> identificadores) {
         this.identificadores = identificadores;
     }
 

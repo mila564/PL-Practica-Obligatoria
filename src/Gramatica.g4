@@ -1,7 +1,9 @@
 grammar Gramatica;
 
 @header{
-    package especificacion;
+    import especificacion.*;
+    import java.util.*;
+    import java.io.*;
 }
 
 @parser::members{
@@ -13,26 +15,57 @@ grammar Gramatica;
     }
 }
 
-r: program;
+r: program[programa]{
+    try{
+        PrintWriter pw = new PrintWriter(
+            new FileWriter(
+               "D:\\ESCRITORIO\\PL\\practica_obligatoria\\src\\salida.html",
+               true
+            ));
+        pw.println($program.s.toString());
+        pw.flush();
+        pw.close();
+    }catch (IOException e){
+      e.printStackTrace();
+    }
+};
 
-program returns [Program s]:
-    part programPrima {$s = $programPrima.s.getSubprogramas().add($part.s);}
+// Estas reglas son las que obtuvimos al aplicar el algoritmo para quitar la ambigüedad:
+/*
+program : part programPrima;
+
+programPrima : program | ;
+*/
+
+// Sin embargo, nos dimos cuenta de que
+// el árbol sintáctico resultante con las siguientes reglas
+// se ajustaba adecuadamente a nuestra jerarquía de clases:
+
+program [Program h] returns [Program s]:
+    part programPrima {
+        $programPrima.s.addFirst($part.s);
+        $h.setSubprogramas($programPrima.s);
+        $s = $h;
+    }
     ;
 
-programPrima returns [Program s]:
-    program {$s = $program.s;}
+programPrima returns [LinkedList<Part> s]:
+    part programPrima {
+        $programPrima.s.addFirst($part.s);
+        $s = $programPrima.s;
+    }
     |
-
+    {$s = new LinkedList<Part>();}
     ;
 
 part returns [Part s]:
     'funcion' type restpart [new Funcion(new PalabraReservada($type.s))]{$s = $restpart.s;}
     |
-    'procedimiento' restpart [new Procedimiento();]{$s = $restpart.s;}
+    'procedimiento' restpart [new Procedimiento()]{$s = $restpart.s;}
     ;
 
 restpart [Part h] returns [Part s]:
-    IDENTIFICADOR '(' restpartPrima[$h.setIdentificador(new Identificador($IDENTIFICADOR.text))]{$s = $restpartPrima.s;}
+    IDENTIFICADOR '('{$h.setIdentificador(new Identificador($IDENTIFICADOR.text));} restpartPrima[$h]{$s = $restpartPrima.s;}
     ;
 
 //--------------------------------------------------------------------------------------------------
@@ -51,7 +84,7 @@ restpartPrima [Part h] returns [Part s]:
     }
     |
     ')' masDeUnParentesis blq {
-        $h.setListParam(new ArrayList<Param>());
+        $h.setListParam(new LinkedList<Param>());
         $h.setCuerpo($blq.s);
         $s = $h;
     }
@@ -65,14 +98,20 @@ masDeUnParentesis:
 
 //--------------------------------------------------------------------------------------------------
 
-listparam returns [List<Param> s]:
-    type IDENTIFICADOR listparamPrima {$s = $listparamPrima.s.addFirst(new Param(new PalabraReservada($type.s), new Identificador($IDENTIFICADOR.text)));}
+listparam returns [LinkedList<Param> s]:
+    type IDENTIFICADOR listparamPrima {
+        $listparamPrima.s.addFirst(new Param(new PalabraReservada($type.s), new Identificador($IDENTIFICADOR.text)));
+        $s = $listparamPrima.s;
+    }
     ;
 
-listparamPrima returns [List<Param> s]:
-    ',' type IDENTIFICADOR listparamPrima {$s = $listparamPrima.s.addFirst(new Param(new PalabraReservada($type.s), new Identificador($IDENTIFICADOR.text)));}
+listparamPrima returns [LinkedList<Param> s]:
+    ',' type IDENTIFICADOR listparamPrima {
+        $listparamPrima.s.addFirst(new Param(new PalabraReservada($type.s), new Identificador($IDENTIFICADOR.text)));
+        $s = $listparamPrima.s;;
+    }
     |
-    {$s =  new ArrayList<Param>();}
+    {$s =  new LinkedList<Param>();}
     ;
 
 type returns [String s]:
@@ -87,14 +126,20 @@ blq returns [Blq s]:
     'inicio' sentlist 'fin' {$s = new Blq($sentlist.s);}
     ;
 
-sentlist returns [List<Sent> s]:
-    sent sentlistPrima {$s = $sentlistPrima.s.addFirst($sent.s);}
+sentlist returns [LinkedList<Sent> s]:
+    sent sentlistPrima {
+        $sentlistPrima.s.addFirst($sent.s);
+        $s = $sentlistPrima.s;
+    }
     ;
 
-sentlistPrima returns [List<Sent> s]:
-    sent sentlistPrima {$s = $sentlistPrima.s.addFirst($sent.s);}
+sentlistPrima returns [LinkedList<Sent> s]:
+    sent sentlistPrima {
+        $sentlistPrima.s.addFirst($sent.s);
+        $s = $sentlistPrima.s;
+    }
     |
-    {$s = new ArrayList<Sent>();}
+    {$s = new LinkedList<Sent>();}
     ;
 
 //----------------------------------------------------------------------------------------------------
@@ -126,18 +171,7 @@ faltaPuntoYComa : ';' | {notifyErrorListeners("Falta punto y coma.");};
 sent returns [Sent s]:
     type lid faltaPuntoYComa {$s = new DeclaracionVariable(new PalabraReservada($type.s), $lid.s);}
     |
-    IDENTIFICADOR sentPrima {
-        if($sentPrima.s instanceOf Asignacion){
-            Asignacion asig = (Asignacion)$sentPrima.s;
-            asig.setIdentificador(new Identificador($IDENTIFICADOR.text));
-            $s = asig;
-        }
-        else{
-            LlamadaProcedimientoSent llamada = (LlamadaProcedimientoSent) $sentPrima.s;
-            llamada.getIdentificadores().addFirst(new Identificador($IDENTIFICADOR.text));
-            $s = llamada;
-        }
-    }
+    IDENTIFICADOR sentPrima[new Identificador($IDENTIFICADOR.text)] {$s = $sentPrima.s;}
     |
     'return' exp faltaPuntoYComa {$s = new Return($exp.s);}
     // Falta explicar en la memoria que en error3.txt da error porque interpreta hasta el ; sin cerrar
@@ -183,26 +217,29 @@ faltaPalabraReservadaEntonces : 'entonces' | {notifyErrorListeners("Falta la pal
 
 //----------------------------------------------------------------------------------------------------
 
-sentPrima returns [Sent s]:
-    asig exp faltaPuntoYComa {$s = new Asignacion(null, $asig.s, $exp.s);}
+sentPrima [Identificador h] returns [Sent s]:
+    asig exp faltaPuntoYComa {$s = new Asignacion($h, $asig.s, $exp.s);}
     |
     '(' sentPrimaPrima {$s = new LlamadaProcedimientoSent($sentPrimaPrima.s);}
     ;
 
-sentPrimaPrima returns [List<Identificador> s]:
+sentPrimaPrima returns [LinkedList<Identificador> s]:
     lid ')' faltaPuntoYComa {$s = $lid.s;}
     |
-    ')' faltaPuntoYComa {$s = new ArrayList<Identificador>();}
+    ')' faltaPuntoYComa {$s = new LinkedList<Identificador>();}
     ;
 
-lid returns [List<Identificador> s]:
-    IDENTIFICADOR lidPrima {$s = $lidPrima.s.addFirst(new Identificador($IDENTIFICADOR.text));}
+lid returns [LinkedList<Identificador> s]:
+    IDENTIFICADOR lidPrima {
+        $lidPrima.s.addFirst(new Identificador($IDENTIFICADOR.text));
+        $s = $lidPrima.s;
+    }
     ;
 
-lidPrima returns [List<Identificador> s]:
+lidPrima returns [LinkedList<Identificador> s]:
     ',' lid {$s = $lid.s;}
     |
-    {$s = new ArrayList<Identificador>();}
+    {$s = new LinkedList<Identificador>();}
     ;
 
 asig returns [String s]:
@@ -218,7 +255,10 @@ asig returns [String s]:
      ;
 
 exp returns [Exp s]:
-    IDENTIFICADOR expPrima expPrimaPrima {$s = new Exp(new LlamadaProcedimientoExp($expPrima.s.addFirst(new Identificador($IDENTIFICADOR.text)), $expPrimaPrima.s));}
+    IDENTIFICADOR expPrima expPrimaPrima {
+        $expPrima.s.addFirst(new Identificador($IDENTIFICADOR.text));
+        $s = new Exp(new LlamadaProcedimientoExp($expPrima.s), $expPrimaPrima.s);
+    }
     |
     '(' exp ')' expPrimaPrima {$s = new Exp(new ExpConParentesis($exp.s), $expPrimaPrima.s);}
     |
@@ -229,16 +269,19 @@ exp returns [Exp s]:
     CONSTLIT expPrimaPrima {$s = new Exp(new Constante($CONSTLIT.text), $expPrimaPrima.s);}
     ;
 
-expPrima returns [List<Identificador> s]:
+expPrima returns [LinkedList<Identificador> s]:
     '(' lid ')' {$s = $lid.s;}
      |
-     {$s = new ArrayList<Identificador>();}
+     {$s = new LinkedList<Identificador>();}
      ;
 
-expPrimaPrima returns [List<ExpRecursivo> s]:
-    op exp expPrimaPrima {$s = $expPrimaPrima.s.addFirst(new ExpRecursivo($op.s, $exp.s));}
+expPrimaPrima returns [LinkedList<ExpRecursivo> s]:
+    op exp expPrimaPrima {
+        $expPrimaPrima.s.addFirst(new ExpRecursivo($op.s, $exp.s));
+        $s = $expPrimaPrima.s;
+    }
     |
-    {$s = new ArrayList<ExpRecursivo>();}
+    {$s = new LinkedList<ExpRecursivo>();}
     ;
 
 op returns [String s]:
@@ -251,16 +294,19 @@ op returns [String s]:
     div = '/'{$s = $div.text;}
      ;
 
-lcond returns [LCond s]:
+lcond returns [Lcond s]:
     cond lcondPrima {$s = new Lcond(false, $cond.s, $lcondPrima.s);}
     |
     'no' cond lcondPrima {$s = new Lcond(true, $cond.s, $lcondPrima.s);}
     ;
 
-lcondPrima returns [LcondRecursivo s]:
-    opl lcond lcondPrima {$s = new LcondRecursivo ($opl.s, $lcond.s, $lcondPrima.s);}
+lcondPrima returns [LcondPrima s]:
+    opl lcond lcondPrima {
+        $lcondPrima.s.getLcondprima().addFirst(new LcondRecursivo($opl.s, $lcond.s));
+        $s = $lcondPrima.s;
+    }
     |
-    {$s = null;};
+    {$s = new LcondPrima(new LinkedList<LcondRecursivo>());};
 
 cond returns [Cond s]:
     e1=exp opr e2=exp{$s = new CondBooleanaCompleja($e1.s, $opr.s, $e2.s);}
