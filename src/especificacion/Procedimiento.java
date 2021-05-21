@@ -6,6 +6,9 @@ public class Procedimiento extends Part{
     public Procedimiento(Identificador identificador, List<Param> listParam, Blq cuerpo) {
         super(identificador, listParam, cuerpo);
     }
+    public Procedimiento(){
+        super();
+    }
 
     @Override
     public String toString() {

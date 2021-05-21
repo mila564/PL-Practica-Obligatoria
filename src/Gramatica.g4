@@ -15,13 +15,25 @@ grammar Gramatica;
 
 r: program;
 
-program : part programPrima;
+program returns [Program s]:
+    part programPrima {$s = $programPrima.s.getSubprogramas().add($part.s);}
+    ;
 
-programPrima : program | ;
+programPrima returns [Program s]:
+    program {$s = $program.s;}
+    |
 
-part : 'funcion' type restpart | 'procedimiento' restpart;
+    ;
 
-restpart: IDENTIFICADOR '(' restpartPrima;
+part returns [Part s]:
+    'funcion' type restpart [new Funcion(new PalabraReservada($type.s))]{$s = $restpart.s;}
+    |
+    'procedimiento' restpart [new Procedimiento();]{$s = $restpart.s;}
+    ;
+
+restpart [Part h] returns [Part s]:
+    IDENTIFICADOR '(' restpartPrima[$h.setIdentificador(new Identificador($IDENTIFICADOR.text))]{$s = $restpartPrima.s;}
+    ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -31,23 +43,59 @@ restpart: IDENTIFICADOR '(' restpartPrima;
 
 //restpartPrima: listparam ')' blq | ')' blq;
 
-restpartPrima: listparam ')' masDeUnParentesis blq | ')' masDeUnParentesis blq;
+restpartPrima [Part h] returns [Part s]:
+    listparam ')' masDeUnParentesis blq{
+        $h.setListParam($listparam.s);
+        $h.setCuerpo($blq.s);
+        $s = $h;
+    }
+    |
+    ')' masDeUnParentesis blq {
+        $h.setListParam(new ArrayList<Param>());
+        $h.setCuerpo($blq.s);
+        $s = $h;
+    }
+    ;
 
-masDeUnParentesis :  | ')' masDeUnParentesis{notifyErrorListeners("Demasiados paréntesis");};
+masDeUnParentesis:
+    ')' masDeUnParentesis{notifyErrorListeners("Demasiados paréntesis");}
+    |
+
+    ;
 
 //--------------------------------------------------------------------------------------------------
 
-listparam : type IDENTIFICADOR listparamPrima;
+listparam returns [List<Param> s]:
+    type IDENTIFICADOR listparamPrima {$s = $listparamPrima.s.addFirst(new Param(new PalabraReservada($type.s), new Identificador($IDENTIFICADOR.text)));}
+    ;
 
-listparamPrima : ',' type IDENTIFICADOR listparamPrima	| ;
+listparamPrima returns [List<Param> s]:
+    ',' type IDENTIFICADOR listparamPrima {$s = $listparamPrima.s.addFirst(new Param(new PalabraReservada($type.s), new Identificador($IDENTIFICADOR.text)));}
+    |
+    {$s =  new ArrayList<Param>();}
+    ;
 
-type : 'entero' | 'real' | 'caracter';
+type returns [String s]:
+     ent = 'entero'{$s = $ent.text;}
+     |
+     real = 'real'{$s = $real.text;}
+     |
+     letra = 'caracter'{$s = $letra.text;}
+     ;
 
-blq : 'inicio' sentlist 'fin';
+blq returns [Blq s]:
+    'inicio' sentlist 'fin' {$s = new Blq($sentlist.s);}
+    ;
 
-sentlist : sent sentlistPrima;
+sentlist returns [List<Sent> s]:
+    sent sentlistPrima {$s = $sentlistPrima.s.addFirst($sent.s);}
+    ;
 
-sentlistPrima : sent sentlistPrima | ;
+sentlistPrima returns [List<Sent> s]:
+    sent sentlistPrima {$s = $sentlistPrima.s.addFirst($sent.s);}
+    |
+    {$s = new ArrayList<Sent>();}
+    ;
 
 //----------------------------------------------------------------------------------------------------
 
@@ -75,24 +123,37 @@ faltaPuntoYComa : ';' | {notifyErrorListeners("Falta punto y coma.");};
 
 //----------------------------------------------------------------------------------------------------
 
-sent: type lid faltaPuntoYComa //  1_ Declaraciones de variables
-|
-IDENTIFICADOR sentPrima // 2_ Sentencias de asignación y 3_ Llamadas a procedimientos
-|
-'return' exp faltaPuntoYComa  // 4_ especificacion.Return
-// Falta explicar en la memoria que en error3.txt da error porque interpreta hasta el ; sin cerrar
-|
-'bifurcacion' '(' lcond ')' faltaPalabraReservadaEntonces blq 'sino' blq
-|
-'bifurcacio' '(' lcond ')' faltaPalabraReservadaEntonces blq 'sino' blq {notifyErrorListeners("Palabra reservada 'bifurcacion' mal escrita");}
-|
-'buclepara' '(' IDENTIFICADOR asig exp faltaPuntoYComa lcond faltaPuntoYComa IDENTIFICADOR asig exp ')' blq
-|
-'buclemientras' '(' lcond ')' blq
-|
-'bucle' blq 'hasta' '(' lcond ')'
-|
-blq;
+sent returns [Sent s]:
+    type lid faltaPuntoYComa {$s = new DeclaracionVariable(new PalabraReservada($type.s), $lid.s);}
+    |
+    IDENTIFICADOR sentPrima {
+        if($sentPrima.s instanceOf Asignacion){
+            Asignacion asig = (Asignacion)$sentPrima.s;
+            asig.setIdentificador(new Identificador($IDENTIFICADOR.text));
+            $s = asig;
+        }
+        else{
+            LlamadaProcedimientoSent llamada = (LlamadaProcedimientoSent) $sentPrima.s;
+            llamada.getIdentificadores().addFirst(new Identificador($IDENTIFICADOR.text));
+            $s = llamada;
+        }
+    }
+    |
+    'return' exp faltaPuntoYComa {$s = new Return($exp.s);}
+    // Falta explicar en la memoria que en error3.txt da error porque interpreta hasta el ; sin cerrar
+    |
+    'bifurcacion' '(' lcond ')' faltaPalabraReservadaEntonces blq1=blq 'sino' blq2=blq {$s = new Bifurcacion($lcond.s, $blq1.s, $blq2.s);}
+    |
+    'bifurcacio' '(' lcond ')' faltaPalabraReservadaEntonces blq1=blq 'sino' blq2=blq {$s = new Bifurcacion($lcond.s, $blq1.s, $blq2.s); notifyErrorListeners("Palabra reservada 'bifurcacion' mal escrita");}
+    |
+    'buclepara' '(' id1=IDENTIFICADOR asig1=asig exp1=exp faltaPuntoYComa lcond faltaPuntoYComa id2=IDENTIFICADOR asig2=asig exp2=exp ')' blq{$s = new Buclepara(new Identificador($id1.text), $asig1.s, $exp1.s, $lcond.s, new Identificador($id2.text), $asig2.s, $exp2.s, $blq.s);}
+    |
+    'buclemientras' '(' lcond ')' blq {$s = new Buclemientras($lcond.s, $blq.s);}
+    |
+    'bucle' blq 'hasta' '(' lcond ')' {$s = new Bucle($blq.s, $lcond.s);}
+    |
+    blq {$s = $blq.s;}
+    ;
 
 //----------------------------------------------------------------------------------------------------
 
@@ -122,9 +183,17 @@ faltaPalabraReservadaEntonces : 'entonces' | {notifyErrorListeners("Falta la pal
 
 //----------------------------------------------------------------------------------------------------
 
-sentPrima: asig exp faltaPuntoYComa | '(' sentPrimaPrima;
+sentPrima returns [Sent s]:
+    asig exp faltaPuntoYComa {$s = new Asignacion(null, $asig.s, $exp.s);}
+    |
+    '(' sentPrimaPrima {$s = new LlamadaProcedimientoSent($sentPrimaPrima.s);}
+    ;
 
-sentPrimaPrima : lid ')' faltaPuntoYComa | ')' faltaPuntoYComa;
+sentPrimaPrima returns [List<Identificador> s]:
+    lid ')' faltaPuntoYComa {$s = $lid.s;}
+    |
+    ')' faltaPuntoYComa {$s = new ArrayList<Identificador>();}
+    ;
 
 lid returns [List<Identificador> s]:
     IDENTIFICADOR lidPrima {$s = $lidPrima.s.addFirst(new Identificador($IDENTIFICADOR.text));}
@@ -136,7 +205,17 @@ lidPrima returns [List<Identificador> s]:
     {$s = new ArrayList<Identificador>();}
     ;
 
-asig : '=' | '+=' | '-=' | '*=' | '/=';
+asig returns [String s]:
+    eq = '='{$s = $eq.text;}
+     |
+    sumAsig = '+='{$s = $sumAsig.text;}
+     |
+    subAsig = '-='{$s = $subAsig.text;}
+     |
+    mulAsig = '*='{$s = $mulAsig.text;}
+     |
+    divAsig = '/='{$s = $divAsig.text;}
+     ;
 
 exp returns [Exp s]:
     IDENTIFICADOR expPrima expPrimaPrima {$s = new Exp(new LlamadaProcedimientoExp($expPrima.s.addFirst(new Identificador($IDENTIFICADOR.text)), $expPrimaPrima.s));}
@@ -162,7 +241,15 @@ expPrimaPrima returns [List<ExpRecursivo> s]:
     {$s = new ArrayList<ExpRecursivo>();}
     ;
 
-op : '+' | '-' | '*' | '/';
+op returns [String s]:
+    sum = '+' {$s = $sum.text;}
+     |
+    sub = '-'{$s = $sub.text;}
+     |
+    mul = '*'{$s = $mul.text;}
+     |
+    div = '/'{$s = $div.text;}
+     ;
 
 lcond returns [LCond s]:
     cond lcondPrima {$s = new Lcond(false, $cond.s, $lcondPrima.s);}

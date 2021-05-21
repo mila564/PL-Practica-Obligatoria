@@ -5,6 +5,10 @@ import java.util.List;
 public class Funcion extends Part{
     private PalabraReservada tipoDevuelto;
 
+    public Funcion(PalabraReservada tipoDevuelto){
+        super();
+        this.tipoDevuelto = tipoDevuelto;
+    }
     public Funcion(PalabraReservada tipoDevuelto, Identificador identificador, List<Param> listParam, Blq cuerpo) {
         super(identificador, listParam, cuerpo);
         this.tipoDevuelto = tipoDevuelto;

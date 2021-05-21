@@ -7,6 +7,10 @@ public abstract class Part {
     protected List<Param> listParam;
     protected Blq cuerpo;
 
+    public Part(){
+
+    }
+
     public Part(Identificador identificador, List<Param> listParam, Blq cuerpo) {
         this.identificador = identificador;
         this.listParam = listParam;
