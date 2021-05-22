@@ -43,7 +43,7 @@ public class Funcion extends Part{
         linea += "</A>";
         linea += "<BR>";
         linea += this.getCuerpo().toString();
-        linea += "<A HREF=\"#" + this.getIdentificador() + "\">Inicio de rutina</A>";
+        linea += "<A HREF=\"#" + this.getIdentificador().getTexto() + "\">Inicio de rutina</A>";
         linea += "<BR>";
         linea += "<A HREF=\"#inicio\">Inicio de programa</A>";
         linea += "<BR>";
