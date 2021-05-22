@@ -13,9 +13,11 @@ public class Procedimiento extends Part{
     @Override
     public String toString() {
         String linea = "<HR/>";
-        linea += "<A NAME=\""+getIdentificador()+"\">";
+        linea += "<A NAME=\""+getIdentificador().getTexto()+"\">";
         linea += "<SPAN CLASS=\"palres\">procedimiento</SPAN>";
+        linea += " ";
         linea += identificador.toString();
+        linea += " ";
         linea += "(";
         List<Param> sublista = this.getListParam().subList(0, this.getListParam().size() - 1);
         for (Param param: sublista) {
@@ -27,7 +29,7 @@ public class Procedimiento extends Part{
         linea += "</A>";
         linea += "<BR>";
         linea += this.getCuerpo().toString();
-        linea += "<A HREF=\"#" + this.getIdentificador() + "\">Inicio de rutina</A>";
+        linea += "<A HREF=\"#" + this.getIdentificador().getTexto() + "\">Inicio de rutina</A>";
         linea += "<BR>";
         linea += "<A HREF=\"#inicio\">Inicio de programa</A>";
         linea += "<BR>";
