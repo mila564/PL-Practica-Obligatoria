@@ -42,12 +42,12 @@ public class Program {
         lista += "</head>";
         lista += "<body>";
         lista += "<a name= \"inicio\">";
-        lista += "<h1>Programa:" + this.getNombrePrograma() + "</h1>";
+        lista += "<h1>Programa: " + this.getNombrePrograma() + "</h1>";
         lista += "<h2>Funciones y procedimientos</h2>";
         lista += "</a>";
         lista += "<ul>";
         for(Part p: this.getSubprogramas()){
-            lista += "<li><a href=\"#" + p.getIdentificador() + "\">";
+            lista += "<li><a href=\"#" + p.getIdentificador().getTexto() + "\">";
             lista += p.getCabecera();
             lista += "</li>";
         }
