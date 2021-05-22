@@ -25,10 +25,13 @@ public class Funcion extends Part{
     @Override
     public String toString() {
         String linea = "<HR/>";
-        linea += "<A NAME=\""+getIdentificador()+"\">";
+        linea += "<A NAME=\""+getIdentificador().getTexto()+"\">";
         linea += "<SPAN CLASS=\"palres\">funcion</SPAN>";
+        linea += " ";
         linea += tipoDevuelto.toString();
+        linea += " ";
         linea += identificador.toString();
+        linea += " ";
         linea += "(";
         List<Param> sublista = this.getListParam().subList(0, this.getListParam().size() - 1);
         for (Param param: sublista) {
