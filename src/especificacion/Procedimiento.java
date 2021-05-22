@@ -19,12 +19,15 @@ public class Procedimiento extends Part{
         linea += identificador.toString();
         linea += " ";
         linea += "(";
-        List<Param> sublista = this.getListParam().subList(0, this.getListParam().size() - 1);
-        for (Param param: sublista) {
-            linea += param.toString();
-            linea += ", ";
+        List<Param> sublista = this.getListParam();
+        if (sublista.size() != 0){
+            sublista = this.getListParam().subList(0, this.getListParam().size() - 1);
+            for (Param param: sublista) {
+                linea += param.toString();
+                linea += ", ";
+            }
+            linea += getListParam().get(getListParam().size()-1).toString();
         }
-        linea += getListParam().get(getListParam().size()-1).toString();
         linea += ")";
         linea += "</A>";
         linea += "<BR>";
@@ -39,12 +42,15 @@ public class Procedimiento extends Part{
         String cabecera ="";
         cabecera += this.getIdentificador() + " ";
         cabecera += "(";
-        List<Param> sublista = this.getListParam().subList(0, this.getListParam().size() - 1);
-        for (Param param: sublista) {
-            cabecera += param.toString();
-            cabecera += ", ";
+        List<Param> sublista = this.getListParam();
+        if (sublista.size() != 0){
+            sublista = this.getListParam().subList(0, this.getListParam().size() - 1);
+            for (Param param: sublista) {
+                cabecera += param.toString();
+                cabecera += ", ";
+            }
+            cabecera += getListParam().get(getListParam().size()-1).toString();
         }
-        cabecera += getListParam().get(getListParam().size()-1).toString();
         cabecera += ")";
         return cabecera;
     }
