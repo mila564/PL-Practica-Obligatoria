@@ -1,5 +1,6 @@
 package especificacion;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class DeclaracionVariable extends Sent{
@@ -30,9 +31,14 @@ public class DeclaracionVariable extends Sent{
     @Override
     public String toString() {
         String lista = "";
-        for (Identificador id: lid){
-            lista = id.toString() + ",";
+        if (lid.size() > 1) {
+            List<Identificador> sublista = lid.subList(0, lid.size() - 1);
+            for (Identificador id: sublista){
+                lista += id.toString() + ", ";
+            }
         }
-        return "<DIV STYLE=\"text-indent: 0.5cm>" + type.toString() + lista + ";</DIV>";
+        lista += lid.get(lid.size() - 1).toString();
+
+        return "<DIV STYLE=\"text-indent: 0.5cm>" + type.toString() + " " + lista + ";</DIV>";
     }
 }
