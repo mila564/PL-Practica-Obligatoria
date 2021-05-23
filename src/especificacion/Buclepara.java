@@ -93,6 +93,7 @@ public class Buclepara extends Sent{
         String lista = "";
         lista += "<DIV STYLE=\"text-indent: 0.5cm\">";
         lista += "<SPAN CLASS=\"palres\">buclepara</SPAN>";
+        lista += " ";
         lista += "(";
         lista += this.getIdInicializacion().toString();
         lista += this.asigInicializacion.toString();
