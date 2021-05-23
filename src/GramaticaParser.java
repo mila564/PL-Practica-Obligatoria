@@ -467,7 +467,7 @@ public class GramaticaParser extends Parser {
 				setState(94);
 				masDeUnParentesis();
 				setState(95);
-				((RestpartPrimaContext)_localctx).blq = blq();
+				((RestpartPrimaContext)_localctx).blq = blq(1);
 
 				        _localctx.h.setListParam(new LinkedList<Param>());
 				        _localctx.h.setCuerpo(((RestpartPrimaContext)_localctx).blq.s);
@@ -487,7 +487,7 @@ public class GramaticaParser extends Parser {
 				setState(100);
 				masDeUnParentesis();
 				setState(101);
-				((RestpartPrimaContext)_localctx).blq = blq();
+				((RestpartPrimaContext)_localctx).blq = blq(1);
 
 				        _localctx.h.setListParam(((RestpartPrimaContext)_localctx).listparam.s);
 				        _localctx.h.setCuerpo(((RestpartPrimaContext)_localctx).blq.s);
@@ -757,13 +757,16 @@ public class GramaticaParser extends Parser {
 	}
 
 	public static class BlqContext extends ParserRuleContext {
+		public int h;
 		public Blq s;
 		public SentlistContext sentlist;
 		public SentlistContext sentlist() {
 			return getRuleContext(SentlistContext.class,0);
 		}
-		public BlqContext(ParserRuleContext parent, int invokingState) {
+		public BlqContext(ParserRuleContext parent, int invokingState) { super(parent, invokingState); }
+		public BlqContext(ParserRuleContext parent, int invokingState, int h) {
 			super(parent, invokingState);
+			this.h = h;
 		}
 		@Override public int getRuleIndex() { return RULE_blq; }
 		@Override
@@ -776,8 +779,8 @@ public class GramaticaParser extends Parser {
 		}
 	}
 
-	public final BlqContext blq() throws RecognitionException {
-		BlqContext _localctx = new BlqContext(_ctx, getState());
+	public final BlqContext blq(int h) throws RecognitionException {
+		BlqContext _localctx = new BlqContext(_ctx, getState(), h);
 		enterRule(_localctx, 20, RULE_blq);
 		try {
 			enterOuterAlt(_localctx, 1);
@@ -785,10 +788,10 @@ public class GramaticaParser extends Parser {
 			setState(135);
 			match(T__8);
 			setState(136);
-			((BlqContext)_localctx).sentlist = sentlist();
+			((BlqContext)_localctx).sentlist = sentlist(h);
 			setState(137);
 			match(T__9);
-			((BlqContext)_localctx).s =  new Blq(((BlqContext)_localctx).sentlist.s);
+			((BlqContext)_localctx).s =  new Blq(((BlqContext)_localctx).sentlist.s, _localctx.h);
 			}
 		}
 		catch (RecognitionException re) {
@@ -803,6 +806,7 @@ public class GramaticaParser extends Parser {
 	}
 
 	public static class SentlistContext extends ParserRuleContext {
+		public int h;
 		public LinkedList<Sent> s;
 		public SentContext sent;
 		public SentlistPrimaContext sentlistPrima;
@@ -812,8 +816,10 @@ public class GramaticaParser extends Parser {
 		public SentlistPrimaContext sentlistPrima() {
 			return getRuleContext(SentlistPrimaContext.class,0);
 		}
-		public SentlistContext(ParserRuleContext parent, int invokingState) {
+		public SentlistContext(ParserRuleContext parent, int invokingState) { super(parent, invokingState); }
+		public SentlistContext(ParserRuleContext parent, int invokingState, int h) {
 			super(parent, invokingState);
+			this.h = h;
 		}
 		@Override public int getRuleIndex() { return RULE_sentlist; }
 		@Override
@@ -826,16 +832,16 @@ public class GramaticaParser extends Parser {
 		}
 	}
 
-	public final SentlistContext sentlist() throws RecognitionException {
-		SentlistContext _localctx = new SentlistContext(_ctx, getState());
+	public final SentlistContext sentlist(int h) throws RecognitionException {
+		SentlistContext _localctx = new SentlistContext(_ctx, getState(), h);
 		enterRule(_localctx, 22, RULE_sentlist);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(140);
-			((SentlistContext)_localctx).sent = sent();
+			((SentlistContext)_localctx).sent = sent(_localctx.h+1);
 			setState(141);
-			((SentlistContext)_localctx).sentlistPrima = sentlistPrima();
+			((SentlistContext)_localctx).sentlistPrima = sentlistPrima(_localctx.h+1);
 
 			        ((SentlistContext)_localctx).sentlistPrima.s.addFirst(((SentlistContext)_localctx).sent.s);
 			        ((SentlistContext)_localctx).s =  ((SentlistContext)_localctx).sentlistPrima.s;
@@ -854,6 +860,7 @@ public class GramaticaParser extends Parser {
 	}
 
 	public static class SentlistPrimaContext extends ParserRuleContext {
+		public int h;
 		public LinkedList<Sent> s;
 		public SentContext sent;
 		public SentlistPrimaContext sentlistPrima;
@@ -863,8 +870,10 @@ public class GramaticaParser extends Parser {
 		public SentlistPrimaContext sentlistPrima() {
 			return getRuleContext(SentlistPrimaContext.class,0);
 		}
-		public SentlistPrimaContext(ParserRuleContext parent, int invokingState) {
+		public SentlistPrimaContext(ParserRuleContext parent, int invokingState) { super(parent, invokingState); }
+		public SentlistPrimaContext(ParserRuleContext parent, int invokingState, int h) {
 			super(parent, invokingState);
+			this.h = h;
 		}
 		@Override public int getRuleIndex() { return RULE_sentlistPrima; }
 		@Override
@@ -877,8 +886,8 @@ public class GramaticaParser extends Parser {
 		}
 	}
 
-	public final SentlistPrimaContext sentlistPrima() throws RecognitionException {
-		SentlistPrimaContext _localctx = new SentlistPrimaContext(_ctx, getState());
+	public final SentlistPrimaContext sentlistPrima(int h) throws RecognitionException {
+		SentlistPrimaContext _localctx = new SentlistPrimaContext(_ctx, getState(), h);
 		enterRule(_localctx, 24, RULE_sentlistPrima);
 		try {
 			setState(149);
@@ -898,9 +907,9 @@ public class GramaticaParser extends Parser {
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(144);
-				((SentlistPrimaContext)_localctx).sent = sent();
+				((SentlistPrimaContext)_localctx).sent = sent(_localctx.h);
 				setState(145);
-				((SentlistPrimaContext)_localctx).sentlistPrima = sentlistPrima();
+				((SentlistPrimaContext)_localctx).sentlistPrima = sentlistPrima(_localctx.h);
 
 				        ((SentlistPrimaContext)_localctx).sentlistPrima.s.addFirst(((SentlistPrimaContext)_localctx).sent.s);
 				        ((SentlistPrimaContext)_localctx).s =  ((SentlistPrimaContext)_localctx).sentlistPrima.s;
@@ -997,6 +1006,7 @@ public class GramaticaParser extends Parser {
 	}
 
 	public static class SentContext extends ParserRuleContext {
+		public int h;
 		public Sent s;
 		public TypeContext type;
 		public LidContext lid;
@@ -1056,8 +1066,10 @@ public class GramaticaParser extends Parser {
 		public AsigContext asig(int i) {
 			return getRuleContext(AsigContext.class,i);
 		}
-		public SentContext(ParserRuleContext parent, int invokingState) {
+		public SentContext(ParserRuleContext parent, int invokingState) { super(parent, invokingState); }
+		public SentContext(ParserRuleContext parent, int invokingState, int h) {
 			super(parent, invokingState);
+			this.h = h;
 		}
 		@Override public int getRuleIndex() { return RULE_sent; }
 		@Override
@@ -1070,8 +1082,8 @@ public class GramaticaParser extends Parser {
 		}
 	}
 
-	public final SentContext sent() throws RecognitionException {
-		SentContext _localctx = new SentContext(_ctx, getState());
+	public final SentContext sent(int h) throws RecognitionException {
+		SentContext _localctx = new SentContext(_ctx, getState(), h);
 		enterRule(_localctx, 28, RULE_sent);
 		try {
 			setState(222);
@@ -1127,11 +1139,11 @@ public class GramaticaParser extends Parser {
 				setState(173);
 				faltaPalabraReservadaEntonces();
 				setState(174);
-				((SentContext)_localctx).blq1 = blq();
+				((SentContext)_localctx).blq1 = blq(_localctx.h);
 				setState(175);
 				match(T__13);
 				setState(176);
-				((SentContext)_localctx).blq2 = blq();
+				((SentContext)_localctx).blq2 = blq(_localctx.h);
 				((SentContext)_localctx).s =  new Bifurcacion(((SentContext)_localctx).lcond.s, ((SentContext)_localctx).blq1.s, ((SentContext)_localctx).blq2.s);
 				}
 				break;
@@ -1149,11 +1161,11 @@ public class GramaticaParser extends Parser {
 				setState(183);
 				faltaPalabraReservadaEntonces();
 				setState(184);
-				((SentContext)_localctx).blq1 = blq();
+				((SentContext)_localctx).blq1 = blq(_localctx.h);
 				setState(185);
 				match(T__13);
 				setState(186);
-				((SentContext)_localctx).blq2 = blq();
+				((SentContext)_localctx).blq2 = blq(_localctx.h);
 				((SentContext)_localctx).s =  new Bifurcacion(((SentContext)_localctx).lcond.s, ((SentContext)_localctx).blq1.s, ((SentContext)_localctx).blq2.s); notifyErrorListeners("Palabra reservada 'bifurcacion' mal escrita");
 				}
 				break;
@@ -1185,7 +1197,7 @@ public class GramaticaParser extends Parser {
 				setState(200);
 				match(T__3);
 				setState(201);
-				((SentContext)_localctx).blq = blq();
+				((SentContext)_localctx).blq = blq(_localctx.h);
 				((SentContext)_localctx).s =  new Buclepara(new Identificador((((SentContext)_localctx).id1!=null?((SentContext)_localctx).id1.getText():null)), ((SentContext)_localctx).asig1.s, ((SentContext)_localctx).exp1.s, ((SentContext)_localctx).lcond.s, new Identificador((((SentContext)_localctx).id2!=null?((SentContext)_localctx).id2.getText():null)), ((SentContext)_localctx).asig2.s, ((SentContext)_localctx).exp2.s, ((SentContext)_localctx).blq.s);
 				}
 				break;
@@ -1201,7 +1213,7 @@ public class GramaticaParser extends Parser {
 				setState(207);
 				match(T__3);
 				setState(208);
-				((SentContext)_localctx).blq = blq();
+				((SentContext)_localctx).blq = blq(_localctx.h);
 				((SentContext)_localctx).s =  new Buclemientras(((SentContext)_localctx).lcond.s, ((SentContext)_localctx).blq.s);
 				}
 				break;
@@ -1211,7 +1223,7 @@ public class GramaticaParser extends Parser {
 				setState(211);
 				match(T__17);
 				setState(212);
-				((SentContext)_localctx).blq = blq();
+				((SentContext)_localctx).blq = blq(_localctx.h);
 				setState(213);
 				match(T__18);
 				setState(214);
@@ -1227,7 +1239,7 @@ public class GramaticaParser extends Parser {
 				enterOuterAlt(_localctx, 9);
 				{
 				setState(219);
-				((SentContext)_localctx).blq = blq();
+				((SentContext)_localctx).blq = blq(_localctx.h);
 				((SentContext)_localctx).s =  ((SentContext)_localctx).blq.s;
 				}
 				break;

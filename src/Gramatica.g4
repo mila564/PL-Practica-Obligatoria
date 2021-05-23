@@ -77,13 +77,13 @@ restpart [Part h] returns [Part s]:
 //restpartPrima: listparam ')' blq | ')' blq;
 
 restpartPrima [Part h] returns [Part s]:
-    ')' masDeUnParentesis blq {
+    ')' masDeUnParentesis blq[1] {
         $h.setListParam(new LinkedList<Param>());
         $h.setCuerpo($blq.s);
         $s = $h;
     }
     |
-    listparam ')' masDeUnParentesis blq{
+    listparam ')' masDeUnParentesis blq[1]{
         $h.setListParam($listparam.s);
         $h.setCuerpo($blq.s);
         $s = $h;
@@ -122,19 +122,19 @@ type returns [String s]:
      letra = 'caracter'{$s = $letra.text;}
      ;
 
-blq returns [Blq s]:
-    'inicio' sentlist 'fin' {$s = new Blq($sentlist.s);}
+blq [int h] returns [Blq s]:
+    'inicio' sentlist[h] 'fin' {$s = new Blq($sentlist.s, $h);}
     ;
 
-sentlist returns [LinkedList<Sent> s]:
-    sent sentlistPrima {
+sentlist[int h] returns [LinkedList<Sent> s]:
+    sent[$h+1] sentlistPrima[$h+1] {
         $sentlistPrima.s.addFirst($sent.s);
         $s = $sentlistPrima.s;
     }
     ;
 
-sentlistPrima returns [LinkedList<Sent> s]:
-    sent sentlistPrima {
+sentlistPrima[int h] returns [LinkedList<Sent> s]:
+    sent[$h] sentlistPrima[$h] {
         $sentlistPrima.s.addFirst($sent.s);
         $s = $sentlistPrima.s;
     }
@@ -168,7 +168,7 @@ faltaPuntoYComa : ';' | {notifyErrorListeners("Falta punto y coma.");};
 
 //----------------------------------------------------------------------------------------------------
 
-sent returns [Sent s]:
+sent[int h] returns [Sent s]:
     type lid faltaPuntoYComa {$s = new DeclaracionVariable(new PalabraReservada($type.s), $lid.s);}
     |
     IDENTIFICADOR sentPrima[new Identificador($IDENTIFICADOR.text)] {$s = $sentPrima.s;}
@@ -176,17 +176,17 @@ sent returns [Sent s]:
     'return' exp faltaPuntoYComa {$s = new Return($exp.s);}
     // Falta explicar en la memoria que en error3.txt da error porque interpreta hasta el ; sin cerrar
     |
-    'bifurcacion' '(' lcond ')' faltaPalabraReservadaEntonces blq1=blq 'sino' blq2=blq {$s = new Bifurcacion($lcond.s, $blq1.s, $blq2.s);}
+    'bifurcacion' '(' lcond ')' faltaPalabraReservadaEntonces blq1=blq[$h] 'sino' blq2=blq[$h] {$s = new Bifurcacion($lcond.s, $blq1.s, $blq2.s);}
     |
-    'bifurcacio' '(' lcond ')' faltaPalabraReservadaEntonces blq1=blq 'sino' blq2=blq {$s = new Bifurcacion($lcond.s, $blq1.s, $blq2.s); notifyErrorListeners("Palabra reservada 'bifurcacion' mal escrita");}
+    'bifurcacio' '(' lcond ')' faltaPalabraReservadaEntonces blq1=blq[$h] 'sino' blq2=blq[$h] {$s = new Bifurcacion($lcond.s, $blq1.s, $blq2.s); notifyErrorListeners("Palabra reservada 'bifurcacion' mal escrita");}
     |
-    'buclepara' '(' id1=IDENTIFICADOR asig1=asig exp1=exp faltaPuntoYComa lcond faltaPuntoYComa id2=IDENTIFICADOR asig2=asig exp2=exp ')' blq{$s = new Buclepara(new Identificador($id1.text), $asig1.s, $exp1.s, $lcond.s, new Identificador($id2.text), $asig2.s, $exp2.s, $blq.s);}
+    'buclepara' '(' id1=IDENTIFICADOR asig1=asig exp1=exp faltaPuntoYComa lcond faltaPuntoYComa id2=IDENTIFICADOR asig2=asig exp2=exp ')' blq[$h]{$s = new Buclepara(new Identificador($id1.text), $asig1.s, $exp1.s, $lcond.s, new Identificador($id2.text), $asig2.s, $exp2.s, $blq.s);}
     |
-    'buclemientras' '(' lcond ')' blq {$s = new Buclemientras($lcond.s, $blq.s);}
+    'buclemientras' '(' lcond ')' blq[$h] {$s = new Buclemientras($lcond.s, $blq.s);}
     |
-    'bucle' blq 'hasta' '(' lcond ')' {$s = new Bucle($blq.s, $lcond.s);}
+    'bucle' blq[$h] 'hasta' '(' lcond ')' {$s = new Bucle($blq.s, $lcond.s);}
     |
-    blq {$s = $blq.s;}
+    blq[$h] {$s = $blq.s;}
     ;
 
 //----------------------------------------------------------------------------------------------------

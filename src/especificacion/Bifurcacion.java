@@ -38,19 +38,19 @@ public class Bifurcacion extends Sent{
     @Override
     public String toString() {
         String lista = "";
-        lista += "<DIV STYLE=\"text-indent: 0.5cm\">";
+        lista += "<DIV>";
         lista += "<SPAN CLASS=\"palres\">bifurcacion</SPAN>";
         lista += "(";
         lista += this.getCondicion().toString();
         lista += ")";
         lista += "</DIV>";
-        lista += "<DIV STYLE=\"text-indent: 0.5cm\">";
+        lista += "<DIV>";
         lista += "<SPAN CLASS=\"palres\">entonces</SPAN>";
         lista += "</DIV>";
         lista += this.getBloqueEntonces().toString();
-        lista += "<DIV STYLE=\"text-indent: 0.5cm\">";
+        lista += "<DIV>";
         lista += "<SPAN CLASS=\"palres\">sino</SPAN>";
-        lista += "/<DIV>";
+        lista += "</DIV>";
         lista += this.getBloqueSino().toString();
         return lista;
     }

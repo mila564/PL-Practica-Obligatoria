@@ -91,7 +91,7 @@ public class Buclepara extends Sent{
     @Override
     public String toString() {
         String lista = "";
-        lista += "<DIV STYLE=\"text-indent: 0.5cm\">";
+        lista += "<DIV>";
         lista += "<SPAN CLASS=\"palres\">buclepara</SPAN>";
         lista += " ";
         lista += "(";

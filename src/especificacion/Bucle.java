@@ -28,11 +28,11 @@ public class Bucle extends Sent{
     @Override
     public String toString() {
         String lista = "";
-        lista += "<DIV STYLE=\"text-indent: 0.5cm\">";
+        lista += "<DIV>";
         lista += "<SPAN CLASS=\"palres\">bucle</SPAN>";
         lista += "</DIV>";
         lista += this.getCuerpo().toString();
-        lista += "<DIV STYLE=\"text-indent: 0.5cm\">";
+        lista += "<DIV>";
         lista += "<SPAN CLASS=\"palres\">hasta</SPAN>";
         lista += "(";
         lista += this.getCondicion().toString();

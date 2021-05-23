@@ -28,7 +28,7 @@ public class Buclemientras extends Sent{
     @Override
     public String toString() {
         String lista = "";
-        lista += "<DIV STYLE=\"text-indent: 0.5cm\">";
+        lista += "<DIV>";
         lista += "<SPAN CLASS=\"palres\"> buclemientras </SPAN>";
         lista += "(";
         lista += this.getCondicion().toString();

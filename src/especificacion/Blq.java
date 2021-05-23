@@ -4,9 +4,11 @@ import java.util.List;
 
 public class Blq extends Sent{
     private List<Sent> sentencias;
+    private int nivelIndentacion;
 
-    public Blq(List<Sent> sentencias) {
+    public Blq(List<Sent> sentencias, int nivelIndentacion) {
         this.sentencias = sentencias;
+        this.nivelIndentacion = nivelIndentacion;
     }
 
     public List<Sent> getSentencias() {
@@ -17,6 +19,14 @@ public class Blq extends Sent{
         this.sentencias = sentencias;
     }
 
+    public int getNivelIndentacion() {
+        return nivelIndentacion;
+    }
+
+    public void setNivelIndentacion(int nivelIndentacion) {
+        this.nivelIndentacion = nivelIndentacion;
+    }
+
     @Override
     public String toString() {
         String lista = "";
@@ -24,10 +34,9 @@ public class Blq extends Sent{
             lista += s.toString();
         }
         return "<DIV>" +
-                "<SPAN CLASS=\"palres\">inicio</SPAN>" + "<BR>"
-                + lista +
-                "<SPAN CLASS=\"palres\">fin</SPAN>" +
-                "<BR>" +
+                "<DIV>" +"<SPAN CLASS=\"palres\">inicio</SPAN>" + "</DIV>"
+                + "<DIV STYLE=\"text-indent:" + this.getNivelIndentacion()* 0.5 + "cm\">" + lista + "</DIV>" +
+                "<DIV>" + "<SPAN CLASS=\"palres\">fin</SPAN>" + "</DIV>" +
                 "</DIV>";
     }
 }
