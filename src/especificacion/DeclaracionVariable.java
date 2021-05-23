@@ -39,6 +39,6 @@ public class DeclaracionVariable extends Sent{
         }
         lista += lid.get(lid.size() - 1).toString();
 
-        return "<DIV STYLE=\"text-indent: 0.5cm>" + type.toString() + " " + lista + ";</DIV>";
+        return "<DIV STYLE=\"text-indent: 0.5cm\">" + type.toString() + " " + lista + ";</DIV>";
     }
 }

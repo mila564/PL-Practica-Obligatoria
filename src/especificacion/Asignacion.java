@@ -38,6 +38,6 @@ public class Asignacion extends Sent{
 
     @Override
     public String toString() {
-        return "<div style=\"text-indent: 0.5cm>" + this.getId().toString() + this.getAsig().toString() + this.getExpresion().toString() + ";</div>" ;
+        return "<div style=\"text-indent: 0.5cm\">" + this.getId().toString() + this.getAsig().toString() + this.getExpresion().toString() + ";</div>" ;
     }
 }

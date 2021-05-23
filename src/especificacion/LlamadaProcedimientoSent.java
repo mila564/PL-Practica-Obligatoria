@@ -28,6 +28,6 @@ public class LlamadaProcedimientoSent extends Sent{
             lista = id.toString() + ",";
         }
         lista += ')';
-        return "<div style=\"text-indent: 0.5cm>" + lista + ";</div>";
+        return "<div style=\"text-indent: 0.5cm\">" + lista + ";</div>";
     }
 }

@@ -21,12 +21,14 @@ public class LlamadaProcedimientoExp extends ExpBasico{
     public String toString() {
         String lista = "";
         lista = this.getIdentificadores().get(0).toString();
-        lista += '(';
-        List<Identificador> sublista = this.getIdentificadores().subList(1, this.getIdentificadores().size());
-        for (Identificador id : sublista){
-            lista = id.toString() + ",";
+        if (this.getIdentificadores().size() > 1){
+            lista += '(';
+            List<Identificador> sublista = this.getIdentificadores().subList(1, this.getIdentificadores().size());
+            for (Identificador id : sublista){
+                lista = id.toString() + ",";
+            }
+            lista += ')';
         }
-        lista += ')';
         return lista;
     }
 }

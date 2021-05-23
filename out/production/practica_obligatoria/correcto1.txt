@@ -1,4 +1,4 @@
-funcion entero sumaDiezPrimerosDigitos ()
+funcion entero sumaDiezPrimerosDigitos()
 inicio
     entero suma;
     entero i;

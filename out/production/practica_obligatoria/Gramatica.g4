@@ -65,7 +65,7 @@ part returns [Part s]:
     ;
 
 restpart [Part h] returns [Part s]:
-    IDENTIFICADOR '('{$h.setIdentificador(new Identificador($IDENTIFICADOR.text));} restpartPrima[$h]{$s = $restpartPrima.s;}
+    IDENTIFICADOR '('{$h.setIdentificador(new Identificador($IDENTIFICADOR.text)); } restpartPrima[$h]{$s = $restpartPrima.s;}
     ;
 
 //--------------------------------------------------------------------------------------------------
@@ -77,14 +77,14 @@ restpart [Part h] returns [Part s]:
 //restpartPrima: listparam ')' blq | ')' blq;
 
 restpartPrima [Part h] returns [Part s]:
-    listparam ')' masDeUnParentesis blq{
-        $h.setListParam($listparam.s);
+    ')' masDeUnParentesis blq {
+        $h.setListParam(new LinkedList<Param>());
         $h.setCuerpo($blq.s);
         $s = $h;
     }
     |
-    ')' masDeUnParentesis blq {
-        $h.setListParam(new LinkedList<Param>());
+    listparam ')' masDeUnParentesis blq{
+        $h.setListParam($listparam.s);
         $h.setCuerpo($blq.s);
         $s = $h;
     }

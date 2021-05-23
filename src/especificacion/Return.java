@@ -17,6 +17,6 @@ public class Return extends Sent{
 
     @Override
     public String toString() {
-        return "<div style=\"text-indent: 0.5cm>" + "<SPAN CLASS=\"palres\">return</SPAN>" + this.getExpresion().toString() + ";</div>";
+        return "<div style=\"text-indent: 0.5cm\">" + "<SPAN CLASS=\"palres\">return</SPAN>" + " " +this.getExpresion().toString() + ";</div>";
     }
 }

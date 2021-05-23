@@ -23,10 +23,11 @@ public class Blq extends Sent{
         for (Sent s : this.getSentencias()){
             lista += s.toString();
         }
-        return "<DIV STYLE=\"text-indent: 0.5cm>" +
+        return "<DIV>" +
                 "<SPAN CLASS=\"palres\">inicio</SPAN>" + "<BR>"
                 + lista +
                 "<SPAN CLASS=\"palres\">fin</SPAN>" +
-                "<BR>" + "</DIV>";
+                "<BR>" +
+                "</DIV>";
     }
 }

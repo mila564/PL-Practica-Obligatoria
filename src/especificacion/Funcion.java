@@ -54,18 +54,19 @@ public class Funcion extends Part{
     }
     public String getCabecera(){
         String cabecera ="";
-        cabecera += this.getTipoDevuelto();
+        cabecera += this.getTipoDevuelto().getTexto();
         cabecera += " ";
-        cabecera += this.getIdentificador() + " ";
+        cabecera += this.getIdentificador().getTexto() + " ";
         cabecera += "(";
         List<Param> sublista = this.getListParam();
         if (sublista.size() != 0){
             sublista = this.getListParam().subList(0, this.getListParam().size() - 1);
             for (Param param: sublista) {
-                cabecera += param.toString();
+                cabecera += param.getType().getTexto() + " " + param.getId().getTexto();
                 cabecera += ", ";
             }
-            cabecera += getListParam().get(getListParam().size()-1).toString();
+            Param ultimoElemento = getListParam().get(getListParam().size()-1);
+            cabecera += ultimoElemento.getType().getTexto() + " " + ultimoElemento.getId().getTexto();
         }
         cabecera += ")";
         return cabecera;

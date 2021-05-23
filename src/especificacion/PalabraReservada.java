@@ -17,6 +17,6 @@ public class PalabraReservada{
 
     @Override
     public String toString() {
-        return "<SPAN CLASS=\"palres\">"+ this.getTexto() +"</SPAN>";
+        return "<SPAN CLASS=\"palres\">" + this.getTexto() + "</SPAN>";
     }
 }
