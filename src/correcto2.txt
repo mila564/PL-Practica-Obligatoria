@@ -11,3 +11,30 @@ inicio
             return numero2;
         fin
 fin
+
+funcion entero Principal()
+inicio
+    entero num1;
+    entero num2;
+    entero num3;
+    num3 = comprobarSiUnNumeroEsMayorQueOtroYOperar(num1 , num2);
+    return num3;
+fin
+
+procedimiento mostrarSiUnNumeroEsPar(entero num)
+inicio
+    entero modulo;
+    modulo = mod(num);
+    bifurcacion(modulo <> 0) entonces
+    inicio
+        caracter impar;
+        impar = "impar";
+        mostrar(impar);
+    fin
+    sino
+    inicio
+        caracter par;
+        par = "Par";
+        mostrar(par);
+    fin
+fin

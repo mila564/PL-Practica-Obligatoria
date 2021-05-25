@@ -1,7 +1,8 @@
 <component name="libraryTable">
-  <library name="mili">
+  <library name="m">
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/../../mili.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../ANTLR/antlr.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

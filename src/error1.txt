@@ -9,3 +9,17 @@ inicio
             return b;
         fin
 fin
+
+funcion entero Principal()
+inicio
+        caracter aux;
+        aux = "Esta es una funcion principal";
+        mostrar(aux);
+fin
+
+procedimiento Principal()
+inicio
+    caracter aux;
+    aux = "Este es un procedimiento principal";
+    mostrar(aux);
+fin
