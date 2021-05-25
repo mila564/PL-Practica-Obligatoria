@@ -116,7 +116,8 @@ public class GramaticaParser extends Parser {
 
 
 	    private Program programa;
-
+	    private boolean tieneErrores = false;
+	    private int numPrincipal = 0;
 	    public GramaticaParser (TokenStream input, Program prog){
 	        this(input);
 	        programa = prog;
@@ -155,17 +156,23 @@ public class GramaticaParser extends Parser {
 			setState(62);
 			((RContext)_localctx).program = program(programa);
 
-			    try{
-			        PrintWriter pw = new PrintWriter(
-			            new FileWriter(
-			               "D:\\ESCRITORIO\\PL\\practica_obligatoria\\src\\salida.html",
-			               true
-			            ));
-			        pw.println(((RContext)_localctx).program.s.toString());
-			        pw.flush();
-			        pw.close();
-			    }catch (IOException e){
-			      e.printStackTrace();
+			    if(!tieneErrores && (numPrincipal <= 1)){
+			        try{
+			            // Introducir ruta del fichero HTML donde se visualizará el código
+			            PrintWriter pw = new PrintWriter(
+			                new FileWriter(
+			                   "",
+			                   true
+			                ));
+			            pw.println(((RContext)_localctx).program.s.toString());
+			            pw.flush();
+			            pw.close();
+			        }catch (IOException e){
+			          e.printStackTrace();
+			        }
+			    }
+			    else if (numPrincipal > 1){
+			        notifyErrorListeners("El programa contiene mas de un subprograma denominado Principal");
 			    }
 
 			}
@@ -405,7 +412,7 @@ public class GramaticaParser extends Parser {
 			((RestpartContext)_localctx).IDENTIFICADOR = match(IDENTIFICADOR);
 			setState(88);
 			match(T__2);
-			_localctx.h.setIdentificador(new Identificador((((RestpartContext)_localctx).IDENTIFICADOR!=null?((RestpartContext)_localctx).IDENTIFICADOR.getText():null))); 
+			_localctx.h.setIdentificador(new Identificador((((RestpartContext)_localctx).IDENTIFICADOR!=null?((RestpartContext)_localctx).IDENTIFICADOR.getText():null))); if((((RestpartContext)_localctx).IDENTIFICADOR!=null?((RestpartContext)_localctx).IDENTIFICADOR.getText():null).equals("Principal")) numPrincipal++; 
 			setState(90);
 			((RestpartContext)_localctx).restpartPrima = restpartPrima(_localctx.h);
 			((RestpartContext)_localctx).s =  ((RestpartContext)_localctx).restpartPrima.s;
@@ -542,7 +549,8 @@ public class GramaticaParser extends Parser {
 				match(T__3);
 				setState(107);
 				masDeUnParentesis();
-				notifyErrorListeners("Demasiados paréntesis");
+
+				        notifyErrorListeners("Demasiados paréntesis"); tieneErrores = true;
 				}
 				break;
 			case T__8:
@@ -987,7 +995,8 @@ public class GramaticaParser extends Parser {
 			case CONSTLIT:
 				enterOuterAlt(_localctx, 2);
 				{
-				notifyErrorListeners("Falta punto y coma.");
+
+				        notifyErrorListeners("Falta punto y coma."); tieneErrores = true;
 				}
 				break;
 			default:
@@ -1166,7 +1175,7 @@ public class GramaticaParser extends Parser {
 				match(T__13);
 				setState(186);
 				((SentContext)_localctx).blq2 = blq(_localctx.h);
-				((SentContext)_localctx).s =  new Bifurcacion(((SentContext)_localctx).lcond.s, ((SentContext)_localctx).blq1.s, ((SentContext)_localctx).blq2.s); notifyErrorListeners("Palabra reservada 'bifurcacion' mal escrita");
+				((SentContext)_localctx).s =  new Bifurcacion(((SentContext)_localctx).lcond.s, ((SentContext)_localctx).blq1.s, ((SentContext)_localctx).blq2.s); notifyErrorListeners("Palabra reservada 'bifurcacion' mal escrita"); tieneErrores = true;
 				}
 				break;
 			case T__15:
@@ -1290,7 +1299,7 @@ public class GramaticaParser extends Parser {
 			case T__8:
 				enterOuterAlt(_localctx, 2);
 				{
-				notifyErrorListeners("Falta la palabra reservada entonces");
+				notifyErrorListeners("Falta la palabra reservada entonces"); tieneErrores = true;
 				}
 				break;
 			default:
@@ -2392,7 +2401,7 @@ public class GramaticaParser extends Parser {
 			case CONSTLIT:
 				enterOuterAlt(_localctx, 2);
 				{
-				notifyErrorListeners("No es un operador relacional");
+				notifyErrorListeners("No es un operador relacional"); tieneErrores = true;
 				}
 				break;
 			default:
