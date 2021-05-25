@@ -24,7 +24,7 @@ r: program[programa]{
         // la ruta del fichero HTML donde se visualizará el código
             PrintWriter pw = new PrintWriter(
                 new FileWriter(
-                   "C:\\Users\\Lunar Crystal\\Desktop\\salida.html",
+                   "D:\\ESCRITORIO\\PL\\practica_obligatoria\\src\\salida.html",
                    true
                 ));
             if(numPrincipal == 1){
@@ -198,7 +198,7 @@ sent[int h] returns [Sent s]:
     |
     'bifurcacion' '(' lcond ')' faltaPalabraReservadaEntonces blq1=blq[$h] 'sino' blq2=blq[$h] {$s = new Bifurcacion($lcond.s, $blq1.s, $blq2.s);}
     |
-    'bifurcacio' '(' lcond ')' faltaPalabraReservadaEntonces blq1=blq[$h] 'sino' blq2=blq[$h] { notifyErrorListeners("Palabra reservada 'bifurcacion' mal escrita"); tieneErrores = true;}
+    'bifurcacio' '(' lcond ')' faltaPalabraReservadaEntonces blq[$h] 'sino' blq[$h] { notifyErrorListeners("Palabra reservada 'bifurcacion' mal escrita"); tieneErrores = true;}
     |
     'buclepara' '(' id1=IDENTIFICADOR asig1=asig exp1=exp faltaPuntoYComa lcond faltaPuntoYComa id2=IDENTIFICADOR asig2=asig exp2=exp ')' blq[$h]{$s = new Buclepara(new Identificador($id1.text), $asig1.s, $exp1.s, $lcond.s, new Identificador($id2.text), $asig2.s, $exp2.s, $blq.s);}
     |
