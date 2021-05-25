@@ -8,5 +8,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="mili" level="project" />
+    <orderEntry type="library" name="antlr" level="project" />
   </component>
 </module>

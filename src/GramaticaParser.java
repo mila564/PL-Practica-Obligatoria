@@ -796,7 +796,7 @@ public class GramaticaParser extends Parser {
 			setState(135);
 			match(T__8);
 			setState(136);
-			((BlqContext)_localctx).sentlist = sentlist(h);
+			((BlqContext)_localctx).sentlist = sentlist(_localctx.h);
 			setState(137);
 			match(T__9);
 			((BlqContext)_localctx).s =  new Blq(((BlqContext)_localctx).sentlist.s, _localctx.h);
