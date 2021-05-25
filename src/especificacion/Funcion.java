@@ -25,7 +25,7 @@ public class Funcion extends Part{
     @Override
     public String toString() {
         String linea = "<HR/>";
-        linea += "<A NAME=\""+getIdentificador().getTexto()+"\">";
+        linea += "<A NAME=\"" + getIdentificador().getTexto() + "\">";
         linea += "<SPAN CLASS=\"palres\">funcion</SPAN>";
         linea += " ";
         linea += tipoDevuelto.toString();

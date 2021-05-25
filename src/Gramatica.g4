@@ -220,7 +220,10 @@ faltaPalabraReservadaEntonces : 'entonces' | {notifyErrorListeners("Falta la pal
 sentPrima [Identificador h] returns [Sent s]:
     asig exp faltaPuntoYComa {$s = new Asignacion($h, $asig.s, $exp.s);}
     |
-    '(' sentPrimaPrima {$s = new LlamadaProcedimientoSent($sentPrimaPrima.s);}
+    '(' sentPrimaPrima {
+        $sentPrimaPrima.s.addFirst($h);
+        $s = new LlamadaProcedimientoSent($sentPrimaPrima.s);
+    }
     ;
 
 sentPrimaPrima returns [LinkedList<Identificador> s]:
@@ -230,7 +233,7 @@ sentPrimaPrima returns [LinkedList<Identificador> s]:
     ;
 
 lid returns [LinkedList<Identificador> s]:
-    IDENTIFICADOR lidPrima {
+    IDENTIFICADOR lidPrima{
         $lidPrima.s.addFirst(new Identificador($IDENTIFICADOR.text));
         $s = $lidPrima.s;
     }
@@ -269,7 +272,7 @@ exp returns [Exp s]:
     CONSTLIT expPrimaPrima {$s = new Exp(new Constante($CONSTLIT.text), $expPrimaPrima.s);}
     ;
 
-expPrima returns [LinkedList<Identificador> s]:
+expPrima returns [LinkedList<Identificador> s, boolean s2]:
     '(' lid ')' {$s = $lid.s;}
      |
      {$s = new LinkedList<Identificador>();}

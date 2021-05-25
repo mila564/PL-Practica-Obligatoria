@@ -95,13 +95,13 @@ public class Buclepara extends Sent{
         lista += "<SPAN CLASS=\"palres\">buclepara</SPAN>";
         lista += " ";
         lista += "(";
-        lista += this.getIdInicializacion().toString();
+        lista += "<A HREF=\"#" + this.getIdInicializacion().getTexto() + "\">" + this.getIdInicializacion().getTexto() + "</A>";
         lista += this.asigInicializacion.toString();
         lista += this.getExpInicializacion().toString();
         lista += ";";
         lista += this.getCondicion().toString();
         lista += ";";
-        lista += this.getIdIncremento().toString();
+        lista += "<A HREF=\"#" + this.getIdIncremento().getTexto() + "\">" + this.getIdIncremento().getTexto() + "</A>";
         lista += this.getAsigIncremento().toString();
         lista += this.getExpIncremento().toString();
         lista += ")";

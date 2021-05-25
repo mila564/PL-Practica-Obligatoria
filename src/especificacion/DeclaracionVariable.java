@@ -34,6 +34,7 @@ public class DeclaracionVariable extends Sent{
         if (lid.size() > 1) {
             List<Identificador> sublista = lid.subList(0, lid.size() - 1);
             for (Identificador id: sublista){
+                lista += "<A NAME=\"" + id.getTexto()+ "</A>";
                 lista += id.toString() + ", ";
             }
         }

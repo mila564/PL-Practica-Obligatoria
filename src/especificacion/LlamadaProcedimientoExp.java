@@ -17,16 +17,26 @@ public class LlamadaProcedimientoExp extends ExpBasico{
         this.identificadores = identificadores;
     }
 
+
     @Override
     public String toString() {
         String lista = "";
-        lista = this.getIdentificadores().get(0).toString();
-        if (this.getIdentificadores().size() > 1){
+        if (this.getIdentificadores().size() == 1) {
+            lista += "<A HREF=\"#" + this.getIdentificadores().get(0).getTexto() + "\">" + this.getIdentificadores().get(0).getTexto() + "</A>";
+        }
+        else if (this.getIdentificadores().size() == 2) {
+            lista += "<A HREF=\"#" + this.getIdentificadores().get(0).getTexto() + "\">" + this.getIdentificadores().get(0).getTexto() + "</A>";
             lista += '(';
-            List<Identificador> sublista = this.getIdentificadores().subList(1, this.getIdentificadores().size());
-            for (Identificador id : sublista){
-                lista = id.toString() + ",";
+            lista += "<A HREF=\"#" + this.getIdentificadores().get(1).getTexto() + "\">" + this.getIdentificadores().get(1).getTexto() + "</A>";
+            lista += ')';
+        }
+        else {
+            lista += "<A HREF=\"#" + this.getIdentificadores().get(0).getTexto() + "\">" + this.getIdentificadores().get(0).getTexto() + "</A>";
+            lista += '(';
+            for (Identificador id : this.getIdentificadores().subList(1, this.getIdentificadores().size() - 1)) {
+                lista += "<A HREF=\"#" + id.getTexto() + "\">" + id.getTexto() + "</A>" + ",";
             }
+            lista += "<A HREF=\"#" + this.getIdentificadores().get(this.getIdentificadores().size() - 1).getTexto() + "\">" + this.getIdentificadores().get(this.getIdentificadores().size() - 1).getTexto() + "</A>";
             lista += ')';
         }
         return lista;

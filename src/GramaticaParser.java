@@ -1372,7 +1372,10 @@ public class GramaticaParser extends Parser {
 				match(T__2);
 				setState(234);
 				((SentPrimaContext)_localctx).sentPrimaPrima = sentPrimaPrima();
-				((SentPrimaContext)_localctx).s =  new LlamadaProcedimientoSent(((SentPrimaContext)_localctx).sentPrimaPrima.s);
+
+				        ((SentPrimaContext)_localctx).sentPrimaPrima.s.addFirst(_localctx.h);
+				        ((SentPrimaContext)_localctx).s =  new LlamadaProcedimientoSent(((SentPrimaContext)_localctx).sentPrimaPrima.s);
+				    
 				}
 				break;
 			default:
@@ -1779,6 +1782,7 @@ public class GramaticaParser extends Parser {
 
 	public static class ExpPrimaContext extends ParserRuleContext {
 		public LinkedList<Identificador> s;
+		public boolean s2;
 		public LidContext lid;
 		public LidContext lid() {
 			return getRuleContext(LidContext.class,0);

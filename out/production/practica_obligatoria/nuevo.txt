@@ -1,0 +1,13 @@
+procedimiento cutre(entero i)
+inicio
+   bifurcacion (i == 0)
+   entonces
+    inicio
+        return "Me he impreso" + i + "veces";
+    fin
+   sino
+    inicio
+        i = i - 1;
+        cutre(i);
+    fin
+fin

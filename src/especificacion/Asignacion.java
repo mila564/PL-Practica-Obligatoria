@@ -38,6 +38,6 @@ public class Asignacion extends Sent{
 
     @Override
     public String toString() {
-        return "<DIV>" + this.getId().toString() + this.getAsig().toString() + this.getExpresion().toString() + ";</DIV>" ;
+        return "<DIV>" + "<A HREF=\"#" + this.getId().getTexto() + "\">" + this.getId().getTexto() + "</A>" + this.getAsig().toString() + this.getExpresion().toString() + ";</DIV>" ;
     }
 }

@@ -13,7 +13,7 @@ public class Procedimiento extends Part{
     @Override
     public String toString() {
         String linea = "<HR/>";
-        linea += "<A NAME=\""+getIdentificador().getTexto()+"\">";
+        linea += "<A NAME=\"" + getIdentificador().getTexto() + "\">";
         linea += "<SPAN CLASS=\"palres\">procedimiento</SPAN>";
         linea += " ";
         linea += identificador.toString();
@@ -49,7 +49,7 @@ public class Procedimiento extends Part{
                 cabecera += param.getType().getTexto() + " " + param.getId().getTexto();
                 cabecera += ", ";
             }
-            cabecera += getListParam().get(getListParam().size()-1).toString();
+            cabecera += getListParam().get(getListParam().size()-1).getType().getTexto() + " " + getListParam().get(getListParam().size()-1).getId().getTexto();
         }
         cabecera += ")";
         return cabecera;
