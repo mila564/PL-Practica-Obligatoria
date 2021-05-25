@@ -8,25 +8,33 @@ grammar Gramatica;
 
 @parser::members{
     private Program programa;
-
+    private boolean tieneErrores = false;
+    private int numPrincipal = 0;
     public GramaticaParser (TokenStream input, Program prog){
         this(input);
         programa = prog;
     }
 }
-
+@lexer::members{}
 r: program[programa]{
-    try{
-        PrintWriter pw = new PrintWriter(
-            new FileWriter(
-               "D:\\ESCRITORIO\\PL\\practica_obligatoria\\src\\salida.html",
-               true
-            ));
-        pw.println($program.s.toString());
-        pw.flush();
-        pw.close();
-    }catch (IOException e){
-      e.printStackTrace();
+    if(!tieneErrores && (numPrincipal <= 1)){
+        try{
+            // Introducir en el primer parámetro del constructor de FileWriter
+            // la ruta del fichero HTML donde se visualizará el código
+            PrintWriter pw = new PrintWriter(
+                new FileWriter(
+                   "D:\\ESCRITORIO\\PL\\practica_obligatoria\\src\\salida.html",
+                   true
+                ));
+            pw.println($program.s.toString());
+            pw.flush();
+            pw.close();
+        }catch (IOException e){
+          e.printStackTrace();
+        }
+    }
+    else if (numPrincipal > 1){
+        notifyErrorListeners("El programa contiene mas de un subprograma denominado Principal");
     }
 };
 
@@ -65,7 +73,7 @@ part returns [Part s]:
     ;
 
 restpart [Part h] returns [Part s]:
-    IDENTIFICADOR '('{$h.setIdentificador(new Identificador($IDENTIFICADOR.text)); } restpartPrima[$h]{$s = $restpartPrima.s;}
+    IDENTIFICADOR '('{$h.setIdentificador(new Identificador($IDENTIFICADOR.text)); if($IDENTIFICADOR.text.equals("Principal")) numPrincipal++; } restpartPrima[$h]{$s = $restpartPrima.s;}
     ;
 
 //--------------------------------------------------------------------------------------------------
@@ -91,7 +99,8 @@ restpartPrima [Part h] returns [Part s]:
     ;
 
 masDeUnParentesis:
-    ')' masDeUnParentesis{notifyErrorListeners("Demasiados paréntesis");}
+    ')' masDeUnParentesis{
+        notifyErrorListeners("Demasiados paréntesis"); tieneErrores = true;}
     |
 
     ;
@@ -123,7 +132,7 @@ type returns [String s]:
      ;
 
 blq [int h] returns [Blq s]:
-    'inicio' sentlist[h] 'fin' {$s = new Blq($sentlist.s, $h);}
+    'inicio' sentlist[$h] 'fin' {$s = new Blq($sentlist.s, $h);}
     ;
 
 sentlist[int h] returns [LinkedList<Sent> s]:
@@ -162,7 +171,8 @@ sentlistPrima[int h] returns [LinkedList<Sent> s]:
 
 // Creamos una nueva regla
 
-faltaPuntoYComa : ';' | {notifyErrorListeners("Falta punto y coma.");};
+faltaPuntoYComa : ';' | {
+        notifyErrorListeners("Falta punto y coma."); tieneErrores = true;};
 
 // Sustituimos en todas las apariciones del ;
 
@@ -178,7 +188,7 @@ sent[int h] returns [Sent s]:
     |
     'bifurcacion' '(' lcond ')' faltaPalabraReservadaEntonces blq1=blq[$h] 'sino' blq2=blq[$h] {$s = new Bifurcacion($lcond.s, $blq1.s, $blq2.s);}
     |
-    'bifurcacio' '(' lcond ')' faltaPalabraReservadaEntonces blq1=blq[$h] 'sino' blq2=blq[$h] {$s = new Bifurcacion($lcond.s, $blq1.s, $blq2.s); notifyErrorListeners("Palabra reservada 'bifurcacion' mal escrita");}
+    'bifurcacio' '(' lcond ')' faltaPalabraReservadaEntonces blq1=blq[$h] 'sino' blq2=blq[$h] {$s = new Bifurcacion($lcond.s, $blq1.s, $blq2.s); notifyErrorListeners("Palabra reservada 'bifurcacion' mal escrita"); tieneErrores = true;}
     |
     'buclepara' '(' id1=IDENTIFICADOR asig1=asig exp1=exp faltaPuntoYComa lcond faltaPuntoYComa id2=IDENTIFICADOR asig2=asig exp2=exp ')' blq[$h]{$s = new Buclepara(new Identificador($id1.text), $asig1.s, $exp1.s, $lcond.s, new Identificador($id2.text), $asig2.s, $exp2.s, $blq.s);}
     |
@@ -213,7 +223,7 @@ sent[int h] returns [Sent s]:
 
 // Tenemos que crear una regla:
 
-faltaPalabraReservadaEntonces : 'entonces' | {notifyErrorListeners("Falta la palabra reservada entonces");};
+faltaPalabraReservadaEntonces : 'entonces' | {notifyErrorListeners("Falta la palabra reservada entonces"); tieneErrores = true;};
 
 //----------------------------------------------------------------------------------------------------
 
@@ -345,7 +355,7 @@ opr returns [String s]:
     '<='{$s = "<=";}
     ;
 
-operadorIgualdadErroneo : '=' | {notifyErrorListeners("No es un operador relacional");};
+operadorIgualdadErroneo : '=' | {notifyErrorListeners("No es un operador relacional"); tieneErrores = true;};
 
 //----------------------------------------------------------------------------------------------------
 

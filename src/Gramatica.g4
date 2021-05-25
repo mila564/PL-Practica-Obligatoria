@@ -19,10 +19,11 @@ grammar Gramatica;
 r: program[programa]{
     if(!tieneErrores && (numPrincipal <= 1)){
         try{
-            // Introducir ruta del fichero HTML donde se visualizará el código
+            // Introducir en el primer parámetro del constructor de FileWriter
+            // la ruta del fichero HTML donde se visualizará el código
             PrintWriter pw = new PrintWriter(
                 new FileWriter(
-                   "",
+                   "D:\\ESCRITORIO\\PL\\practica_obligatoria\\src\\salida.html",
                    true
                 ));
             pw.println($program.s.toString());
