@@ -666,7 +666,7 @@ public class GramaticaParser extends Parser {
 				((ListparamPrimaContext)_localctx).listparamPrima = listparamPrima();
 
 				        ((ListparamPrimaContext)_localctx).listparamPrima.s.addFirst(new Param(new PalabraReservada(((ListparamPrimaContext)_localctx).type.s), new Identificador((((ListparamPrimaContext)_localctx).IDENTIFICADOR!=null?((ListparamPrimaContext)_localctx).IDENTIFICADOR.getText():null))));
-				        ((ListparamPrimaContext)_localctx).s =  ((ListparamPrimaContext)_localctx).listparamPrima.s;;
+				        ((ListparamPrimaContext)_localctx).s =  ((ListparamPrimaContext)_localctx).listparamPrima.s;
 				    
 				}
 				break;

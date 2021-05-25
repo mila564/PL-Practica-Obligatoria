@@ -108,7 +108,7 @@ listparam returns [LinkedList<Param> s]:
 listparamPrima returns [LinkedList<Param> s]:
     ',' type IDENTIFICADOR listparamPrima {
         $listparamPrima.s.addFirst(new Param(new PalabraReservada($type.s), new Identificador($IDENTIFICADOR.text)));
-        $s = $listparamPrima.s;;
+        $s = $listparamPrima.s;
     }
     |
     {$s =  new LinkedList<Param>();}
