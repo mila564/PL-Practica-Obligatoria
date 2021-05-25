@@ -1,22 +1,46 @@
-funcion caracter nombre (caracter inicial)
+funcion entero suma (entero n)
 inicio
-	caracter nombre;
-	bifurcacion (inicial == 'M')
-	entonces
-	inicio
-		nombre = "Milagros";
-	fin
-	sino 
-	inicio
-		bifurcacion (inicial == 'S')
-		entonces
-		inicio
-			nombre = "Sonia";
-		fin
-		sino
-		inicio
-			nombre = "Juan Antonio";
-		fin
-	fin
-	return "Mi nombre es " + nombre;
+    entero prev;
+    bifurcacion (n == 1)
+    entonces
+        inicio
+            return 1;
+        fin
+    sino
+        inicio
+            prev = n - 1;
+            return suma(prev) + n;
+        fin
+fin
+
+funcion entero fibonacci (entero n)
+inicio
+    entero n1, n2;
+    bifurcacion (n == 0)
+    entonces
+        inicio
+            return 0;
+        fin
+    sino
+        inicio
+            bifurcacion (n == 1)
+            entonces
+                inicio
+                    return 1;
+                fin
+            sino
+                inicio
+                    bifurcacion (n > 1)
+                    entonces
+                        inicio
+                            n1 = n - 1;
+                            n2 = n - 2;
+                            return fibonacci(n1) + fibonacci(n2);
+                        fin
+                    sino
+                        inicio
+                            return -1;
+                        fin
+                fin
+        fin
 fin
