@@ -142,7 +142,7 @@ type returns [String s]:
      ;
 
 blq [int h] returns [Blq s]:
-    'inicio' sentlist[h] 'fin' {$s = new Blq($sentlist.s, $h);}
+    'inicio' sentlist[$h] 'fin' {$s = new Blq($sentlist.s, $h);}
     ;
 
 sentlist[int h] returns [LinkedList<Sent> s]:
