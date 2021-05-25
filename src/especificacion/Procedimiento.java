@@ -13,12 +13,17 @@ public class Procedimiento extends Part{
     @Override
     public String toString() {
         String linea = "<HR/>";
+        String anclas = "";
         linea += "<A NAME=\"" + getIdentificador().getTexto() + "\">";
         linea += "<SPAN CLASS=\"palres\">procedimiento</SPAN>";
         linea += " ";
         linea += identificador.toString();
         linea += " ";
         linea += "(";
+        for (Param p : this.getListParam()){
+            anclas += "<A NAME=\"" + p.getId().getTexto()+ "\"></A>";
+        }
+        linea += anclas;
         List<Param> sublista = this.getListParam();
         if (sublista.size() != 0){
             sublista = this.getListParam().subList(0, this.getListParam().size() - 1);

@@ -1,4 +1,4 @@
-funcion entero sumaDiezPrimerosDigitos()
+funcion entero sumas()
 inicio
     entero suma;
     entero i;
@@ -7,4 +7,9 @@ inicio
     inicio
         suma = suma + i;
     fin
+    buclemientras (i < 1000)
+    inicio
+        suma += 20 * i;
+    fin
+    return suma;
 fin

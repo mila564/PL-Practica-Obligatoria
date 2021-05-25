@@ -31,15 +31,18 @@ public class DeclaracionVariable extends Sent{
     @Override
     public String toString() {
         String lista = "";
+        String anclas = "";
+        for (Identificador id: lid){
+            anclas += "<A NAME=\"" + id.getTexto()+ "\"></A>";
+        }
         if (lid.size() > 1) {
             List<Identificador> sublista = lid.subList(0, lid.size() - 1);
             for (Identificador id: sublista){
-                lista += "<A NAME=\"" + id.getTexto()+ "</A>";
-                lista += id.toString() + ", ";
+                lista += id + ", ";
             }
         }
         lista += lid.get(lid.size() - 1).toString();
 
-        return "<DIV>" + type.toString() + " " + lista + ";</DIV>";
+        return "<DIV>" + anclas + type.toString() + " " + lista + ";</DIV>";
     }
 }
