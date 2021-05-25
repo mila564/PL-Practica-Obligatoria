@@ -1,6 +1,6 @@
 funcion entero calculadoraDeSumasYRestas (entero numero1 , entero numero2 , caracter operacion)
 inicio
-	bifurcacion (operacion == "sumar")
+	bifurcacion (operacion == 's')
 	entonces
 	inicio
     	return numero1 + numero2;
@@ -11,11 +11,11 @@ inicio
     fin
 fin
 
-procedimiento cambiarNombre(caracter nuevoNombre)
+procedimiento cambiarNombre(caracter nuevoCaracter)
 inicio
-    nombre = nuevoNombre;
+    caracterActual = nuevoCaracter;
     caracter verificacion;
-    verificacion = "Se ha podido modificar el nombre";
+    verificacion = 'g';
     mostrar(verificacion);
 fin
 

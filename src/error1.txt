@@ -13,13 +13,13 @@ fin
 funcion entero Principal()
 inicio
         caracter aux;
-        aux = "Esta es una funcion principal";
+        aux = 'f'
         mostrar(aux);
 fin
 
 procedimiento Principal()
 inicio
     caracter aux;
-    aux = "Este es un procedimiento principal";
+    aux = 'p';
     mostrar(aux);
 fin

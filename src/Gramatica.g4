@@ -10,6 +10,7 @@ grammar Gramatica;
     private Program programa;
     private boolean tieneErrores = false;
     private int numPrincipal = 0;
+    private Part metodoPrincipal;
     public GramaticaParser (TokenStream input, Program prog){
         this(input);
         programa = prog;
@@ -19,13 +20,17 @@ grammar Gramatica;
 r: program[programa]{
     if(!tieneErrores && (numPrincipal <= 1)){
         try{
-            // Introducir en el primer parámetro del constructor de FileWriter
-            // la ruta del fichero HTML donde se visualizará el código
+        // Introducir en el primer parámetro del constructor de FileWriter
+        // la ruta del fichero HTML donde se visualizará el código
             PrintWriter pw = new PrintWriter(
                 new FileWriter(
-                   "D:\\ESCRITORIO\\PL\\practica_obligatoria\\src\\salida.html",
+                   "C:\\Users\\Lunar Crystal\\Desktop\\salida.html",
                    true
                 ));
+            if(numPrincipal == 1){
+                LinkedList<Part> listaPart = (LinkedList)$program.s.getSubprogramas();
+                listaPart.addFirst(metodoPrincipal);
+            }
             pw.println($program.s.toString());
             pw.flush();
             pw.close();
@@ -59,7 +64,12 @@ program [Program h] returns [Program s]:
 
 programPrima returns [LinkedList<Part> s]:
     part programPrima {
+    if($part.s.getIdentificador().getTexto().equals("Principal")){
+        metodoPrincipal = $part.s;
+    }
+    else{
         $programPrima.s.addFirst($part.s);
+    }
         $s = $programPrima.s;
     }
     |
@@ -132,7 +142,7 @@ type returns [String s]:
      ;
 
 blq [int h] returns [Blq s]:
-    'inicio' sentlist[$h] 'fin' {$s = new Blq($sentlist.s, $h);}
+    'inicio' sentlist[h] 'fin' {$s = new Blq($sentlist.s, $h);}
     ;
 
 sentlist[int h] returns [LinkedList<Sent> s]:
@@ -188,7 +198,7 @@ sent[int h] returns [Sent s]:
     |
     'bifurcacion' '(' lcond ')' faltaPalabraReservadaEntonces blq1=blq[$h] 'sino' blq2=blq[$h] {$s = new Bifurcacion($lcond.s, $blq1.s, $blq2.s);}
     |
-    'bifurcacio' '(' lcond ')' faltaPalabraReservadaEntonces blq1=blq[$h] 'sino' blq2=blq[$h] {$s = new Bifurcacion($lcond.s, $blq1.s, $blq2.s); notifyErrorListeners("Palabra reservada 'bifurcacion' mal escrita"); tieneErrores = true;}
+    'bifurcacio' '(' lcond ')' faltaPalabraReservadaEntonces blq1=blq[$h] 'sino' blq2=blq[$h] { notifyErrorListeners("Palabra reservada 'bifurcacion' mal escrita"); tieneErrores = true;}
     |
     'buclepara' '(' id1=IDENTIFICADOR asig1=asig exp1=exp faltaPuntoYComa lcond faltaPuntoYComa id2=IDENTIFICADOR asig2=asig exp2=exp ')' blq[$h]{$s = new Buclepara(new Identificador($id1.text), $asig1.s, $exp1.s, $lcond.s, new Identificador($id2.text), $asig2.s, $exp2.s, $blq.s);}
     |

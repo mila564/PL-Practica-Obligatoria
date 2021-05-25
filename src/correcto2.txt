@@ -14,9 +14,7 @@ fin
 
 funcion entero Principal()
 inicio
-    entero num1;
-    entero num2;
-    entero num3;
+    entero num1 , num2, num3;
     num3 = comprobarSiUnNumeroEsMayorQueOtroYOperar(num1 , num2);
     return num3;
 fin
@@ -28,13 +26,13 @@ inicio
     bifurcacion(modulo <> 0) entonces
     inicio
         caracter impar;
-        impar = "impar";
+        impar = 'i';
         mostrar(impar);
     fin
     sino
     inicio
         caracter par;
-        par = "Par";
+        par = 'p';
         mostrar(par);
     fin
 fin
