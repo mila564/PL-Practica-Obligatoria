@@ -159,6 +159,7 @@ sentlist[int h] returns [LinkedList<Sent> s]:
             $sentlistPrima.s.addFirst($sent.s);
             $s = $sentlistPrima.s;
         }catch(NullPointerException e){ // Se lanza una excepción cuando se producen errores léxicos
+            tieneErrores = true; // No se genera el HTML
             $s = new LinkedList<Sent>(); // El atributo sintetizado pasa a ser la lista vacía
         }
     }

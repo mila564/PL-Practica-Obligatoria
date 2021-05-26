@@ -865,8 +865,9 @@ public class GramaticaParser extends Parser {
 			        try{
 			            ((SentlistContext)_localctx).sentlistPrima.s.addFirst(((SentlistContext)_localctx).sent.s);
 			            ((SentlistContext)_localctx).s =  ((SentlistContext)_localctx).sentlistPrima.s;
-			        }catch(NullPointerException e){// Se lanza una excepción cuando se producen errores léxicos
-			            ((SentlistContext)_localctx).s =  new LinkedList<Sent>();
+			        }catch(NullPointerException e){ // Se lanza una excepción cuando se producen errores léxicos
+			            tieneErrores = true; // No se genera el HTML
+			            ((SentlistContext)_localctx).s =  new LinkedList<Sent>(); // El atributo sintetizado pasa a ser la lista vacía
 			        }
 			    
 			}
@@ -934,8 +935,13 @@ public class GramaticaParser extends Parser {
 				setState(145);
 				((SentlistPrimaContext)_localctx).sentlistPrima = sentlistPrima(_localctx.h);
 
-				        ((SentlistPrimaContext)_localctx).sentlistPrima.s.addFirst(((SentlistPrimaContext)_localctx).sent.s);
-				        ((SentlistPrimaContext)_localctx).s =  ((SentlistPrimaContext)_localctx).sentlistPrima.s;
+				        try{
+				            ((SentlistPrimaContext)_localctx).sentlistPrima.s.addFirst(((SentlistPrimaContext)_localctx).sent.s);
+				            ((SentlistPrimaContext)_localctx).s =  ((SentlistPrimaContext)_localctx).sentlistPrima.s;
+				        }catch(NullPointerException e){ // Se lanza una excepción cuando se producen errores léxicos
+				            tieneErrores = true; // No se genera el HTML
+				            ((SentlistPrimaContext)_localctx).s =  new LinkedList<Sent>(); // El atributo sintetizado pasa a ser la lista vacía
+				        }
 				    
 				}
 				break;
