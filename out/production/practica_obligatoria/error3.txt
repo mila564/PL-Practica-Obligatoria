@@ -1,18 +1,20 @@
 funcion caracter cadenaDevueltaAlComprobarUnNumero (entero numero)
 inicio
         auxiliar = numero;
-        buclemientras (auxiliar < 10 )
+        buclemientras (auxiliar < 10)
         inicio
             auxiliar = auxiliar + 1;
         fin
         resultado = auxiliar - numero;
-        bifurcacion(resultado <= 5)
+        bifurcacion (resultado <= 5)
             entonces
                 inicio
-                    return ""El resultado es igual o menor que 5";
+                    %% menor
+                    return "m";
                 fin
             sino
                 inicio
-                    return "El resultado es mayor que 5";
+                    %% mayor
+                    return "M;
                 fin
 fin

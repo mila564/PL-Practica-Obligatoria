@@ -118,6 +118,7 @@ public class GramaticaParser extends Parser {
 	    private Program programa;
 	    private boolean tieneErrores = false;
 	    private int numPrincipal = 0;
+	    private Part metodoPrincipal;
 	    public GramaticaParser (TokenStream input, Program prog){
 	        this(input);
 	        programa = prog;
@@ -158,13 +159,17 @@ public class GramaticaParser extends Parser {
 
 			    if(!tieneErrores && (numPrincipal <= 1)){
 			        try{
-			            // Introducir en el primer parámetro del constructor de FileWriter
-			            // la ruta del fichero HTML donde se visualizará el código
+			        // Introducir en el primer parámetro del constructor de FileWriter
+			        // la ruta del fichero HTML donde se visualizará el código
 			            PrintWriter pw = new PrintWriter(
 			                new FileWriter(
 			                   "D:\\ESCRITORIO\\PL\\practica_obligatoria\\src\\salida.html",
 			                   true
 			                ));
+			            if(numPrincipal == 1){
+			                LinkedList<Part> listaPart = (LinkedList)((RContext)_localctx).program.s.getSubprogramas();
+			                listaPart.addFirst(metodoPrincipal);
+			            }
 			            pw.println(((RContext)_localctx).program.s.toString());
 			            pw.flush();
 			            pw.close();
@@ -173,7 +178,7 @@ public class GramaticaParser extends Parser {
 			        }
 			    }
 			    else if (numPrincipal > 1){
-			        notifyErrorListeners("El programa contiene mas de un subprograma denominado Principal");
+			        notifyErrorListeners("El programa contiene m" + "\u00e1" +"s de un subprograma denominado Principal");
 			    }
 
 			}
@@ -284,7 +289,12 @@ public class GramaticaParser extends Parser {
 				setState(70);
 				((ProgramPrimaContext)_localctx).programPrima = programPrima();
 
+				    if(((ProgramPrimaContext)_localctx).part.s.getIdentificador().getTexto().equals("Principal")){
+				        metodoPrincipal = ((ProgramPrimaContext)_localctx).part.s;
+				    }
+				    else{
 				        ((ProgramPrimaContext)_localctx).programPrima.s.addFirst(((ProgramPrimaContext)_localctx).part.s);
+				    }
 				        ((ProgramPrimaContext)_localctx).s =  ((ProgramPrimaContext)_localctx).programPrima.s;
 				    
 				}
@@ -551,7 +561,7 @@ public class GramaticaParser extends Parser {
 				setState(107);
 				masDeUnParentesis();
 
-				        notifyErrorListeners("Demasiados paréntesis"); tieneErrores = true;
+				        notifyErrorListeners("Demasiados par" + "\u00e9" + "ntesis"); tieneErrores = true;
 				}
 				break;
 			case T__8:
@@ -852,8 +862,12 @@ public class GramaticaParser extends Parser {
 			setState(141);
 			((SentlistContext)_localctx).sentlistPrima = sentlistPrima(_localctx.h+1);
 
-			        ((SentlistContext)_localctx).sentlistPrima.s.addFirst(((SentlistContext)_localctx).sent.s);
-			        ((SentlistContext)_localctx).s =  ((SentlistContext)_localctx).sentlistPrima.s;
+			        try{
+			            ((SentlistContext)_localctx).sentlistPrima.s.addFirst(((SentlistContext)_localctx).sent.s);
+			            ((SentlistContext)_localctx).s =  ((SentlistContext)_localctx).sentlistPrima.s;
+			        }catch(NullPointerException e){// Se lanza una excepción cuando se producen errores léxicos
+			            ((SentlistContext)_localctx).s =  new LinkedList<Sent>();
+			        }
 			    
 			}
 		}
@@ -997,7 +1011,7 @@ public class GramaticaParser extends Parser {
 				enterOuterAlt(_localctx, 2);
 				{
 
-				        notifyErrorListeners("Falta punto y coma."); tieneErrores = true;
+				        notifyErrorListeners("Falta punto y coma"); tieneErrores = true;
 				}
 				break;
 			default:
@@ -1165,18 +1179,18 @@ public class GramaticaParser extends Parser {
 				setState(180);
 				match(T__2);
 				setState(181);
-				((SentContext)_localctx).lcond = lcond();
+				lcond();
 				setState(182);
 				match(T__3);
 				setState(183);
 				faltaPalabraReservadaEntonces();
 				setState(184);
-				((SentContext)_localctx).blq1 = blq(_localctx.h);
+				blq(_localctx.h);
 				setState(185);
 				match(T__13);
 				setState(186);
-				((SentContext)_localctx).blq2 = blq(_localctx.h);
-				((SentContext)_localctx).s =  new Bifurcacion(((SentContext)_localctx).lcond.s, ((SentContext)_localctx).blq1.s, ((SentContext)_localctx).blq2.s); notifyErrorListeners("Palabra reservada 'bifurcacion' mal escrita"); tieneErrores = true;
+				blq(_localctx.h);
+				 notifyErrorListeners("Palabra reservada 'bifurcaci" + "\u00f3" + "n' mal escrita"); tieneErrores = true;
 				}
 				break;
 			case T__15:

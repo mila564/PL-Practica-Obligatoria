@@ -17,6 +17,14 @@ grammar Gramatica;
     }
 }
 @lexer::members{}
+
+// Caracteres unicode usados en los Strings
+// \u00e1 = á
+// \u00e9 = é
+// \u00ed = í
+// \u00f3 = ó
+// \u+00fa = ú
+
 r: program[programa]{
     if(!tieneErrores && (numPrincipal <= 1)){
         try{
@@ -39,7 +47,7 @@ r: program[programa]{
         }
     }
     else if (numPrincipal > 1){
-        notifyErrorListeners("El programa contiene mas de un subprograma denominado Principal");
+        notifyErrorListeners("El programa contiene m" + "\u00e1" +"s de un subprograma denominado Principal");
     }
 };
 
@@ -110,7 +118,7 @@ restpartPrima [Part h] returns [Part s]:
 
 masDeUnParentesis:
     ')' masDeUnParentesis{
-        notifyErrorListeners("Demasiados paréntesis"); tieneErrores = true;}
+        notifyErrorListeners("Demasiados par" + "\u00e9" + "ntesis"); tieneErrores = true;}
     |
 
     ;
@@ -147,15 +155,24 @@ blq [int h] returns [Blq s]:
 
 sentlist[int h] returns [LinkedList<Sent> s]:
     sent[$h+1] sentlistPrima[$h+1] {
-        $sentlistPrima.s.addFirst($sent.s);
-        $s = $sentlistPrima.s;
+        try{
+            $sentlistPrima.s.addFirst($sent.s);
+            $s = $sentlistPrima.s;
+        }catch(NullPointerException e){ // Se lanza una excepción cuando se producen errores léxicos
+            $s = new LinkedList<Sent>(); // El atributo sintetizado pasa a ser la lista vacía
+        }
     }
     ;
 
 sentlistPrima[int h] returns [LinkedList<Sent> s]:
     sent[$h] sentlistPrima[$h] {
-        $sentlistPrima.s.addFirst($sent.s);
-        $s = $sentlistPrima.s;
+        try{
+            $sentlistPrima.s.addFirst($sent.s);
+            $s = $sentlistPrima.s;
+        }catch(NullPointerException e){ // Se lanza una excepción cuando se producen errores léxicos
+            tieneErrores = true; // No se genera el HTML
+            $s = new LinkedList<Sent>(); // El atributo sintetizado pasa a ser la lista vacía
+        }
     }
     |
     {$s = new LinkedList<Sent>();}
@@ -182,7 +199,7 @@ sentlistPrima[int h] returns [LinkedList<Sent> s]:
 // Creamos una nueva regla
 
 faltaPuntoYComa : ';' | {
-        notifyErrorListeners("Falta punto y coma."); tieneErrores = true;};
+        notifyErrorListeners("Falta punto y coma"); tieneErrores = true;};
 
 // Sustituimos en todas las apariciones del ;
 
@@ -194,11 +211,10 @@ sent[int h] returns [Sent s]:
     IDENTIFICADOR sentPrima[new Identificador($IDENTIFICADOR.text)] {$s = $sentPrima.s;}
     |
     'return' exp faltaPuntoYComa {$s = new Return($exp.s);}
-    // Falta explicar en la memoria que en error3.txt da error porque interpreta hasta el ; sin cerrar
     |
     'bifurcacion' '(' lcond ')' faltaPalabraReservadaEntonces blq1=blq[$h] 'sino' blq2=blq[$h] {$s = new Bifurcacion($lcond.s, $blq1.s, $blq2.s);}
     |
-    'bifurcacio' '(' lcond ')' faltaPalabraReservadaEntonces blq[$h] 'sino' blq[$h] { notifyErrorListeners("Palabra reservada 'bifurcacion' mal escrita"); tieneErrores = true;}
+    'bifurcacio' '(' lcond ')' faltaPalabraReservadaEntonces blq[$h] 'sino' blq[$h] { notifyErrorListeners("Palabra reservada 'bifurcaci" + "\u00f3" + "n' mal escrita"); tieneErrores = true;}
     |
     'buclepara' '(' id1=IDENTIFICADOR asig1=asig exp1=exp faltaPuntoYComa lcond faltaPuntoYComa id2=IDENTIFICADOR asig2=asig exp2=exp ')' blq[$h]{$s = new Buclepara(new Identificador($id1.text), $asig1.s, $exp1.s, $lcond.s, new Identificador($id2.text), $asig2.s, $exp2.s, $blq.s);}
     |
@@ -380,13 +396,13 @@ CONSTLIT: (('"' ('""'|~'"')* '"' )| (['](~[']|[']['])*[']));
 WS: (' ' | '\n' | '\r' | '\t' | ('%%' ~('\n')* '\n') | ('%-' ((~('-')) | '-'~('%'))* '-%')) -> skip;
 
 ERRORCOMENT: ('%-' ((~('-')) | '-'~('%'))*) EOF{
-    System.err.println("Error léxico: Comentario multilinea sin cierre");
+    System.err.println("Error l"+ "\u00e9" + "xico: Comentario multil" + "\u00ed" + "nea sin cierre");
 };
 
 ERRORLIT: (('"' ('""'|~'"')*)| (['](~[']|[']['])*) EOF){
-    System.err.println("Error léxico: Cadena sin cerrar");
+    System.err.println("Error l"+ "\u00e9" + "xico: Cadena sin cerrar");
 };
 
 ERRORNUM: ('.' ([+-]?[0-9]+) | ('$'[+-]?[0-9A-F]+)){
-    System.err.println("Error léxico: " + getText() + " no es un número");
+    System.err.println("Error l"+ "\u00e9" + "xico: " + getText() + " no es un n" + "\u00fa" + "mero");
 };

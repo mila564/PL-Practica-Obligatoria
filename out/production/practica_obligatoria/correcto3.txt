@@ -1,12 +1,32 @@
-procedimiento suma1odivide5 (entero numero)
+funcion entero calculadoraDeSumasYRestas (entero numero1 , entero numero2 , caracter operacion)
 inicio
-	bifurcacion (numero > 9)
+	bifurcacion (operacion == 's')
 	entonces
 	inicio
-    	return numero + 1;
+    	return numero1 + numero2;
     fin
     sino
     inicio
-    	return numero / 10;
+    	return numero1 - numero2;
     fin
+fin
+
+procedimiento cambiarNombre(caracter nuevoCaracter)
+inicio
+    caracterActual = nuevoCaracter;
+    caracter verificacion;
+    verificacion = 'g';
+    mostrar(verificacion);
+fin
+
+procedimiento adivinarClave()
+inicio
+    entero numSecreto;
+    random(numSecreto);
+    entero numeroIntroducido;
+    bucle
+        inicio
+            introducirPorPantalla(numeroIntroducido);
+        fin
+    hasta (numeroIntroducido == numSecreto)
 fin

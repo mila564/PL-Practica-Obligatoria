@@ -145,7 +145,7 @@ public class GramaticaLexer extends Lexer {
 		switch (actionIndex) {
 		case 0:
 
-			    System.err.println("Error léxico: Comentario multilinea sin cierre");
+			    System.err.println("Error l"+ "\u00e9" + "xico: Comentario multil" + "\u00ed" + "nea sin cierre");
 
 			break;
 		}
@@ -154,7 +154,7 @@ public class GramaticaLexer extends Lexer {
 		switch (actionIndex) {
 		case 1:
 
-			    System.err.println("Error léxico: Cadena sin cerrar");
+			    System.err.println("Error l"+ "\u00e9" + "xico: Cadena sin cerrar");
 
 			break;
 		}
@@ -163,7 +163,7 @@ public class GramaticaLexer extends Lexer {
 		switch (actionIndex) {
 		case 2:
 
-			    System.err.println("Error léxico: " + getText() + " no es un número");
+			    System.err.println("Error l"+ "\u00e9" + "xico: " + getText() + " no es un n" + "\u00fa" + "mero");
 
 			break;
 		}

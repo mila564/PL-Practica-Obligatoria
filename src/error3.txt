@@ -10,11 +10,11 @@ inicio
             entonces
                 inicio
                     %% menor
-                    return ""m";
+                    return "m";
                 fin
             sino
                 inicio
                     %% mayor
-                    return "M";
+                    return "M;
                 fin
 fin
