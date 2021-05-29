@@ -16,7 +16,6 @@ grammar Gramatica;
         programa = prog;
     }
 }
-@lexer::members{}
 
 // Caracteres unicode usados en los Strings
 // \u00e1 = á
@@ -32,7 +31,7 @@ r: program[programa]{
         // la ruta del fichero HTML donde se visualizará el código
             PrintWriter pw = new PrintWriter(
                 new FileWriter(
-                   "D:\\ESCRITORIO\\PL\\practica_obligatoria\\src\\salida.html",
+                   "src\\salida.html",
                    true
                 ));
             if(numPrincipal == 1){
