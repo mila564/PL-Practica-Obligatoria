@@ -16,7 +16,6 @@ grammar Gramatica;
         programa = prog;
     }
 }
-@lexer::members{}
 
 // Caracteres unicode usados en los Strings
 // \u00e1 = á
@@ -27,14 +26,14 @@ grammar Gramatica;
 
 r: program[programa]{
     if(!tieneErrores && (numPrincipal <= 1)){
+        File file = new File("salida.html");
         try{
-        // Introducir en el primer parámetro del constructor de FileWriter
-        // la ruta del fichero HTML donde se visualizará el código
-            PrintWriter pw = new PrintWriter(
-                new FileWriter(
-                   "D:\\ESCRITORIO\\PL\\practica_obligatoria\\src\\salida.html",
-                   true
-                ));
+            file.createNewFile();
+        }catch (IOException e1){
+            e1.printStackTrace();
+        }
+        try{
+            PrintWriter pw = new PrintWriter(file);
             if(numPrincipal == 1){
                 LinkedList<Part> listaPart = (LinkedList)$program.s.getSubprogramas();
                 listaPart.addFirst(metodoPrincipal);
@@ -158,16 +157,22 @@ sentlist[int h] returns [LinkedList<Sent> s]:
         try{
             $sentlistPrima.s.addFirst($sent.s);
             $s = $sentlistPrima.s;
-        }catch(NullPointerException e){// Se lanza una excepción cuando se producen errores léxicos
-            $s = new LinkedList<Sent>();
+        }catch(NullPointerException e){ // Se lanza una excepción cuando se producen errores léxicos
+            tieneErrores = true; // No se genera el HTML
+            $s = new LinkedList<Sent>(); // El atributo sintetizado pasa a ser la lista vacía
         }
     }
     ;
 
 sentlistPrima[int h] returns [LinkedList<Sent> s]:
     sent[$h] sentlistPrima[$h] {
-        $sentlistPrima.s.addFirst($sent.s);
-        $s = $sentlistPrima.s;
+        try{
+            $sentlistPrima.s.addFirst($sent.s);
+            $s = $sentlistPrima.s;
+        }catch(NullPointerException e){ // Se lanza una excepción cuando se producen errores léxicos
+            tieneErrores = true; // No se genera el HTML
+            $s = new LinkedList<Sent>(); // El atributo sintetizado pasa a ser la lista vacía
+        }
     }
     |
     {$s = new LinkedList<Sent>();}

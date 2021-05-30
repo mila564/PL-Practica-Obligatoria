@@ -29,7 +29,7 @@ public class ClasePrincipal {
             // Invocamos al constructor del Parser sobrecargado que tiene de parámetros
             // un objeto de tipo CommonTokenStream y otro de tipo Program
             GramaticaParser anasint = new GramaticaParser(tokens, programa);
-            // ----------------------------------------------------------------------------------------------
+            // --------------------------------------------------------------------------------------------
             /*
             Si se quiere pasar al analizador algún objeto externo con el que trabajar,
             éste deberá ser de una clase del mismo paquete

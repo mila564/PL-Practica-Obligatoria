@@ -3,7 +3,7 @@
     <output-path>$PROJECT_DIR$/out/artifacts/practica_obligatoria_jar</output-path>
     <root id="archive" name="practica_obligatoria.jar">
       <element id="module-output" name="practica_obligatoria" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/../../mili.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../antlr.jar" path-in-jar="/" />
     </root>
   </artifact>
 </component>

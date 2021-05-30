@@ -158,19 +158,21 @@ public class GramaticaParser extends Parser {
 			((RContext)_localctx).program = program(programa);
 
 			    if(!tieneErrores && (numPrincipal <= 1)){
+			        File file = new File("salida.html");
 			        try{
-			            BufferedWriter bw = new BufferedWriter(
-			                new BufferedWriter(
-			                   new FileWriter("src\\salida.html")
-			                ));
-			            bw.write("");
+			            file.createNewFile();
+			        }catch (IOException e1){
+			            e1.printStackTrace();
+			        }
+			        try{
+			            PrintWriter pw = new PrintWriter(file);
 			            if(numPrincipal == 1){
 			                LinkedList<Part> listaPart = (LinkedList)((RContext)_localctx).program.s.getSubprogramas();
 			                listaPart.addFirst(metodoPrincipal);
 			            }
-			            bw.write(((RContext)_localctx).program.s.toString());
-			            bw.flush();
-			            bw.close();
+			            pw.println(((RContext)_localctx).program.s.toString());
+			            pw.flush();
+			            pw.close();
 			        }catch (IOException e){
 			          e.printStackTrace();
 			        }

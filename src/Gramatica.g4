@@ -26,19 +26,21 @@ grammar Gramatica;
 
 r: program[programa]{
     if(!tieneErrores && (numPrincipal <= 1)){
+        File file = new File("salida.html");
         try{
-            BufferedWriter bw = new BufferedWriter(
-                new BufferedWriter(
-                   new FileWriter("src\\salida.html")
-                ));
-            bw.write(""); // Machacamos el contenido antiguo del fichero salida.html
+            file.createNewFile();
+        }catch (IOException e1){
+            e1.printStackTrace();
+        }
+        try{
+            PrintWriter pw = new PrintWriter(file);
             if(numPrincipal == 1){
                 LinkedList<Part> listaPart = (LinkedList)$program.s.getSubprogramas();
                 listaPart.addFirst(metodoPrincipal);
             }
-            bw.write($program.s.toString());
-            bw.flush();
-            bw.close();
+            pw.println($program.s.toString());
+            pw.flush();
+            pw.close();
         }catch (IOException e){
           e.printStackTrace();
         }
