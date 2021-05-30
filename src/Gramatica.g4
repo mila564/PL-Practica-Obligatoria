@@ -27,20 +27,18 @@ grammar Gramatica;
 r: program[programa]{
     if(!tieneErrores && (numPrincipal <= 1)){
         try{
-        // Introducir en el primer parámetro del constructor de FileWriter
-        // la ruta del fichero HTML donde se visualizará el código
-            PrintWriter pw = new PrintWriter(
-                new FileWriter(
-                   "src\\salida.html",
-                   true
+            BufferedWriter bw = new BufferedWriter(
+                new BufferedWriter(
+                   new FileWriter("src\\salida.html")
                 ));
+            bw.write(""); // Machacamos el contenido antiguo del fichero salida.html
             if(numPrincipal == 1){
                 LinkedList<Part> listaPart = (LinkedList)$program.s.getSubprogramas();
                 listaPart.addFirst(metodoPrincipal);
             }
-            pw.println($program.s.toString());
-            pw.flush();
-            pw.close();
+            bw.write($program.s.toString());
+            bw.flush();
+            bw.close();
         }catch (IOException e){
           e.printStackTrace();
         }

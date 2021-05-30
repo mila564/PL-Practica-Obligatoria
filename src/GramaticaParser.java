@@ -159,20 +159,18 @@ public class GramaticaParser extends Parser {
 
 			    if(!tieneErrores && (numPrincipal <= 1)){
 			        try{
-			        // Introducir en el primer parámetro del constructor de FileWriter
-			        // la ruta del fichero HTML donde se visualizará el código
-			            PrintWriter pw = new PrintWriter(
-			                new FileWriter(
-			                   "D:\\ESCRITORIO\\PL\\practica_obligatoria\\src\\salida.html",
-			                   true
+			            BufferedWriter bw = new BufferedWriter(
+			                new BufferedWriter(
+			                   new FileWriter("src\\salida.html")
 			                ));
+			            bw.write("");
 			            if(numPrincipal == 1){
 			                LinkedList<Part> listaPart = (LinkedList)((RContext)_localctx).program.s.getSubprogramas();
 			                listaPart.addFirst(metodoPrincipal);
 			            }
-			            pw.println(((RContext)_localctx).program.s.toString());
-			            pw.flush();
-			            pw.close();
+			            bw.write(((RContext)_localctx).program.s.toString());
+			            bw.flush();
+			            bw.close();
 			        }catch (IOException e){
 			          e.printStackTrace();
 			        }

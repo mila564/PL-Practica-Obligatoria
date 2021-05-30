@@ -19,12 +19,17 @@ public class ClasePrincipal {
             CommonTokenStream tokens = new CommonTokenStream(analex);
             // Crear el objeto correspondiente al analizador sintáctico
             // GramaticaParser anasint = new GramaticaParser(tokens);
-
+            // -------------------------------------------------------------------------------------------
+            // Creamos un array de Strings haciendo split según el carácter '\' sobre el args[0]
             String[] directorioSplit = args[0].split("\\\\");
+            // Cogemos en una variable de tipo String el nombre del fichero
             String nombrePrograma = directorioSplit[directorioSplit.length-1];
+            // Creamos una instancia de programa con una lista vacía de subprogramas y el nombre del fichero
             Program programa = new Program(new ArrayList<Part>(), nombrePrograma);
-
+            // Invocamos al constructor del Parser sobrecargado que tiene de parámetros
+            // un objeto de tipo CommonTokenStream y otro de tipo Program
             GramaticaParser anasint = new GramaticaParser(tokens, programa);
+            // ----------------------------------------------------------------------------------------------
             /*
             Si se quiere pasar al analizador algún objeto externo con el que trabajar,
             éste deberá ser de una clase del mismo paquete
